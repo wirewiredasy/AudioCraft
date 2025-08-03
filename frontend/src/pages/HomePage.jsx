@@ -74,7 +74,7 @@ function HomePage() {
           sx={{
             fontWeight: 800,
             fontSize: { xs: '2.5rem', md: '4rem', lg: '5rem' },
-            background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
+            background: 'linear-gradient(135deg, #0969da 0%, #238636 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

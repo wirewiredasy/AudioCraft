@@ -85,10 +85,18 @@ function Header({ isDarkMode, onToggleTheme }) {
     <>
       <AppBar position="static" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', backdropFilter: 'blur(20px)' }}>
         <Toolbar>
-          <MusicNote sx={{ mr: 2, color: 'primary.main' }} />
+          <GraphicEq sx={{ mr: 2, color: 'primary.main' }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-            Audio Processing Studio
+            Audio Studio Pro
           </Typography>
+          
+          <IconButton
+            onClick={onToggleTheme}
+            color="inherit"
+            sx={{ mr: 1 }}
+          >
+            {isDarkMode ? <LightMode /> : <DarkMode />}
+          </IconButton>
           
           {isMobile ? (
             <IconButton

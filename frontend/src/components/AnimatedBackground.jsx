@@ -11,7 +11,7 @@ function AnimatedBackground() {
         width: '100%',
         height: '100%',
         zIndex: -1,
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #581c87 50%, #be185d 75%, #dc2626 100%)',
+        background: 'linear-gradient(135deg, #0e1418 0%, #161b22 50%, #21262d 100%)',
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -20,9 +20,9 @@ function AnimatedBackground() {
           width: '100%',
           height: '100%',
           background: `
-            radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)
+            radial-gradient(circle at 20% 50%, rgba(35, 134, 54, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(9, 105, 218, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 40% 80%, rgba(111, 66, 193, 0.1) 0%, transparent 50%)
           `,
           animation: 'float 20s ease-in-out infinite',
         },
