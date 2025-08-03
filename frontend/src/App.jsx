@@ -18,6 +18,10 @@ import NoiseReductionPage from './pages/NoiseReductionPage'
 import HowToUseVocalRemover from './pages/HowToUseVocalRemover'
 import HowToUsePitchTempo from './pages/HowToUsePitchTempo'
 import HowToUseFormatConverter from './pages/HowToUseFormatConverter'
+import VoiceAIStylePage from './pages/VoiceAIStylePage'
+import AIFeaturesPage from './pages/AIFeaturesPage'
+import ProcessingStudioPage from './pages/ProcessingStudioPage'
+import VoiceAILanding from './pages/VoiceAILanding'
 
 const lightTheme = createTheme({
   palette: {
@@ -232,6 +236,10 @@ function App() {
             <Route path="/how-to-use/vocal-remover" element={<HowToUseVocalRemover />} />
             <Route path="/how-to-use/pitch-tempo" element={<HowToUsePitchTempo />} />
             <Route path="/how-to-use/format-converter" element={<HowToUseFormatConverter />} />
+            <Route path="/voice-ai-style" element={<VoiceAIStylePage />} />
+            <Route path="/ai-features" element={<AIFeaturesPage />} />
+            <Route path="/processing-studio" element={<ProcessingStudioPage />} />
+            <Route path="/voice-ai-landing" element={<VoiceAILanding />} />
           </Routes>
           <Footer />
         </Router>
