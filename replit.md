@@ -78,8 +78,12 @@ Comprehensive validation layer including:
 - **React 18**: Modern React with hooks and TypeScript support
 - **Vite**: Fast build tool and development server
 - **TypeScript**: Type safety and better developer experience
-- **TailwindCSS**: Utility-first CSS framework for styling
-- **ShadCN UI**: High-quality, accessible React components built on Radix UI
+- **TailwindCSS + clsx**: Utility-first CSS framework with class merging
+- **ShadCN UI + Radix UI**: High-quality, accessible React components
+- **Framer Motion**: Industry standard animations and transitions
+- **React Dropzone**: Lightweight, customizable drag & drop file upload
+- **React Hook Form + Zod**: Type-safe form validation and handling  
+- **Sonner**: Super sleek notification system (better than Toastify)
 - **Axios**: HTTP client for API communication
 
 ### Frontend Architecture
