@@ -18,6 +18,8 @@ import NoiseReductionPage from './pages/NoiseReductionPage'
 import HowToUseVocalRemover from './pages/HowToUseVocalRemover'
 import HowToUsePitchTempo from './pages/HowToUsePitchTempo'
 import HowToUseFormatConverter from './pages/HowToUseFormatConverter'
+import HowToUseAudioEditor from './pages/HowToUseAudioEditor'
+import HowToUse from './pages/HowToUse'
 import VoiceAIStylePage from './pages/VoiceAIStylePage'
 import AIFeaturesPage from './pages/AIFeaturesPage'
 import ProcessingStudioPage from './pages/ProcessingStudioPage'
@@ -227,15 +229,16 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/how-to-use" element={<HowToUsePage />} />
+            <Route path="/how-to-use" element={<HowToUse />} />
             <Route path="/vocal-remover" element={<ImprovedVocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />
             <Route path="/audio-editor" element={<AudioEditorPage />} />
             <Route path="/noise-reduction" element={<NoiseReductionPage />} />
-            <Route path="/how-to-use/vocal-remover" element={<HowToUseVocalRemover />} />
-            <Route path="/how-to-use/pitch-tempo" element={<HowToUsePitchTempo />} />
-            <Route path="/how-to-use/format-converter" element={<HowToUseFormatConverter />} />
+            <Route path="/how-to-use-vocal-remover" element={<HowToUseVocalRemover />} />
+            <Route path="/how-to-use-pitch-tempo" element={<HowToUsePitchTempo />} />
+            <Route path="/how-to-use-format-converter" element={<HowToUseFormatConverter />} />
+            <Route path="/how-to-use-audio-editor" element={<HowToUseAudioEditor />} />
             <Route path="/voice-ai-style" element={<VoiceAIStylePage />} />
             <Route path="/ai-features" element={<AIFeaturesPage />} />
             <Route path="/processing-studio" element={<ProcessingStudioPage />} />

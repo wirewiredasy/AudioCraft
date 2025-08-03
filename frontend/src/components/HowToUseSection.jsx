@@ -6,15 +6,12 @@ import {
   Box, 
   Card, 
   CardContent,
-  Button,
-  Chip
+  Button
 } from '@mui/material'
 import { Link } from 'react-router-dom'
 import {
   PlayArrow,
-  ArrowBack,
-  ArrowForward,
-  Settings
+  ArrowForward
 } from '@mui/icons-material'
 
 function HowToUseSection() {
@@ -121,262 +118,118 @@ function HowToUseSection() {
               </Box>
 
               {/* Action Buttons */}
-              <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+              <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
                 <Button
+                  variant="contained"
+                  size="large"
+                  startIcon={<PlayArrow />}
+                  component={Link}
+                  to="/how-to-use"
                   sx={{
-                    background: 'rgba(255, 255, 255, 0.9)',
-                    color: '#2d1b40',
-                    px: 3,
-                    py: 1,
-                    borderRadius: '8px',
+                    background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                    px: 4,
+                    py: 1.5,
+                    fontSize: '1rem',
                     fontWeight: 600,
-                    fontSize: '0.9rem',
-                    textTransform: 'none',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                    boxShadow: '0 8px 25px rgba(102, 126, 234, 0.4)',
                     '&:hover': {
-                      background: 'rgba(255, 255, 255, 1)',
-                      transform: 'translateY(-1px)',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-                    }
+                      background: 'linear-gradient(45deg, #5a67d8, #6b46c1)',
+                      boxShadow: '0 12px 35px rgba(102, 126, 234, 0.6)',
+                      transform: 'translateY(-2px)',
+                    },
                   }}
                 >
-                  All Guides
+                  View All Guides
                 </Button>
-                <Button
-                  sx={{
-                    background: 'rgba(255, 255, 255, 0.9)',
-                    color: '#2d1b40',
-                    px: 3,
-                    py: 1,
-                    borderRadius: '8px',
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
-                    textTransform: 'none',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                    '&:hover': {
-                      background: 'rgba(255, 255, 255, 1)',
-                      transform: 'translateY(-1px)',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-                    }
-                  }}
-                >
-                  Quick Start
-                </Button>
-              </Box>
-
-              {/* Quality Tags */}
-              <Box sx={{ mt: 4 }}>
-                <Typography variant="caption" sx={{ color: '#6b5b73', mb: 1, display: 'block' }}>
-                  Independent tutorials with
-                </Typography>
-                <Typography variant="body2" sx={{ color: '#4a3858', fontWeight: 600 }}>
-                  professional quality guides
+                
+                <Typography variant="body2" sx={{ color: '#6b5b73', fontWeight: 500 }}>
+                  Independent tutorials with professional quality guides
                 </Typography>
               </Box>
             </Box>
           </motion.div>
 
-          {/* Right Side - Device with Hand */}
+          {/* Right Side - Tool Navigation Cards */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
-              
-              {/* Navigation Arrows */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <Box sx={{ 
-                  position: 'absolute', 
-                  left: -40, 
-                  top: '50%', 
-                  transform: 'translateY(-50%)',
-                  zIndex: 10
-                }}>
-                  <Box sx={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.9)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      background: 'rgba(255, 255, 255, 1)',
-                      transform: 'scale(1.05)',
-                    }
-                  }}>
-                    <ArrowBack sx={{ color: '#2d1b40', fontSize: 24 }} />
-                  </Box>
-                </Box>
-
-                <Box sx={{ 
-                  position: 'absolute', 
-                  right: -40, 
-                  top: '50%', 
-                  transform: 'translateY(-50%)',
-                  zIndex: 10
-                }}>
-                  <Box sx={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.9)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      background: 'rgba(255, 255, 255, 1)',
-                      transform: 'scale(1.05)',
-                    }
-                  }}>
-                    <ArrowForward sx={{ color: '#2d1b40', fontSize: 24 }} />
-                  </Box>
-                </Box>
-              </motion.div>
-
-              {/* Main Device in Hand */}
-              <motion.div
-                animate={{
-                  y: [0, -8, 0],
-                  rotate: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              >
-                <Box sx={{ position: 'relative' }}>
-                  {/* Hand holding device */}
-                  <Box
+            <Box sx={{ display: 'grid', gap: 3 }}>
+              {[
+                { 
+                  title: 'Vocal Remover Guide', 
+                  path: '/how-to-use-vocal-remover',
+                  color: '#ef4444',
+                  description: 'AI-powered vocal separation'
+                },
+                { 
+                  title: 'Pitch & Tempo Guide', 
+                  path: '/how-to-use-pitch-tempo',
+                  color: '#3b82f6',
+                  description: 'Professional audio adjustment'
+                },
+                { 
+                  title: 'Format Converter Guide', 
+                  path: '/how-to-use-format-converter',
+                  color: '#8b5cf6',
+                  description: 'Universal audio conversion'
+                }
+              ].map((guide, index) => (
+                <motion.div
+                  key={guide.title}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ x: 8, transition: { type: "spring", stiffness: 300 } }}
+                >
+                  <Card
+                    component={Link}
+                    to={guide.path}
                     sx={{
-                      width: { xs: 300, md: 350, lg: 400 },
-                      height: { xs: 400, md: 450, lg: 500 },
-                      position: 'relative',
+                      textDecoration: 'none',
+                      background: 'rgba(255, 255, 255, 0.8)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '16px',
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer',
+                      '&:hover': {
+                        background: 'rgba(255, 255, 255, 0.9)',
+                        boxShadow: `0 8px 25px ${guide.color}40`,
+                        border: `1px solid ${guide.color}60`,
+                      },
                     }}
                   >
-                    {/* Hand */}
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: 200,
-                        height: 300,
-                        background: 'linear-gradient(145deg, #d4a574, #c49660)',
-                        borderRadius: '100px 100px 50px 50px',
-                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
-                      }}
-                    />
-
-                    {/* Microphone Device */}
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        top: 20,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: 80,
-                        height: 200,
-                        background: 'linear-gradient(145deg, #e8e8e8, #d0d0d0)',
-                        borderRadius: '40px 40px 20px 20px',
-                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
-                        border: '2px solid rgba(255, 255, 255, 0.3)',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {/* Microphone Mesh */}
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          top: 10,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: 60,
-                          height: 60,
-                          background: 'radial-gradient(circle, #888 1px, transparent 1px)',
-                          backgroundSize: '6px 6px',
-                          borderRadius: '50%',
-                          border: '2px solid #666',
-                        }}
-                      />
-
-                      {/* Control Buttons */}
-                      <Box sx={{ position: 'absolute', top: 90, left: '50%', transform: 'translateX(-50%)' }}>
-                        <Box sx={{
-                          width: 35,
-                          height: 35,
-                          borderRadius: '50%',
-                          background: 'linear-gradient(145deg, #f0f0f0, #d0d0d0)',
-                          border: '2px solid #bbb',
-                          mb: 1,
-                          boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
-                        }} />
-                        <Box sx={{
-                          width: 35,
-                          height: 35,
-                          borderRadius: '50%',
-                          background: 'linear-gradient(145deg, #f0f0f0, #d0d0d0)',
-                          border: '2px solid #bbb',
-                          boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
-                        }} />
+                    <CardContent sx={{ p: 3 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Box>
+                          <Typography 
+                            variant="h6" 
+                            fontWeight="bold" 
+                            sx={{ color: '#2d1b40', mb: 0.5 }}
+                          >
+                            {guide.title}
+                          </Typography>
+                          <Typography 
+                            variant="body2" 
+                            sx={{ color: '#6b5b73' }}
+                          >
+                            {guide.description}
+                          </Typography>
+                        </Box>
+                        <ArrowForward 
+                          sx={{ 
+                            color: guide.color, 
+                            fontSize: 24,
+                            transition: 'transform 0.3s ease',
+                          }} 
+                        />
                       </Box>
-
-                      {/* Brand Label */}
-                      <Box sx={{
-                        position: 'absolute',
-                        bottom: 20,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        color: '#666',
-                        fontSize: '0.6rem',
-                        fontWeight: 'bold',
-                        letterSpacing: '1px'
-                      }}>
-                        ODO
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  {/* Info Labels */}
-                  <Box sx={{ position: 'absolute', top: 60, right: -80 }}>
-                    <Typography variant="caption" sx={{ 
-                      color: '#6b5b73', 
-                      fontSize: '0.8rem',
-                      fontWeight: 600
-                    }}>
-                      Pitch
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{ position: 'absolute', top: 140, right: -100 }}>
-                    <Typography variant="caption" sx={{ 
-                      color: '#6b5b73', 
-                      fontSize: '0.8rem',
-                      fontWeight: 600
-                    }}>
-                      Quality
-                    </Typography>
-                    <Typography variant="caption" sx={{ 
-                      color: '#6b5b73', 
-                      fontSize: '0.75rem',
-                      display: 'block'
-                    }}>
-                      control
-                    </Typography>
-                  </Box>
-                </Box>
-              </motion.div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </Box>
           </motion.div>
         </Box>
