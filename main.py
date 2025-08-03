@@ -337,6 +337,12 @@ async def play_audio(file_id: str):
         "note": "Service will be connected when all dependencies are installed"
     }
 
+# Catch-all route for React Router (SPA)
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str):
+    """Serve React app for all unmatched routes"""
+    return FileResponse("frontend/dist/index.html")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000)
