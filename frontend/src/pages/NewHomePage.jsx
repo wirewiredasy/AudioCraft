@@ -170,7 +170,7 @@ function NewHomePage() {
                   lineHeight: 1.6,
                 }}
               >
-                Professional-grade audio tools powered by AI and advanced signal processing algorithms
+                Professional-grade audio tools powered by advanced signal processing algorithms
               </Typography>
             </Box>
 
@@ -178,8 +178,8 @@ function NewHomePage() {
               {[
                 {
                   id: '1',
-                  title: 'Vocal Remover (AI-Powered)',
-                  description: 'Remove vocals from any song using cutting-edge AI technology',
+                  title: 'Vocal Remover',
+                  description: 'Remove vocals from any song using advanced processing technology',
                   icon: VolumeOff,
                   color: '#8b5cf6',
                   path: '/vocal-remover'

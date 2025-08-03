@@ -19,10 +19,7 @@ import {
   ContentCut,
   MusicNote,
   Psychology,
-  AutoAwesome,
-  Settings,
-  RecordVoiceOver,
-  GraphicEq
+  Settings
 } from '@mui/icons-material'
 
 const NavigationMenu = ({ open, onClose }) => {
@@ -35,9 +32,6 @@ const NavigationMenu = ({ open, onClose }) => {
     { path: '/format-converter', label: 'Format Converter', icon: SwapHoriz, section: 'Audio Tools' },
     { path: '/audio-editor', label: 'Audio Editor', icon: ContentCut, section: 'Audio Tools' },
     { path: '/noise-reduction', label: 'Noise Reduction', icon: MusicNote, section: 'Audio Tools' },
-    { path: '/voice-ai-style', label: 'Voice AI Studio', icon: RecordVoiceOver, section: 'AI Features' },
-    { path: '/ai-features', label: 'AI Features', icon: AutoAwesome, section: 'AI Features' },
-    { path: '/processing-studio', label: 'Processing Studio', icon: GraphicEq, section: 'AI Features' },
     { path: '/how-to-use/vocal-remover', label: 'Vocal Remover Guide', icon: Psychology, section: 'How to Use' },
     { path: '/how-to-use/pitch-tempo', label: 'Pitch & Tempo Guide', icon: Settings, section: 'How to Use' },
     { path: '/how-to-use/format-converter', label: 'Format Converter Guide', icon: SwapHoriz, section: 'How to Use' }
@@ -69,7 +63,7 @@ const NavigationMenu = ({ open, onClose }) => {
           OdoRemover
         </Typography>
         <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.6)' }}>
-          AI Audio Processing Suite
+          Audio Processing Suite
         </Typography>
       </Box>
 

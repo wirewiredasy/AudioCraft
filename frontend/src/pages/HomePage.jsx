@@ -99,14 +99,14 @@ function HomePage() {
           color="textSecondary" 
           sx={{ mb: 4, maxWidth: '800px', mx: 'auto' }}
         >
-          Professional audio processing tools powered by cutting-edge AI and advanced algorithms. 
+          Professional audio processing tools powered by advanced algorithms. 
           Transform your audio with precision and quality.
         </Typography>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
           <Chip 
             icon={<GraphicEq />} 
-            label="AI-Powered" 
+            label="Advanced Processing" 
             color="primary" 
             variant="outlined" 
           />
