@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl;
+  }
+  
+  .audio-wave-animation {
+    animation: audioWave 1.5s ease-in-out infinite alternate;
+  }
+  
+  .processing-spinner {
+    @apply animate-spin h-8 w-8 border-4 border-audio-processing border-t-transparent rounded-full;
+  }
+  
+  .upload-area {
+    @apply border-2 border-dashed border-primary-500/50 rounded-xl p-8 transition-all duration-300 hover:border-primary-500 hover:bg-primary-50/5;
+  }
+  
+  .upload-area.dragover {
+    @apply border-primary-600 bg-primary-50/10 scale-105;
+  }
+}
+
+@keyframes audioWave {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.5); }
+  100% { transform: scaleY(0.5); }
+}
+
+.waveform-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.audio-controls {
+  @apply flex items-center gap-4 p-4 bg-white/10 rounded-lg backdrop-blur-sm;
+}
+
+.process-button {
+  @apply px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold transition-all duration-300 hover:from-primary-600 hover:to-primary-700 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed;
+}
