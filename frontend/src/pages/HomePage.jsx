@@ -132,7 +132,7 @@ function HomePage() {
         {features.map((feature) => {
           const Icon = feature.icon
           return (
-            <Grid item xs={12} md={6} lg={4} key={feature.title}>
+            <Grid size={{ xs: 12, md: 6, lg: 4 }} key={feature.title}>
               <Card 
                 sx={{ 
                   height: '100%',

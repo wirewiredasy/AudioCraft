@@ -26,11 +26,11 @@ const theme = createTheme({
     },
     background: {
       default: 'transparent',
-      paper: 'rgba(255, 255, 255, 0.08)',
+      paper: 'rgba(255, 255, 255, 0.12)',
     },
     text: {
       primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.7)',
+      secondary: 'rgba(255, 255, 255, 0.8)',
     },
   },
   components: {
@@ -55,11 +55,11 @@ const theme = createTheme({
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         contained: {
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
           boxShadow: '0 10px 20px -5px rgba(59, 130, 246, 0.4)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-            boxShadow: '0 20px 25px -5px rgba(59, 130, 246, 0.6)',
+            background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%)',
+            boxShadow: '0 20px 25px -5px rgba(139, 92, 246, 0.6)',
             transform: 'translateY(-2px)',
           },
         },

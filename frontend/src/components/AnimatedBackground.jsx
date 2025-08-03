@@ -11,7 +11,7 @@ function AnimatedBackground() {
         width: '100%',
         height: '100%',
         zIndex: -1,
-        background: 'linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #ec4899 100%)',
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #581c87 50%, #be185d 75%, #dc2626 100%)',
         '&::before': {
           content: '""',
           position: 'absolute',

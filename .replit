@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "Frontend Development"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -37,7 +37,7 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
-waitForPort = 3000
+waitForPort = 3001
 
 [[workflows.workflow]]
 name = "Frontend Development"
@@ -69,6 +69,10 @@ exposeLocalhost = true
 [[ports]]
 localPort = 3000
 externalPort = 3000
+
+[[ports]]
+localPort = 3001
+externalPort = 3002
 
 [[ports]]
 localPort = 5000
