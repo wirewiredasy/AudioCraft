@@ -8,7 +8,7 @@ UPLOAD_DIR = os.getenv("UPLOAD_DIR", "static/uploads")
 PROCESSED_DIR = os.getenv("PROCESSED_DIR", "static/processed")
 
 # Port configuration
-GATEWAY_PORT = int(os.getenv("GATEWAY_PORT", "5000"))
+GATEWAY_PORT = int(os.getenv("GATEWAY_PORT", "8000"))
 
 # Service ports
 VOCAL_REMOVER_PORT = int(os.getenv("VOCAL_REMOVER_PORT", "8001"))
