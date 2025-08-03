@@ -1,5 +1,5 @@
-modules = ["python-3.11"]
-run = "node main.py"
+modules = ["python-3.11", "web", "nodejs-20"]
+run = "node static/index.html"
 
 [nix]
 channel = "stable-25_05"
@@ -39,7 +39,7 @@ localPort = 8000
 externalPort = 8000
 
 [deployment]
-run = ["sh", "-c", "node main.py"]
+run = ["sh", "-c", "node static/index.html"]
 
 [agent]
 expertMode = true
