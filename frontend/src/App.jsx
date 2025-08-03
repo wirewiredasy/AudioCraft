@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import Header from './components/Header'
-import AnimatedBackground from './components/AnimatedBackground'
 import HomePage from './pages/HomePage'
 import VocalRemoverPage from './pages/VocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
@@ -11,26 +10,50 @@ import FormatConverterPage from './pages/FormatConverterPage'
 import AudioEditorPage from './pages/AudioEditorPage'
 import NoiseReductionPage from './pages/NoiseReductionPage'
 
-const theme = createTheme({
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#0969da',
+      light: '#54aeff',
+      dark: '#0550ae',
+    },
+    secondary: {
+      main: '#6f42c1',
+      light: '#8a63d2',
+      dark: '#5a32a3',
+    },
+    background: {
+      default: '#f7f9fc',
+      paper: 'rgba(255, 255, 255, 0.9)',
+    },
+    text: {
+      primary: '#24292f',
+      secondary: '#656d76',
+    },
+  },
+})
+
+const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#3b82f6',
-      light: '#60a5fa',
-      dark: '#1d4ed8',
+      main: '#238636',
+      light: '#2ea043',
+      dark: '#1a7f37',
     },
     secondary: {
-      main: '#8b5cf6',
-      light: '#a78bfa',
-      dark: '#7c3aed',
+      main: '#1f6feb',
+      light: '#388bfd',
+      dark: '#0969da',
     },
     background: {
-      default: 'transparent',
-      paper: 'rgba(255, 255, 255, 0.12)',
+      default: '#0e1418',
+      paper: 'rgba(22, 27, 34, 0.9)',
     },
     text: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.8)',
+      primary: '#f0f6fc',
+      secondary: '#7d8590',
     },
   },
   components: {
@@ -55,12 +78,12 @@ const theme = createTheme({
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         contained: {
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
-          boxShadow: '0 10px 20px -5px rgba(59, 130, 246, 0.4)',
+          background: 'linear-gradient(135deg, #238636 0%, #1f6feb 100%)',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%)',
-            boxShadow: '0 20px 25px -5px rgba(139, 92, 246, 0.6)',
-            transform: 'translateY(-2px)',
+            background: 'linear-gradient(135deg, #2ea043 0%, #388bfd 100%)',
+            boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
+            transform: 'translateY(-1px)',
           },
         },
       },
@@ -81,13 +104,19 @@ const theme = createTheme({
 })
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true)
+  
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode)
+    document.body.className = isDarkMode ? 'light' : ''
+  }
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <AnimatedBackground />
       <Router>
         <div className="min-h-screen relative">
-          <Header />
+          <Header isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
           <main className="container mx-auto px-4 py-8">
             <Routes>
               <Route path="/" element={<HomePage />} />

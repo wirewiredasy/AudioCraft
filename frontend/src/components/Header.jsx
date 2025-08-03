@@ -22,7 +22,10 @@ import {
   SwapHoriz,
   ContentCut,
   VolumeOff,
-  Home
+  Home,
+  DarkMode,
+  LightMode,
+  GraphicEq
 } from '@mui/icons-material'
 
 const navigation = [
@@ -34,7 +37,7 @@ const navigation = [
   { name: 'Noise Reduction', path: '/noise-reduction', icon: MusicNote },
 ]
 
-function Header() {
+function Header({ isDarkMode, onToggleTheme }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
   const theme = useTheme()

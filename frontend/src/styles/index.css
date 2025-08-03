@@ -11,9 +11,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #581c87 50%, #be185d 75%, #dc2626 100%);
-  background-attachment: fixed;
+  background: #0e1418;
   min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+body.light {
+  background: #f7f9fc;
 }
 
 code {
