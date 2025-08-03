@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import * as Dialog from '@radix-ui/react-dialog'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { 
   Box,
   Typography,
@@ -47,7 +48,7 @@ function MobileMenu({ open, onClose }) {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/60 z-40 backdrop-blur-sm" />
         <Dialog.Content 
-          className="fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-2xl transition-all duration-300 ease-out"
+          className="fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-2xl"
           style={{
             background: 'linear-gradient(180deg, rgba(26, 29, 41, 0.98) 0%, rgba(15, 20, 25, 0.95) 100%)',
             backdropFilter: 'blur(20px)',
@@ -55,9 +56,17 @@ function MobileMenu({ open, onClose }) {
             borderBottomLeftRadius: '24px',
             borderBottomRightRadius: '24px',
             maxHeight: '70vh',
-            overflowY: 'auto'
+            overflowY: 'auto',
+            transform: open ? 'translateY(0)' : 'translateY(-100%)',
+            transition: 'transform 0.3s ease-out'
           }}
         >
+          <VisuallyHidden.Root>
+            <Dialog.Title>Navigation Menu</Dialog.Title>
+            <Dialog.Description>
+              Main navigation menu with links to all audio tools and information pages
+            </Dialog.Description>
+          </VisuallyHidden.Root>
           {/* Header */}
           <Box sx={{ 
             display: 'flex', 

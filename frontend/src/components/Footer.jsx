@@ -26,12 +26,12 @@ import {
   Email
 } from '@mui/icons-material'
 
-const tools = [
-  { name: 'Vocal Remover', path: '/vocal-remover', icon: VolumeOff },
-  { name: 'Pitch & Tempo', path: '/pitch-tempo', icon: Tune },
-  { name: 'Format Converter', path: '/format-converter', icon: SwapHoriz },
-  { name: 'Audio Editor', path: '/audio-editor', icon: ContentCut },
-  { name: 'Noise Reduction', path: '/noise-reduction', icon: MusicNote },
+const audioTools = [
+  { name: 'Vocal Remover', path: '/vocal-remover', icon: VolumeOff, description: 'AI-powered vocal separation' },
+  { name: 'Pitch & Tempo', path: '/pitch-tempo', icon: Tune, description: 'Professional audio adjustment' },
+  { name: 'Format Converter', path: '/format-converter', icon: SwapHoriz, description: 'Universal audio conversion' },
+  { name: 'Audio Editor', path: '/audio-editor', icon: ContentCut, description: 'Cut and join audio files' },
+  { name: 'Noise Reduction', path: '/noise-reduction', icon: MusicNote, description: 'Crystal clear audio enhancement' },
 ]
 
 const footerLinks = {
@@ -137,7 +137,7 @@ function Footer() {
                   sideOffset={5}
                   align="start"
                 >
-                  {tools.map((tool) => {
+                  {audioTools.map((tool) => {
                     const Icon = tool.icon
                     return (
                       <DropdownMenu.Item key={tool.name} asChild>
