@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Box, Typography, Container } from '@mui/material'
+import { Box, Typography, Container, Button } from '@mui/material'
+import { PlayArrow, VolumeOff, Tune } from '@mui/icons-material'
 
 function HeroSection() {
   const canvasRef = useRef(null)
 
-  // Animated waveform effect
+  // Enhanced realistic wave animation effect
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -20,7 +21,7 @@ function HeroSection() {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Waveform animation
+    // More realistic wave animation
     let animationId
     let time = 0
 
@@ -28,20 +29,29 @@ function HeroSection() {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
       
       const centerY = canvas.offsetHeight / 2
-      const barWidth = 3
-      const barSpacing = 5
+      const barWidth = 6  // Larger bars
+      const barSpacing = 3
       const numBars = Math.floor(canvas.offsetWidth / (barWidth + barSpacing))
 
       for (let i = 0; i < numBars; i++) {
         const x = i * (barWidth + barSpacing)
-        const amplitude = Math.sin(time * 0.01 + i * 0.1) * 30 + Math.sin(time * 0.005 + i * 0.05) * 20
-        const height = Math.abs(amplitude)
         
-        // Create gradient colors (green to blue to purple)
-        const hue = (i / numBars) * 240 + 120 // 120 (green) to 360 (purple)
-        const saturation = 70 + Math.sin(time * 0.01 + i * 0.1) * 20
+        // More realistic wave patterns with multiple frequencies
+        const frequency1 = Math.sin(time * 0.02 + i * 0.2) * 80
+        const frequency2 = Math.sin(time * 0.015 + i * 0.15) * 50
+        const frequency3 = Math.sin(time * 0.008 + i * 0.1) * 30
+        const amplitude = frequency1 + frequency2 + frequency3
+        const height = Math.abs(amplitude) + 20 // Minimum height for visibility
         
-        ctx.fillStyle = `hsl(${hue}, ${saturation}%, 60%)`
+        // Beautiful cyan to blue gradient colors
+        const progress = i / numBars
+        const hue = 190 + progress * 50 // Cyan (190) to blue (240)
+        const saturation = 85 + Math.sin(time * 0.01 + i * 0.08) * 15
+        const lightness = 55 + Math.sin(time * 0.012 + i * 0.1) * 15
+        
+        ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`
+        ctx.shadowColor = `hsl(${hue}, ${saturation}%, ${lightness + 20}%)`
+        ctx.shadowBlur = 4
         ctx.fillRect(x, centerY - height / 2, barWidth, height)
       }
       
@@ -62,15 +72,15 @@ function HeroSection() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #667eea 50%, #4facfe 75%, #00f2fe 100%)',
+        minHeight: '60vh', // Smaller hero section
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)',
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Animated background particles */}
+      {/* Animated geometric patterns */}
       <Box
         sx={{
           position: 'absolute',
@@ -78,30 +88,32 @@ function HeroSection() {
           left: 0,
           right: 0,
           bottom: 0,
-          opacity: 0.1,
+          opacity: 0.08,
         }}
       >
-        {[...Array(50)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
             style={{
               position: 'absolute',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: Math.random() * 4 + 1,
-              height: Math.random() * 4 + 1,
-              background: 'white',
+              width: Math.random() * 8 + 4,
+              height: Math.random() * 8 + 4,
+              background: 'linear-gradient(45deg, #06b6d4, #3b82f6)',
               borderRadius: '50%',
             }}
             animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 1, 0.3],
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              opacity: [0.2, 1, 0.2],
+              scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 4 + 3,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: Math.random() * 2,
+              delay: Math.random() * 3,
             }}
           />
         ))}
@@ -112,9 +124,9 @@ function HeroSection() {
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
-            gap: 8,
+            gap: 6,
             alignItems: 'center',
-            minHeight: '80vh',
+            minHeight: '50vh', // Smaller minimum height
           }}
         >
           {/* Left side - Text Content */}
@@ -123,320 +135,178 @@ function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
           >
-            <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
+            <Box sx={{ color: 'white', mb: 4 }}>
+              <Typography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
+                  fontWeight: 800,
+                  mb: 3,
+                  background: 'linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  lineHeight: 1.1,
+                }}
               >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontSize: { xs: '3rem', md: '4rem', lg: '5rem' },
-                    fontWeight: 900,
-                    color: 'rgba(20, 20, 20, 0.9)',
-                    mb: 1,
-                    textShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                    letterSpacing: '-0.02em',
-                  }}
-                >
-                  Odoremover
-                </Typography>
-              </motion.div>
+                Professional Audio Processing
+              </Typography>
+              
+              <Typography
+                variant="h5"
+                sx={{
+                  mb: 4,
+                  opacity: 0.9,
+                  fontSize: { xs: '1.1rem', md: '1.3rem' },
+                  fontWeight: 400,
+                  color: '#e2e8f0',
+                  lineHeight: 1.6,
+                }}
+              >
+                Remove vocals, adjust pitch & tempo, convert formats, and enhance your audio with AI-powered tools
+              </Typography>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.4 }}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    color: 'rgba(20, 20, 20, 0.7)',
-                    fontWeight: 500,
-                    letterSpacing: '0.1em',
-                    mb: 4,
-                    textTransform: 'uppercase',
-                  }}
+              <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  ADVIA EDITING TOOLS
-                </Typography>
-              </motion.div>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<PlayArrow />}
+                    sx={{
+                      background: 'linear-gradient(45deg, #06b6d4, #3b82f6)',
+                      px: 4,
+                      py: 1.5,
+                      fontSize: '1.1rem',
+                      fontWeight: 600,
+                      boxShadow: '0 8px 25px rgba(6, 182, 212, 0.4)',
+                      '&:hover': {
+                        background: 'linear-gradient(45deg, #0891b2, #2563eb)',
+                        boxShadow: '0 12px 35px rgba(6, 182, 212, 0.6)',
+                      },
+                    }}
+                  >
+                    Try Now
+                  </Button>
+                </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.6 }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    color: 'rgba(20, 20, 20, 0.6)',
-                    fontWeight: 400,
-                    lineHeight: 1.6,
-                    maxWidth: 500,
-                    mx: { xs: 'auto', lg: 0 },
-                  }}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  Professional audio processing tools powered by AI. Remove vocals, 
-                  adjust pitch, convert formats, and enhance your audio with cutting-edge technology.
-                </Typography>
-              </motion.div>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    startIcon={<VolumeOff />}
+                    sx={{
+                      borderColor: '#06b6d4',
+                      color: '#06b6d4',
+                      px: 4,
+                      py: 1.5,
+                      fontSize: '1.1rem',
+                      fontWeight: 600,
+                      '&:hover': {
+                        borderColor: '#0891b2',
+                        background: 'rgba(6, 182, 212, 0.1)',
+                      },
+                    }}
+                  >
+                    Vocal Remover
+                  </Button>
+                </motion.div>
+              </Box>
             </Box>
           </motion.div>
 
-          {/* Right side - Device Mockup */}
+          {/* Right side - Enhanced Wave Visualization */}
           <motion.div
-            initial={{ opacity: 0, x: 50, rotateY: -15 }}
-            animate={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: 'easeOut' }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, delay: 0.3 }}
           >
             <Box
               sx={{
-                perspective: '1000px',
+                position: 'relative',
                 display: 'flex',
                 justifyContent: 'center',
+                alignItems: 'center',
+                height: { xs: '300px', md: '400px' },
               }}
             >
-              <motion.div
-                animate={{
-                  rotateX: [0, 2, 0],
-                  rotateY: [0, -1, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
+              {/* Large Wave Canvas */}
+              <canvas
+                ref={canvasRef}
                 style={{
-                  transformStyle: 'preserve-3d',
+                  width: '100%',
+                  height: '200px',
+                  borderRadius: '16px',
+                  background: 'rgba(6, 182, 212, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(6, 182, 212, 0.2)',
+                  boxShadow: '0 8px 32px rgba(6, 182, 212, 0.3)',
+                }}
+              />
+              
+              {/* Overlay controls */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: 20,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  display: 'flex',
+                  gap: 2,
                 }}
               >
-                <Box
-                  sx={{
-                    width: { xs: 300, md: 450, lg: 500 },
-                    height: { xs: 200, md: 300, lg: 350 },
-                    background: 'linear-gradient(145deg, #1a1a1a, #2d2d2d)',
-                    borderRadius: '20px',
-                    transform: 'rotateX(10deg) rotateY(-5deg)',
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  {/* Screen content */}
                   <Box
                     sx={{
-                      p: 3,
-                      height: '100%',
+                      width: 50,
+                      height: 50,
+                      borderRadius: '50%',
+                      background: 'linear-gradient(45deg, #06b6d4, #3b82f6)',
                       display: 'flex',
-                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 4px 15px rgba(6, 182, 212, 0.4)',
                     }}
                   >
-                    {/* Top bar */}
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        mb: 2,
-                        pb: 1,
-                        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          gap: 0.5,
-                          mr: 2,
-                        }}
-                      >
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', background: '#ff5f57' }} />
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', background: '#ffbd2e' }} />
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', background: '#28ca42' }} />
-                      </Box>
-                      <Typography
-                        variant="caption"
-                        sx={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.7rem' }}
-                      >
-                        OdoRemover - Audio Editor
-                      </Typography>
-                    </Box>
-
-                    {/* Sidebar */}
-                    <Box sx={{ display: 'flex', gap: 2, flex: 1 }}>
-                      <Box
-                        sx={{
-                          width: 60,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: 1,
-                        }}
-                      >
-                        {[
-                          { icon: '🎵', active: true },
-                          { icon: '🎤' },
-                          { icon: '⚡' },
-                          { icon: '🔄' },
-                          { icon: '✂️' },
-                          { icon: '🔇' },
-                        ].map((item, i) => (
-                          <Box
-                            key={i}
-                            sx={{
-                              width: 40,
-                              height: 40,
-                              borderRadius: '8px',
-                              background: item.active
-                                ? 'linear-gradient(135deg, #667eea, #764ba2)'
-                                : 'rgba(255, 255, 255, 0.05)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontSize: '1rem',
-                              border: '1px solid rgba(255, 255, 255, 0.1)',
-                            }}
-                          >
-                            {item.icon}
-                          </Box>
-                        ))}
-                      </Box>
-
-                      {/* Main content area with waveform */}
-                      <Box sx={{ flex: 1, position: 'relative' }}>
-                        <canvas
-                          ref={canvasRef}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            borderRadius: '8px',
-                            background: 'rgba(0, 0, 0, 0.3)',
-                          }}
-                        />
-                        
-                        {/* Playback controls overlay */}
-                        <Box
-                          sx={{
-                            position: 'absolute',
-                            bottom: 10,
-                            left: 10,
-                            right: 10,
-                            height: 40,
-                            background: 'rgba(0, 0, 0, 0.7)',
-                            borderRadius: '8px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            px: 2,
-                            gap: 1,
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              width: 24,
-                              height: 24,
-                              borderRadius: '50%',
-                              background: 'linear-gradient(135deg, #00f2fe, #4facfe)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: 'white',
-                              fontSize: '0.7rem',
-                            }}
-                          >
-                            ▶
-                          </Box>
-                          <Box
-                            sx={{
-                              flex: 1,
-                              height: 2,
-                              background: 'rgba(255, 255, 255, 0.2)',
-                              borderRadius: 1,
-                              position: 'relative',
-                            }}
-                          >
-                            <motion.div
-                              style={{
-                                position: 'absolute',
-                                left: 0,
-                                top: 0,
-                                height: '100%',
-                                background: 'linear-gradient(90deg, #00f2fe, #4facfe)',
-                                borderRadius: 1,
-                              }}
-                              animate={{ width: ['20%', '60%', '20%'] }}
-                              transition={{ duration: 4, repeat: Infinity }}
-                            />
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Box>
+                    <PlayArrow sx={{ color: 'white', fontSize: '1.5rem' }} />
                   </Box>
-
-                  {/* Screen reflection effect */}
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <Box
                     sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%)',
-                      borderRadius: '20px',
-                      pointerEvents: 'none',
+                      width: 50,
+                      height: 50,
+                      borderRadius: '50%',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
                     }}
-                  />
-                </Box>
-              </motion.div>
+                  >
+                    <Tune sx={{ color: '#06b6d4', fontSize: '1.5rem' }} />
+                  </Box>
+                </motion.div>
+              </Box>
             </Box>
           </motion.div>
         </Box>
       </Container>
-
-      {/* Floating elements */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          top: '20%',
-          right: '10%',
-          width: 60,
-          height: 60,
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2))',
-          borderRadius: '50%',
-          backdropFilter: 'blur(10px)',
-        }}
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
-      <motion.div
-        style={{
-          position: 'absolute',
-          bottom: '20%',
-          left: '5%',
-          width: 40,
-          height: 40,
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2))',
-          borderRadius: '20%',
-          backdropFilter: 'blur(10px)',
-        }}
-        animate={{
-          y: [0, 15, 0],
-          rotate: [0, -180, -360],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 1,
-        }}
-      />
     </Box>
   )
 }
