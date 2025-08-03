@@ -27,6 +27,8 @@ import {
 import HeroSection from '../components/HeroSection'
 import NewPrefooter from '../components/NewPrefooter'
 
+import HowToUseSection from '../components/HowToUseSection'
+
 const tools = [
   {
     title: 'Vocal Remover',
@@ -217,6 +219,7 @@ function NewHomePage() {
       </Box>
 
       <NewPrefooter />
+      <HowToUseSection />
     </Box>
   )
 }
