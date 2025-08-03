@@ -30,11 +30,9 @@ import {
 
 const navigation = [
   { name: 'Home', path: '/', icon: Home },
-  { name: 'Vocal Remover', path: '/vocal-remover', icon: VolumeOff },
-  { name: 'Pitch & Tempo', path: '/pitch-tempo', icon: Tune },
-  { name: 'Format Converter', path: '/format-converter', icon: SwapHoriz },
-  { name: 'Audio Editor', path: '/audio-editor', icon: ContentCut },
-  { name: 'Noise Reduction', path: '/noise-reduction', icon: MusicNote },
+  { name: 'Tools', path: '#tools', icon: GraphicEq },
+  { name: 'About', path: '#about', icon: MusicNote },
+  { name: 'Contact', path: '#contact', icon: ContentCut },
 ]
 
 function Header({ isDarkMode, onToggleTheme }) {
@@ -83,12 +81,32 @@ function Header({ isDarkMode, onToggleTheme }) {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', backdropFilter: 'blur(20px)' }}>
+      <AppBar position="static" sx={{ 
+        backgroundColor: 'rgba(26, 29, 41, 0.95)', 
+        backdropFilter: 'blur(20px)',
+        boxShadow: 'none',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+      }}>
         <Toolbar>
-          <GraphicEq sx={{ mr: 2, color: 'primary.main' }} />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-            Audio Studio Pro
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+            <Box sx={{ 
+              width: 32, 
+              height: 32, 
+              borderRadius: '50%', 
+              background: 'linear-gradient(135deg, #1f6feb 0%, #238636 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: 2
+            }}>
+              <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold', fontSize: '18px' }}>
+                O
+              </Typography>
+            </Box>
+            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: 'white' }}>
+              Odoremover
+            </Typography>
+          </Box>
           
           <IconButton
             onClick={onToggleTheme}
