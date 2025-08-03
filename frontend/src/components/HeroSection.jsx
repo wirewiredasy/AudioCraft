@@ -214,13 +214,13 @@ function HeroSection() {
               >
                 <Box
                   sx={{
-                    width: { xs: 300, md: 450, lg: 500 },
-                    height: { xs: 200, md: 300, lg: 350 },
+                    width: { xs: 350, md: 520, lg: 600 },
+                    height: { xs: 220, md: 340, lg: 400 },
                     background: 'linear-gradient(145deg, #1a1a1a, #2d2d2d)',
-                    borderRadius: '20px',
-                    transform: 'rotateX(10deg) rotateY(-5deg)',
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '24px',
+                    transform: 'rotateX(8deg) rotateY(-3deg)',
+                    boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+                    border: '2px solid rgba(255, 255, 255, 0.1)',
                     position: 'relative',
                     overflow: 'hidden',
                   }}
@@ -228,7 +228,7 @@ function HeroSection() {
                   {/* Screen content */}
                   <Box
                     sx={{
-                      p: 3,
+                      p: { xs: 2, md: 3, lg: 4 },
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column',
@@ -264,13 +264,13 @@ function HeroSection() {
                     </Box>
 
                     {/* Sidebar */}
-                    <Box sx={{ display: 'flex', gap: 2, flex: 1 }}>
+                    <Box sx={{ display: 'flex', gap: { xs: 2, lg: 3 }, flex: 1 }}>
                       <Box
                         sx={{
-                          width: 60,
+                          width: { xs: 50, md: 60, lg: 70 },
                           display: 'flex',
                           flexDirection: 'column',
-                          gap: 1,
+                          gap: { xs: 1, lg: 1.5 },
                         }}
                       >
                         {[
@@ -284,17 +284,24 @@ function HeroSection() {
                           <Box
                             key={i}
                             sx={{
-                              width: 40,
-                              height: 40,
-                              borderRadius: '8px',
+                              width: { xs: 36, md: 44, lg: 50 },
+                              height: { xs: 36, md: 44, lg: 50 },
+                              borderRadius: '10px',
                               background: item.active
                                 ? 'linear-gradient(135deg, #667eea, #764ba2)'
-                                : 'rgba(255, 255, 255, 0.05)',
+                                : 'rgba(255, 255, 255, 0.08)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              fontSize: '1rem',
-                              border: '1px solid rgba(255, 255, 255, 0.1)',
+                              fontSize: { xs: '0.9rem', md: '1rem', lg: '1.1rem' },
+                              border: '1px solid rgba(255, 255, 255, 0.15)',
+                              transition: 'all 0.3s ease',
+                              '&:hover': {
+                                background: item.active 
+                                  ? 'linear-gradient(135deg, #667eea, #764ba2)'
+                                  : 'rgba(255, 255, 255, 0.12)',
+                                transform: 'scale(1.05)',
+                              }
                             }}
                           >
                             {item.icon}
@@ -318,29 +325,38 @@ function HeroSection() {
                         <Box
                           sx={{
                             position: 'absolute',
-                            bottom: 10,
-                            left: 10,
-                            right: 10,
-                            height: 40,
-                            background: 'rgba(0, 0, 0, 0.7)',
-                            borderRadius: '8px',
+                            bottom: { xs: 8, md: 12, lg: 15 },
+                            left: { xs: 8, md: 12, lg: 15 },
+                            right: { xs: 8, md: 12, lg: 15 },
+                            height: { xs: 36, md: 44, lg: 50 },
+                            background: 'rgba(0, 0, 0, 0.8)',
+                            backdropFilter: 'blur(10px)',
+                            borderRadius: '12px',
                             display: 'flex',
                             alignItems: 'center',
-                            px: 2,
-                            gap: 1,
+                            px: { xs: 2, md: 3 },
+                            gap: { xs: 1, md: 1.5 },
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
                           }}
                         >
                           <Box
                             sx={{
-                              width: 24,
-                              height: 24,
+                              width: { xs: 28, md: 32, lg: 36 },
+                              height: { xs: 28, md: 32, lg: 36 },
                               borderRadius: '50%',
                               background: 'linear-gradient(135deg, #00f2fe, #4facfe)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                               color: 'white',
-                              fontSize: '0.7rem',
+                              fontSize: { xs: '0.8rem', md: '0.9rem', lg: '1rem' },
+                              boxShadow: '0 4px 12px rgba(79, 172, 254, 0.3)',
+                              cursor: 'pointer',
+                              transition: 'all 0.3s ease',
+                              '&:hover': {
+                                transform: 'scale(1.1)',
+                                boxShadow: '0 6px 16px rgba(79, 172, 254, 0.4)',
+                              }
                             }}
                           >
                             ▶

@@ -26,6 +26,7 @@ import {
 } from '@mui/icons-material'
 import HeroSection from '../components/HeroSection'
 import NewPrefooter from '../components/NewPrefooter'
+import ProductShowcase from '../components/ProductShowcase'
 
 const tools = [
   {
@@ -217,6 +218,7 @@ function NewHomePage() {
       </Box>
 
       <NewPrefooter />
+      <ProductShowcase />
     </Box>
   )
 }
