@@ -24,12 +24,31 @@ function setupEventListeners() {
     uploadArea.addEventListener('dragleave', handleDragLeave);
     uploadArea.addEventListener('drop', handleDrop);
     
-    // Option cards click
-    document.querySelectorAll('.option-card').forEach(card => {
+    // Tool cards click
+    document.querySelectorAll('.tool-card').forEach(card => {
         card.addEventListener('click', function() {
             selectOption(this.dataset.action);
         });
     });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('mobile-open');
+        });
+    }
 }
 
 function handleFileSelect(event) {
@@ -93,8 +112,8 @@ function processFileSelection(file) {
 function selectOption(action) {
     selectedAction = action;
     
-    // Update option cards UI
-    document.querySelectorAll('.option-card').forEach(card => {
+    // Update tool cards UI
+    document.querySelectorAll('.tool-card').forEach(card => {
         card.classList.remove('selected');
     });
     document.querySelector(`[data-action="${action}"]`).classList.add('selected');
@@ -479,8 +498,8 @@ function resetUpload() {
         </button>
     `;
     
-    // Remove selected class from option cards
-    document.querySelectorAll('.option-card').forEach(card => {
+    // Remove selected class from tool cards
+    document.querySelectorAll('.tool-card').forEach(card => {
         card.classList.remove('selected');
     });
 }
@@ -491,6 +510,37 @@ function formatFileSize(bytes) {
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Quick process function for footer dropboxes
+function quickProcess(action) {
+    selectedAction = action;
+    
+    // Create a file input for quick upload
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'audio/*';
+    input.style.display = 'none';
+    
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            selectedFile = file;
+            
+            // Scroll to upload section and show processing
+            const uploadSection = document.querySelector('.upload-section');
+            uploadSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Auto-start processing with default parameters
+            setTimeout(() => {
+                processAudio();
+            }, 1000);
+        }
+        document.body.removeChild(input);
+    };
+    
+    document.body.appendChild(input);
+    input.click();
 }
 
 // Smooth scrolling for navigation links
@@ -505,4 +555,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
+});
+
+// Add intersection observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, observerOptions);
+
+// Observe animated elements
+document.querySelectorAll('.feature-card, .tool-card, .step').forEach(el => {
+    observer.observe(el);
 });
