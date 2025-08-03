@@ -1,4 +1,4 @@
-modules = ["python-3.11", "nodejs-20", "web"]
+modules = ["nodejs-20", "python-3.11", "web"]
 run = "node index.js"
 
 [nix]
@@ -28,7 +28,7 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main.py"
-waitForPort = 8000
+waitForPort = 5000
 
 [[workflows.workflow]]
 name = "Frontend"
@@ -37,7 +37,7 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
-waitForPort = 5000
+waitForPort = 3000
 
 [[ports]]
 localPort = 3000
