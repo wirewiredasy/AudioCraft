@@ -41,8 +41,12 @@ SERVICES = {
 
 @app.get("/")
 async def root():
-    """Serve the main frontend application"""
-    return FileResponse("static/index.html")
+    """API Gateway - redirect to React frontend"""
+    return {
+        "message": "Audio Processing API Gateway", 
+        "frontend_url": "http://localhost:3000",
+        "status": "running"
+    }
 
 @app.get("/api")
 async def api_status():
