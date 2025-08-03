@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "Project"
+runButton = "Frontend Development"
 
 [[workflows.workflow]]
 name = "Project"
@@ -39,9 +39,32 @@ task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 3000
 
+[[workflows.workflow]]
+name = "Frontend Development"
+author = 45918044
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+
+[[workflows.workflow]]
+name = "Full Stack"
+author = 45918044
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+
 [[ports]]
 localPort = 443
 externalPort = 3001
+exposeLocalhost = true
 
 [[ports]]
 localPort = 3000
