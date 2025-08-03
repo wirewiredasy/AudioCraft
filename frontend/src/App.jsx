@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from 'sonner'
 
 // Import pages
 import HomePage from './pages/HomePage'
@@ -13,6 +13,7 @@ import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
 import AudioEditorPage from './pages/AudioEditorPage'
 import NoiseReductionPage from './pages/NoiseReductionPage'
+import ToolsPage from './pages/ToolsPage'
 
 // Footer pages
 import AboutPage from './pages/AboutPage'
@@ -63,6 +64,7 @@ function App() {
             <Route path="/format-converter" element={<FormatConverterPage />} />
             <Route path="/audio-editor" element={<AudioEditorPage />} />
             <Route path="/noise-reduction" element={<NoiseReductionPage />} />
+            <Route path="/tools" element={<ToolsPage />} />
 
             {/* Footer pages */}
             <Route path="/about" element={<AboutPage />} />

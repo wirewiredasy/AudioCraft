@@ -19,7 +19,8 @@ import {
   ContentCut,
   MusicNote,
   Psychology,
-  Settings
+  Settings,
+  Build
 } from '@mui/icons-material'
 
 const NavigationMenu = ({ open, onClose }) => {
@@ -27,14 +28,17 @@ const NavigationMenu = ({ open, onClose }) => {
 
   const menuItems = [
     { path: '/', label: 'Home', icon: Home, section: 'Main' },
+    { path: '/tools', label: 'All Tools', icon: Build, section: 'Main' },
     { path: '/vocal-remover', label: 'Vocal Remover', icon: VolumeOff, section: 'Audio Tools' },
     { path: '/pitch-tempo', label: 'Pitch & Tempo', icon: Tune, section: 'Audio Tools' },
     { path: '/format-converter', label: 'Format Converter', icon: SwapHoriz, section: 'Audio Tools' },
     { path: '/audio-editor', label: 'Audio Editor', icon: ContentCut, section: 'Audio Tools' },
     { path: '/noise-reduction', label: 'Noise Reduction', icon: MusicNote, section: 'Audio Tools' },
-    { path: '/how-to-use/vocal-remover', label: 'Vocal Remover Guide', icon: Psychology, section: 'How to Use' },
-    { path: '/how-to-use/pitch-tempo', label: 'Pitch & Tempo Guide', icon: Settings, section: 'How to Use' },
-    { path: '/how-to-use/format-converter', label: 'Format Converter Guide', icon: SwapHoriz, section: 'How to Use' }
+    { path: '/how-to-use-vocal-remover', label: 'Vocal Remover Guide', icon: Psychology, section: 'How to Use' },
+    { path: '/how-to-use-pitch-tempo', label: 'Pitch & Tempo Guide', icon: Settings, section: 'How to Use' },
+    { path: '/how-to-use-format-converter', label: 'Format Converter Guide', icon: SwapHoriz, section: 'How to Use' },
+    { path: '/how-to-use-audio-editor', label: 'Audio Editor Guide', icon: ContentCut, section: 'How to Use' },
+    { path: '/how-to-use-noise-reduction', label: 'Noise Reduction Guide', icon: MusicNote, section: 'How to Use' }
   ]
 
   const sections = [...new Set(menuItems.map(item => item.section))]
