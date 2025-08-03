@@ -15,6 +15,9 @@ import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
 import AudioEditorPage from './pages/AudioEditorPage'
 import NoiseReductionPage from './pages/NoiseReductionPage'
+import HowToUseVocalRemover from './pages/HowToUseVocalRemover'
+import HowToUsePitchTempo from './pages/HowToUsePitchTempo'
+import HowToUseFormatConverter from './pages/HowToUseFormatConverter'
 
 const lightTheme = createTheme({
   palette: {
@@ -226,6 +229,9 @@ function App() {
             <Route path="/format-converter" element={<FormatConverterPage />} />
             <Route path="/audio-editor" element={<AudioEditorPage />} />
             <Route path="/noise-reduction" element={<NoiseReductionPage />} />
+            <Route path="/how-to-use/vocal-remover" element={<HowToUseVocalRemover />} />
+            <Route path="/how-to-use/pitch-tempo" element={<HowToUsePitchTempo />} />
+            <Route path="/how-to-use/format-converter" element={<HowToUseFormatConverter />} />
           </Routes>
           <Footer />
         </Router>

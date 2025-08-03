@@ -25,7 +25,7 @@ import {
   GraphicEq
 } from '@mui/icons-material'
 import HeroSection from '../components/HeroSection'
-import Prefooter from '../components/Prefooter'
+import NewPrefooter from '../components/NewPrefooter'
 
 const tools = [
   {
@@ -216,7 +216,7 @@ function NewHomePage() {
         </Container>
       </Box>
 
-      <Prefooter />
+      <NewPrefooter />
     </Box>
   )
 }
