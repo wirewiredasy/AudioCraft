@@ -10,7 +10,7 @@ import HomePage from './pages/NewHomePage'
 import ToolsPage from './pages/ToolsPage'
 import PrivacyPage from './pages/PrivacyPage'
 import HowToUsePage from './pages/HowToUsePage'
-import VocalRemoverPage from './pages/VocalRemoverPage'
+import ImprovedVocalRemoverPage from './pages/ImprovedVocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
 import AudioEditorPage from './pages/AudioEditorPage'
@@ -37,6 +37,27 @@ const lightTheme = createTheme({
       primary: '#0f172a',
       secondary: '#475569',
     },
+    success: {
+      main: '#22c55e',
+    },
+    error: {
+      main: '#ef4444',
+    }
+  },
+  typography: {
+    fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif',
+    h1: {
+      fontWeight: 700,
+      fontSize: '3rem',
+    },
+    h2: {
+      fontWeight: 600,
+      fontSize: '2.25rem',
+    },
+    h3: {
+      fontWeight: 600,
+      fontSize: '1.875rem',
+    },
   },
   components: {
     MuiButton: {
@@ -47,12 +68,23 @@ const lightTheme = createTheme({
           fontWeight: 600,
           padding: '12px 24px',
           transition: 'all 0.3s ease',
+          boxShadow: 'none',
         },
         contained: {
           background: '#2563eb',
+          boxShadow: '0 2px 8px rgba(37, 99, 235, 0.3)',
           '&:hover': {
             background: '#1d4ed8',
-            transform: 'translateY(-1px)',
+            transform: 'translateY(-2px)',
+            boxShadow: '0 4px 12px rgba(37, 99, 235, 0.4)',
+          },
+        },
+        outlined: {
+          borderColor: '#2563eb',
+          color: '#2563eb',
+          '&:hover': {
+            background: 'rgba(37, 99, 235, 0.05)',
+            borderColor: '#1d4ed8',
           },
         },
       },
@@ -61,11 +93,31 @@ const lightTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: '16px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+          border: '1px solid rgba(37, 99, 235, 0.1)',
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
           transition: 'all 0.3s ease',
           '&:hover': {
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            transform: 'translateY(-2px)',
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '12px',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '12px',
+            '&.Mui-focused fieldset': {
+              borderColor: '#2563eb',
+            },
           },
         },
       },
@@ -169,7 +221,7 @@ function App() {
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/how-to-use" element={<HowToUsePage />} />
-            <Route path="/vocal-remover" element={<VocalRemoverPage />} />
+            <Route path="/vocal-remover" element={<ImprovedVocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />
             <Route path="/audio-editor" element={<AudioEditorPage />} />
