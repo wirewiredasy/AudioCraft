@@ -37,7 +37,7 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
-waitForPort = 3001
+waitForPort = 3000
 
 [[workflows.workflow]]
 name = "Frontend Development"
