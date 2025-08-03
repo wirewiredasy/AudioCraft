@@ -41,7 +41,12 @@ SERVICES = {
 
 @app.get("/")
 async def root():
-    """Health check endpoint"""
+    """Serve the main frontend application"""
+    return FileResponse("static/index.html")
+
+@app.get("/api")
+async def api_status():
+    """API health check endpoint"""
     return {
         "message": "Audio Processing API Gateway",
         "status": "running",

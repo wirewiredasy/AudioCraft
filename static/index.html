@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Processing Studio - Remove Vocals, Edit Audio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-music"></i>
+                <span>Audio Studio</span>
+            </div>
+            <nav class="nav">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">AI-Powered Audio Processing Studio</h1>
+                <p class="hero-description">
+                    Remove vocals, adjust pitch & tempo, convert formats, reduce noise, and more with advanced AI technology
+                </p>
+                
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h3>Choose File or Drop it Here</h3>
+                            <p>Supports MP3, WAV, FLAC, M4A, AAC, OGG and more</p>
+                            <p class="file-limits">Maximum file size: 100MB</p>
+                            <input type="file" id="fileInput" accept="audio/*" hidden>
+                            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                                <i class="fas fa-plus"></i> Choose File
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="processing-options" id="processingOptions" style="display: none;">
+                        <h3>Select Processing Options</h3>
+                        <div class="options-grid">
+                            <div class="option-card" data-action="remove-vocals">
+                                <i class="fas fa-microphone-slash"></i>
+                                <h4>Remove Vocals</h4>
+                                <p>Extract instrumental tracks</p>
+                            </div>
+                            <div class="option-card" data-action="pitch-tempo">
+                                <i class="fas fa-sliders-h"></i>
+                                <h4>Pitch & Tempo</h4>
+                                <p>Adjust speed and pitch</p>
+                            </div>
+                            <div class="option-card" data-action="convert-format">
+                                <i class="fas fa-exchange-alt"></i>
+                                <h4>Convert Format</h4>
+                                <p>Change audio format</p>
+                            </div>
+                            <div class="option-card" data-action="cut-join">
+                                <i class="fas fa-cut"></i>
+                                <h4>Cut & Join</h4>
+                                <p>Edit audio segments</p>
+                            </div>
+                            <div class="option-card" data-action="reduce-noise">
+                                <i class="fas fa-volume-mute"></i>
+                                <h4>Reduce Noise</h4>
+                                <p>Clean up audio quality</p>
+                            </div>
+                            <div class="option-card" data-action="play-audio">
+                                <i class="fas fa-play"></i>
+                                <h4>Play Audio</h4>
+                                <p>Preview and stream</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Processing Parameters -->
+                    <div class="parameters-section" id="parametersSection" style="display: none;">
+                        <div class="parameters-content">
+                            <h3 id="parametersTitle">Processing Parameters</h3>
+                            <div id="parametersForm"></div>
+                            <div class="parameters-actions">
+                                <button class="btn btn-secondary" onclick="showProcessingOptions()">Back</button>
+                                <button class="btn btn-primary" onclick="processAudio()">
+                                    <i class="fas fa-magic"></i> Process Audio
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Processing Status -->
+                    <div class="processing-status" id="processingStatus" style="display: none;">
+                        <div class="status-content">
+                            <div class="spinner"></div>
+                            <h3>Processing Your Audio...</h3>
+                            <p id="statusMessage">Please wait while we process your file</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="results-section" id="resultsSection" style="display: none;">
+                        <div class="results-content">
+                            <i class="fas fa-check-circle success-icon"></i>
+                            <h3>Processing Complete!</h3>
+                            <div class="audio-player" id="audioPlayer"></div>
+                            <div class="download-actions">
+                                <button class="btn btn-primary" id="downloadBtn">
+                                    <i class="fas fa-download"></i> Download Result
+                                </button>
+                                <button class="btn btn-secondary" onclick="resetUpload()">
+                                    <i class="fas fa-redo"></i> Process Another File
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Powerful Audio Processing Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-microphone-slash feature-icon"></i>
+                        <h3>AI Vocal Removal</h3>
+                        <p>Advanced AI technology separates vocals from instrumentals with high precision</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sliders-h feature-icon"></i>
+                        <h3>Pitch & Tempo Control</h3>
+                        <p>Adjust pitch and tempo independently without affecting audio quality</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt feature-icon"></i>
+                        <h3>Format Conversion</h3>
+                        <p>Convert between all popular audio formats with customizable quality settings</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cut feature-icon"></i>
+                        <h3>Audio Editing</h3>
+                        <p>Cut, trim, and join audio files with precision timing controls</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-volume-mute feature-icon"></i>
+                        <h3>Noise Reduction</h3>
+                        <p>Remove background noise and enhance audio clarity automatically</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cloud feature-icon"></i>
+                        <h3>Cloud Processing</h3>
+                        <p>Fast server-side processing without installing any software</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Upload Your Audio</h3>
+                        <p>Drop your audio file or select from your device. We support all major audio formats.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Choose Processing</h3>
+                        <p>Select the type of processing you want: vocal removal, format conversion, noise reduction, etc.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Download Result</h3>
+                        <p>Our AI processes your audio in seconds. Preview and download your enhanced audio file.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-music"></i>
+                        <span>Audio Studio</span>
+                    </div>
+                    <p>Professional audio processing powered by AI</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Features</h4>
+                    <a href="#vocal-removal">Vocal Removal</a>
+                    <a href="#pitch-tempo">Pitch & Tempo</a>
+                    <a href="#format-conversion">Format Conversion</a>
+                    <a href="#noise-reduction">Noise Reduction</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="#help">Help Center</a>
+                    <a href="#contact">Contact Us</a>
+                    <a href="#api">API Documentation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
