@@ -10,6 +10,13 @@ import HomePage from './pages/NewHomePage'
 import ToolsPage from './pages/ToolsPage'
 import PrivacyPage from './pages/PrivacyPage'
 import HowToUsePage from './pages/HowToUsePage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import TermsPage from './pages/TermsPage'
+import CookiePage from './pages/CookiePage'
+import HelpPage from './pages/HelpPage'
+import DocsPage from './pages/DocsPage'
+import CommunityPage from './pages/CommunityPage'
 import VocalRemoverPage from './pages/VocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
@@ -132,8 +139,15 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/tools" element={<ToolsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/cookies" element={<CookiePage />} />
             <Route path="/how-to-use" element={<HowToUsePage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/docs" element={<DocsPage />} />
+            <Route path="/community" element={<CommunityPage />} />
             <Route path="/vocal-remover" element={<VocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />

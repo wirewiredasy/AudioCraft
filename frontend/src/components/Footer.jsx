@@ -13,6 +13,7 @@ import {
   ListItemText
 } from '@mui/material'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { 
   VolumeOff, 
   Tune, 
@@ -133,36 +134,80 @@ function Footer() {
 
               <DropdownMenu.Portal>
                 <DropdownMenu.Content
-                  className="bg-gray-900 border border-gray-700 rounded-lg shadow-xl p-2 min-w-[200px] z-50"
                   sideOffset={5}
                   align="start"
+                  style={{
+                    backgroundColor: '#1f2937',
+                    border: '1px solid #374151',
+                    borderRadius: '8px',
+                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
+                    padding: '8px',
+                    minWidth: '240px',
+                    zIndex: 9999,
+                    maxHeight: '400px',
+                    overflow: 'auto'
+                  }}
                 >
+                  <VisuallyHidden.Root>
+                    <DropdownMenu.Label>Audio Processing Tools</DropdownMenu.Label>
+                  </VisuallyHidden.Root>
+                  
                   {audioTools.map((tool) => {
                     const Icon = tool.icon
                     return (
                       <DropdownMenu.Item key={tool.name} asChild>
                         <Link
                           to={tool.path}
-                          className="flex items-center px-3 py-2 text-white hover:bg-gray-800 rounded-md cursor-pointer transition-colors no-underline"
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            padding: '12px',
+                            color: 'white',
+                            textDecoration: 'none',
+                            borderRadius: '6px',
+                            cursor: 'pointer',
+                            transition: 'background-color 0.2s ease',
+                            fontSize: '14px'
+                          }}
+                          onMouseEnter={(e) => e.target.style.backgroundColor = '#374151'}
+                          onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                           onClick={() => setToolsMenuOpen(false)}
                         >
-                          <Icon className="mr-2 text-green-400" style={{ fontSize: '18px' }} />
-                          <span className="text-sm">{tool.name}</span>
+                          <Icon style={{ marginRight: '8px', color: '#4ade80', fontSize: '18px' }} />
+                          <div>
+                            <div style={{ fontWeight: 500 }}>{tool.name}</div>
+                            <div style={{ fontSize: '12px', color: '#9ca3af', marginTop: '2px' }}>
+                              {tool.description}
+                            </div>
+                          </div>
                         </Link>
                       </DropdownMenu.Item>
                     )
                   })}
                   
-                  <DropdownMenu.Separator className="h-px bg-gray-700 my-1" />
+                  <DropdownMenu.Separator style={{ height: '1px', backgroundColor: '#374151', margin: '8px 0' }} />
                   
                   <DropdownMenu.Item asChild>
                     <Link
                       to="/tools"
-                      className="flex items-center px-3 py-2 text-green-400 hover:bg-gray-800 rounded-md cursor-pointer transition-colors no-underline font-medium"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '12px',
+                        color: '#4ade80',
+                        textDecoration: 'none',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        transition: 'background-color 0.2s ease',
+                        fontWeight: 600,
+                        fontSize: '14px'
+                      }}
+                      onMouseEnter={(e) => e.target.style.backgroundColor = '#374151'}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                       onClick={() => setToolsMenuOpen(false)}
                     >
-                      <Build className="mr-2" style={{ fontSize: '18px' }} />
-                      <span className="text-sm">View All Tools</span>
+                      <Build style={{ marginRight: '8px', fontSize: '18px' }} />
+                      <span>View All Tools</span>
                     </Link>
                   </DropdownMenu.Item>
                 </DropdownMenu.Content>
