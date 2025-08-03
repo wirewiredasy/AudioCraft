@@ -27,6 +27,7 @@ import {
   LightMode,
   GraphicEq
 } from '@mui/icons-material'
+import MobileMenu from './MobileMenu'
 
 const navigation = [
   { name: 'Home', path: '/', icon: Home },
@@ -147,23 +148,9 @@ function Header({ isDarkMode, onToggleTheme }) {
         </Toolbar>
       </AppBar>
 
-      <Drawer
-        variant="temporary"
-        anchor="right"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
-        sx={{
-          '& .MuiDrawer-paper': {
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            backdropFilter: 'blur(20px)',
-          }
-        }}
-      >
-        {drawer}
-      </Drawer>
+
+      {/* Mobile Menu */}
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   )
 }

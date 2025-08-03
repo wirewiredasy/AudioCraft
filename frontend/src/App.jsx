@@ -1,9 +1,13 @@
+import './App.css'
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import { Box } from '@mui/material'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import HomePage from './pages/NewHomePage'
+import ToolsPage from './pages/ToolsPage'
 import VocalRemoverPage from './pages/VocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
@@ -114,21 +118,27 @@ function App() {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <Router>
-        <div className="min-h-screen relative">
+      <Box sx={{ 
+        margin: 0, 
+        padding: 0,
+        minHeight: '100vh',
+        background: 'linear-gradient(180deg, #1a1d29 0%, #0f1419 50%, #000 100%)',
+        overflowX: 'hidden'
+      }}>
+        <Router>
           <Header isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
-          <main className="container mx-auto px-4 py-8">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/vocal-remover" element={<VocalRemoverPage />} />
-              <Route path="/pitch-tempo" element={<PitchTempoPage />} />
-              <Route path="/format-converter" element={<FormatConverterPage />} />
-              <Route path="/audio-editor" element={<AudioEditorPage />} />
-              <Route path="/noise-reduction" element={<NoiseReductionPage />} />
-            </Routes>
-          </main>
-        </div>
-      </Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/tools" element={<ToolsPage />} />
+            <Route path="/vocal-remover" element={<VocalRemoverPage />} />
+            <Route path="/pitch-tempo" element={<PitchTempoPage />} />
+            <Route path="/format-converter" element={<FormatConverterPage />} />
+            <Route path="/audio-editor" element={<AudioEditorPage />} />
+            <Route path="/noise-reduction" element={<NoiseReductionPage />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </Box>
     </ThemeProvider>
   )
 }

@@ -17,6 +17,7 @@ import {
   ContentCut,
   MusicNote
 } from '@mui/icons-material'
+import Prefooter from '../components/Prefooter'
 
 const tools = [
   {
@@ -55,7 +56,9 @@ function NewHomePage() {
       minHeight: '100vh',
       background: 'linear-gradient(180deg, #1a1d29 0%, #0f1419 50%, #000 100%)',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      margin: 0,
+      padding: 0
     }}>
       {/* Animated Wave Background */}
       <Box sx={{
@@ -301,59 +304,8 @@ function NewHomePage() {
           </Typography>
         </Box>
 
-        {/* Footer */}
-        <Box sx={{ 
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          pt: 4,
-          pb: 4,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 2
-        }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Box sx={{ 
-              width: 24, 
-              height: 24, 
-              borderRadius: '50%', 
-              background: 'linear-gradient(135deg, #1f6feb 0%, #238636 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <Typography variant="caption" sx={{ color: 'white', fontWeight: 'bold' }}>
-                O
-              </Typography>
-            </Box>
-            <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-              Odoremover
-            </Typography>
-          </Box>
-
-          <Box sx={{ display: 'flex', gap: 3 }}>
-            <Typography 
-              variant="body2" 
-              sx={{ 
-                color: 'rgba(255, 255, 255, 0.5)', 
-                cursor: 'pointer',
-                '&:hover': { color: 'white' }
-              }}
-            >
-              Privacy Policy
-            </Typography>
-            <Typography 
-              variant="body2" 
-              sx={{ 
-                color: 'rgba(255, 255, 255, 0.5)', 
-                cursor: 'pointer',
-                '&:hover': { color: 'white' }
-              }}
-            >
-              Terms of Service
-            </Typography>
-          </Box>
-        </Box>
+        {/* Prefooter */}
+        <Prefooter />
       </Container>
     </Box>
   )
