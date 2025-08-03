@@ -1,13 +1,13 @@
-# Audio Processing Microservices API
+# Audio Processing Backend API
 
 ## Overview
 
-This is a comprehensive audio processing backend system built with a microservices architecture. The system provides a centralized API gateway that orchestrates multiple specialized audio processing services including vocal removal, pitch/tempo adjustment, format conversion, audio cutting/joining, noise reduction, and audio playback. Each service operates independently and can be scaled separately, making the system highly modular and maintainable.
+This is a comprehensive audio processing backend system built with FastAPI. The system provides a centralized API that handles multiple specialized audio processing tasks including vocal removal, pitch/tempo adjustment, format conversion, audio cutting/joining, noise reduction, and audio playback. The backend is designed for easy integration with any frontend or direct API usage.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Frontend preference: Modern, professional design with animations, visual effects, and stunning UI layout.
+Architecture preference: Backend-only API system without frontend.
 
 ## System Architecture
 
@@ -75,31 +75,23 @@ Comprehensive validation layer including:
 - **httpx**: Async HTTP client for inter-service communication
 - **uvicorn**: ASGI server for running FastAPI applications
 
-### Frontend Technology Stack
-- **React 18**: Modern React with hooks and TypeScript support
-- **Vite**: Fast build tool and development server
-- **TypeScript**: Type safety and better developer experience
-- **TailwindCSS + clsx**: Utility-first CSS framework with class merging
-- **ShadCN UI + Radix UI**: High-quality, accessible React components
-- **Framer Motion**: Industry standard animations and transitions
-- **React Dropzone**: Lightweight, customizable drag & drop file upload
-- **React Hook Form + Zod**: Type-safe form validation and handling  
-- **Sonner**: Super sleek notification system (better than Toastify)
-- **Axios**: HTTP client for API communication
-
-### Frontend Architecture
-- **Modern Professional Design**: Complete redesign with stunning gradients, glass effects, and premium animations
-- **Advanced Animation System**: Framer Motion integration with floating elements, pulse effects, and smooth transitions
-- **Glass Morphism UI**: Modern glassmorphism effects with backdrop blur and professional styling
-- **Gradient Design System**: Purple-to-teal gradient scheme with dynamic color animations
-- **Enhanced Typography**: Inter font with multiple weights and professional spacing
-- **Professional Landing Page**: Hero section with animated background, feature showcase, and complete sections
-- **Mobile-First Responsive**: Seamless experience across all devices with adaptive layouts
-- **Interactive Elements**: Hover effects, micro-interactions, and professional button animations
-- **Advanced Upload Zones**: Enhanced drag-drop with visual feedback and gradient borders
-- **Custom CSS Classes**: Professional animation utilities, loading states, and visual effects
+### Backend-Only Architecture
+- **API-First Design**: Pure FastAPI backend with comprehensive API endpoints
+- **RESTful Services**: Clean REST API architecture for audio processing
+- **Microservices Ready**: Modular design that can be expanded to microservices
+- **Direct API Access**: All functionality accessible via HTTP endpoints
 
 ### System Dependencies
 - **FFmpeg**: Required system dependency for audio processing
-- **Python 3.8+**: Runtime environment with async/await support
-- **Node.js 20+**: Runtime for the React frontend application
+- **Python 3.11+**: Runtime environment with async/await support
+
+### Recent Changes
+- **Date**: August 3, 2024
+- **Change**: Completely removed frontend components and dependencies
+- **Reason**: User requested complete frontend deletion
+- **Impact**: Now a pure backend API system accessible via HTTP endpoints
+- **Files Removed**: 
+  - `frontend/` directory (React app)
+  - `package.json` and `package-lock.json`
+  - Frontend workflow configuration
+  - All Node.js related dependencies
