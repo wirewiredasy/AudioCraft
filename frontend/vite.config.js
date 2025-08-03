@@ -12,7 +12,12 @@ export default defineConfig({
       clientPort: 3000,
       host: '0.0.0.0'
     },
-    allowedHosts: 'all',
+    allowedHosts: [
+      'all',
+      '.replit.dev',
+      '.replit.app',
+      'df6257d2-c49c-4f68-8d01-070ba16678cf-00-2ylyv99lc2w6r.janeway.replit.dev'
+    ],
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
