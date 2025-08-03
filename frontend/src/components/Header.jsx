@@ -31,9 +31,6 @@ import MobileMenu from './MobileMenu'
 
 const navigation = [
   { name: 'Home', path: '/', icon: Home },
-  { name: 'Voice AI', path: '/voice-ai-landing', icon: GraphicEq },
-  { name: 'Studio', path: '/processing-studio', icon: Tune },
-  { name: 'AI Features', path: '/ai-features', icon: VolumeOff },
   { name: 'Vocal Remover', path: '/vocal-remover', icon: VolumeOff },
   { name: 'Pitch & Tempo', path: '/pitch-tempo', icon: Tune },
 ]
