@@ -84,11 +84,13 @@ function Header({ isDarkMode, onToggleTheme }) {
 
   return (
     <>
-      <AppBar position="static" sx={{ 
-        backgroundColor: 'rgba(26, 29, 41, 0.95)', 
+      <AppBar position="fixed" sx={{ 
+        backgroundColor: isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(59, 130, 246, 0.95)', 
         backdropFilter: 'blur(20px)',
         boxShadow: 'none',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        zIndex: 1201,
+        transition: 'all 0.3s ease'
       }}>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
@@ -151,8 +153,54 @@ function Header({ isDarkMode, onToggleTheme }) {
       </AppBar>
 
 
-      {/* Mobile Menu */}
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      {/* Mobile Menu - Slide from top */}
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: mobileOpen ? '100vh' : '0px',
+          backgroundColor: isDarkMode ? 'rgba(15, 23, 42, 0.98)' : 'rgba(248, 250, 252, 0.98)',
+          backdropFilter: 'blur(20px)',
+          zIndex: 1200,
+          overflow: 'hidden',
+          transition: 'height 0.3s ease',
+          display: { xs: 'block', md: 'none' }
+        }}
+      >
+        <Box sx={{ pt: '64px', p: 3 }}>
+          {navigation.map((item) => {
+            const Icon = item.icon
+            return (
+              <Button
+                key={item.name}
+                component={Link}
+                to={item.path}
+                onClick={() => setMobileOpen(false)}
+                fullWidth
+                startIcon={<Icon />}
+                sx={{
+                  justifyContent: 'flex-start',
+                  py: 2,
+                  px: 3,
+                  mb: 1,
+                  backgroundColor: location.pathname === item.path ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+                  color: location.pathname === item.path ? 'primary.main' : 'text.primary',
+                  '&:hover': {
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                  }
+                }}
+              >
+                {item.name}
+              </Button>
+            )
+          })}
+        </Box>
+      </Box>
+      
+      {/* Add spacing for fixed header */}
+      <Box sx={{ height: '64px' }} />
     </>
   )
 }

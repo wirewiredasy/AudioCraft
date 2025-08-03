@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useScrollAnimation, scrollVariants, staggerVariants } from '../hooks/useScrollAnimation'
 import { 
   Container, 
   Typography, 

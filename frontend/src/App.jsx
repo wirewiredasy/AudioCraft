@@ -19,7 +19,11 @@ import HowToUseVocalRemover from './pages/HowToUseVocalRemover'
 import HowToUsePitchTempo from './pages/HowToUsePitchTempo'
 import HowToUseFormatConverter from './pages/HowToUseFormatConverter'
 import HowToUseAudioEditor from './pages/HowToUseAudioEditor'
+import HowToUseNoiseReduction from './pages/HowToUseNoiseReduction'
 import HowToUse from './pages/HowToUse'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import TermsPage from './pages/TermsPage'
 import VoiceAIStylePage from './pages/VoiceAIStylePage'
 import AIFeaturesPage from './pages/AIFeaturesPage'
 import ProcessingStudioPage from './pages/ProcessingStudioPage'
@@ -239,6 +243,11 @@ function App() {
             <Route path="/how-to-use-pitch-tempo" element={<HowToUsePitchTempo />} />
             <Route path="/how-to-use-format-converter" element={<HowToUseFormatConverter />} />
             <Route path="/how-to-use-audio-editor" element={<HowToUseAudioEditor />} />
+            <Route path="/how-to-use-noise-reduction" element={<HowToUseNoiseReduction />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/voice-ai-style" element={<VoiceAIStylePage />} />
             <Route path="/ai-features" element={<AIFeaturesPage />} />
             <Route path="/processing-studio" element={<ProcessingStudioPage />} />

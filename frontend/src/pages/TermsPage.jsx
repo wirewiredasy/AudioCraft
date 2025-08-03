@@ -9,7 +9,7 @@ import {
   Divider
 } from '@mui/material'
 
-function PrivacyPage() {
+function TermsPage() {
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
       <motion.div
@@ -28,7 +28,7 @@ function PrivacyPage() {
               fontSize: { xs: '2.5rem', md: '3.5rem' }
             }}
           >
-            Privacy Policy
+            Terms of Service
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Last updated: August 3, 2025
@@ -38,87 +38,87 @@ function PrivacyPage() {
         <Card sx={{ borderRadius: '20px' }}>
           <CardContent sx={{ p: 6 }}>
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Information We Collect
+              1. Acceptance of Terms
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-              We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support. This may include your name, email address, and audio files you upload for processing.
+              By accessing and using Odoremover, you accept and agree to be bound by the terms and provision of this agreement.
             </Typography>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              How We Use Your Information
+              2. Use License
             </Typography>
-            <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.7 }}>
-              We use the information we collect to:
+            <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
+              Permission is granted to temporarily download one copy of Odoremover per device for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
             </Typography>
             <Box component="ul" sx={{ pl: 3, mb: 4 }}>
               <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-                Provide, maintain, and improve our audio processing services
+                modify or copy the materials
               </Typography>
               <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-                Process and deliver your audio files
+                use the materials for any commercial purpose or for any public display
               </Typography>
               <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-                Send you technical notices and support messages
+                attempt to reverse engineer any software contained on the website
               </Typography>
               <Typography component="li" variant="body1">
-                Respond to your comments and questions
+                remove any copyright or other proprietary notations from the materials
               </Typography>
             </Box>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Information Sharing
+              3. Disclaimer
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-              We do not sell, trade, or otherwise transfer your personal information to third parties. Your audio files are processed on our secure servers and are automatically deleted after processing is complete.
+              The materials on Odoremover are provided on an 'as is' basis. Odoremover makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
             </Typography>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Data Security
+              4. Limitations
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-              We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. All audio files are encrypted in transit and at rest.
+              In no event shall Odoremover or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Odoremover, even if Odoremover or an authorized representative has been notified orally or in writing of the possibility of such damage.
             </Typography>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Data Retention
+              5. Accuracy of Materials
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-              We retain your uploaded audio files only for the duration necessary to complete processing. Original files are automatically deleted within 24 hours, and processed files are available for download for 7 days before automatic deletion.
+              The materials appearing on Odoremover could include technical, typographical, or photographic errors. Odoremover does not warrant that any of the materials on its website are accurate, complete, or current.
             </Typography>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Your Rights
+              6. Links
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-              You have the right to access, update, or delete your personal information. You may also request that we stop processing your data. To exercise these rights, please contact us using the information provided below.
+              Odoremover has not reviewed all of the sites linked to our website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Odoremover of the site.
             </Typography>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Changes to This Policy
+              7. Modifications
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-              We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date.
+              Odoremover may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.
             </Typography>
 
             <Divider sx={{ my: 4 }} />
 
             <Typography variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
-              Contact Us
+              8. Governing Law
             </Typography>
             <Typography variant="body1" sx={{ lineHeight: 1.7 }}>
-              If you have any questions about this privacy policy, please contact us at support@odoremover.com or through our contact page.
+              These terms and conditions are governed by and construed in accordance with the laws of the United States and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.
             </Typography>
           </CardContent>
         </Card>
@@ -127,4 +127,4 @@ function PrivacyPage() {
   )
 }
 
-export default PrivacyPage
+export default TermsPage
