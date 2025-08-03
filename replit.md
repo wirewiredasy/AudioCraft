@@ -74,6 +74,23 @@ Comprehensive validation layer including:
 - **httpx**: Async HTTP client for inter-service communication
 - **uvicorn**: ASGI server for running FastAPI applications
 
+### Frontend Technology Stack
+- **React 18**: Modern React with hooks and TypeScript support
+- **Vite**: Fast build tool and development server
+- **TypeScript**: Type safety and better developer experience
+- **TailwindCSS**: Utility-first CSS framework for styling
+- **ShadCN UI**: High-quality, accessible React components built on Radix UI
+- **Axios**: HTTP client for API communication
+
+### Frontend Architecture
+- **Component-based Design**: Each audio processing tool is a separate React component
+- **Clean, Professional UI**: Minimal design with consistent spacing and shadows
+- **Mobile-responsive Layout**: Works seamlessly on desktop and mobile devices
+- **Tab-based Navigation**: Single-page application with tabbed interface for different tools
+- **File Upload System**: Drag-and-drop file upload with validation and progress feedback
+- **Real-time Processing Feedback**: Loading states and error handling for all operations
+
 ### System Dependencies
 - **FFmpeg**: Required system dependency for audio processing
 - **Python 3.8+**: Runtime environment with async/await support
+- **Node.js 20+**: Runtime for the React frontend application

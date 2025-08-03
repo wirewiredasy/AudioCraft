@@ -1,0 +1,177 @@
+Samajh gaya ✅ — tum chahte ho ekdam professional, clean, distraction-free frontend, jo:
+
+⚙️ FastAPI microservices ke sath smoothly integrate ho
+
+🎯 Production-level UI ho (no bakwas, no over-color, clean UX)
+
+⚡ React + Vite par ho
+
+🧱 Future scaling (dark mode, animation, SEO, responsiveness) support kare
+
+
+
+---
+
+✅ Final Recommendation: ShadCN UI + TailwindCSS + Radix UI (Vite + React)
+
+Ye combo industry-standard frontend stack hai jab backend FastAPI Microservices hota hai. Let me break it down Hinglish main:
+
+
+---
+
+✅ Why ShadCN + Tailwind + Radix?
+
+Feature	Benefit
+
+🎨 Minimal Design	Clean UI – No extra colors or animation distractions
+🎛️ Radix UI Base	Highly accessible, good for tabs, sliders, modals
+⚙️ Easy Backend Binding	Axios/Fetch se FastAPI microservices connect karna asaan
+🌓 Dark/Light Ready	No extra setup for dark/light toggle
+📱 Fully Responsive	Mobile + Tablet + Desktop support
+🔥 Fast Load Time	No bloated CSS – Tailwind jit output only
+
+
+
+---
+
+📦 Directory Structure (Vite Frontend)
+
+frontend/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── ui/               # ShadCN UI elements
+│   │   ├── Header.tsx
+│   │   └── ToolCard.tsx
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   └── ToolWrapper.tsx
+│   ├── lib/
+│   │   └── api.ts           # FastAPI microservice calls (Axios/Fetch)
+│   ├── App.tsx
+│   └── main.tsx
+├── tailwind.config.ts
+├── index.html
+└── vite.config.ts
+
+
+---
+
+🚀 Install & Setup Commands
+
+# Step 1: Create Vite + React App
+npm create vite@latest frontend -- --template react
+
+cd frontend
+
+# Step 2: Install Tailwind
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# Step 3: Configure Tailwind (in `tailwind.config.js`)
+content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]
+
+# Step 4: Install ShadCN UI
+npm install class-variance-authority clsx tailwind-variants @radix-ui/react-slot
+npx shadcn-ui@latest init
+
+
+---
+
+📡 FastAPI Microservice Integration (lib/api.ts)
+
+// src/lib/api.ts
+export const BASE_URL = "http://localhost:8000"
+
+export async function removeVocals(file: File): Promise<Blob> {
+  const formData = new FormData()
+  formData.append("file", file)
+
+  const response = await fetch(`${BASE_URL}/api/vocal/remove`, {
+    method: "POST",
+    body: formData,
+  })
+
+  if (!response.ok) throw new Error("Failed to process")
+  return await response.blob()
+}
+
+
+---
+
+🧠 UI Logic (Home Page)
+
+// src/pages/Home.tsx
+import { useState } from "react"
+import { removeVocals } from "@/lib/api"
+
+export default function HomePage() {
+  const [file, setFile] = useState<File | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  async function handleUpload() {
+    if (!file) return
+    setLoading(true)
+    const result = await removeVocals(file)
+    const url = URL.createObjectURL(result)
+    window.open(url)
+    setLoading(false)
+  }
+
+  return (
+    <div className="p-6 max-w-xl mx-auto space-y-4">
+      <input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+      <button
+        onClick={handleUpload}
+        className="bg-black text-white px-4 py-2 rounded-lg disabled:opacity-50"
+        disabled={!file || loading}
+      >
+        {loading ? "Processing..." : "Remove Vocals"}
+      </button>
+    </div>
+  )
+}
+
+
+---
+
+🔲 Visual Style
+
+Clean Cards with shadow-sm
+
+Light/Dark toggle (optional)
+
+No overdesign, no color clutter
+
+Focused UX (1 tool = 1 screen = 1 call to backend)
+
+
+
+---
+
+📌 Summary
+
+Task	Tool
+
+Frontend Stack	React + Vite
+UI Library	ShadCN + TailwindCSS
+Component Base	Radix UI
+FastAPI Bindings	Axios / Fetch
+Styling	Clean, Minimal, UX-Focused
+Mobile/Desktop Support	✅ Yes
+
+
+
+---
+
+🔧 Want: Full Starter Repo?
+
+Batayein:
+
+Kya main aapke liye pure frontend template bana du ready to use?
+
+Tabs + Upload + Backend connection + Clean UI?
+
+
+Yes likho toh main bana deta hoon production-ready template.
+
