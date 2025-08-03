@@ -26,8 +26,9 @@ app.add_middleware(
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-# Mount static files
+# Mount static files and frontend assets
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/assets", StaticFiles(directory="frontend/dist/assets"), name="assets")
 
 # Service endpoints mapping
 SERVICES = {
@@ -41,12 +42,8 @@ SERVICES = {
 
 @app.get("/")
 async def root():
-    """API Gateway - redirect to React frontend"""
-    return {
-        "message": "Audio Processing API Gateway", 
-        "frontend_url": "http://localhost:3000",
-        "status": "running"
-    }
+    """Serve React frontend"""
+    return FileResponse("frontend/dist/index.html")
 
 @app.get("/api")
 async def api_status():
