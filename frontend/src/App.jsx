@@ -24,6 +24,10 @@ import HowToUse from './pages/HowToUse'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import TermsPage from './pages/TermsPage'
+import HelpPage from './pages/HelpPage'
+import DocsPage from './pages/DocsPage'
+import CommunityPage from './pages/CommunityPage'
+import CookiesPage from './pages/CookiesPage'
 import VoiceAIStylePage from './pages/VoiceAIStylePage'
 import AIFeaturesPage from './pages/AIFeaturesPage'
 import ProcessingStudioPage from './pages/ProcessingStudioPage'
@@ -247,7 +251,10 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/terms" element={<TermsPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/docs" element={<DocsPage />} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/cookies" element={<CookiesPage />} />
             <Route path="/voice-ai-style" element={<VoiceAIStylePage />} />
             <Route path="/ai-features" element={<AIFeaturesPage />} />
             <Route path="/processing-studio" element={<ProcessingStudioPage />} />
