@@ -10,7 +10,9 @@ import {
   MusicNote,
   Security,
   Help,
-  Build
+  Build,
+  Stars,
+  AutoAwesome
 } from '@mui/icons-material'
 
 const prefooterItems = [
@@ -47,26 +49,65 @@ function Prefooter() {
       border: '1px solid rgba(255, 255, 255, 0.1)',
       borderRadius: '24px',
       mt: 8,
-      mx: 2
+      mx: 2,
+      position: 'relative',
+      overflow: 'hidden'
     }}>
+      {/* Animated Background Elements */}
+      <Box sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cdefs%3E%3CradialGradient id='a' cx='50' cy='50' r='50'%3E%3Cstop offset='0' stop-color='%234ade80' stop-opacity='.1'/%3E%3Cstop offset='1' stop-color='%234ade80' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='10' cy='10' r='2' fill='url(%23a)'%3E%3Canimation attributeName='r' values='2;4;2' dur='3s' repeatCount='indefinite'/%3E%3C/circle%3E%3Ccircle cx='90' cy='10' r='2' fill='url(%23a)'%3E%3Canimation attributeName='r' values='2;4;2' dur='3s' begin='1.5s' repeatCount='indefinite'/%3E%3C/circle%3E%3C/svg%3E")`,
+        opacity: 0.3
+      }} />
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
+        style={{ position: 'relative', zIndex: 1 }}
       >
-        <Typography 
-          variant="h4" 
-          sx={{ 
-            textAlign: 'center', 
-            color: 'white', 
-            fontWeight: 300,
-            mb: 6,
-            fontSize: { xs: '1.8rem', md: '2.5rem' }
-          }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
         >
-          Ready to enhance your audio?
-        </Typography>
+          <Box sx={{ textAlign: 'center', mb: 6, position: 'relative' }}>
+            <AutoAwesome sx={{ 
+              fontSize: 40, 
+              color: '#4ade80', 
+              mb: 2,
+              animation: 'pulse 2s infinite'
+            }} />
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                color: 'white', 
+                fontWeight: 300,
+                fontSize: { xs: '1.8rem', md: '2.5rem' },
+                background: 'linear-gradient(45deg, #ffffff 30%, #4ade80 90%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
+              Ready to enhance your audio?
+            </Typography>
+            <Stars sx={{ 
+              position: 'absolute', 
+              top: -10, 
+              right: '30%', 
+              color: '#f59e0b',
+              fontSize: 20,
+              animation: 'sparkle 1.5s ease-in-out infinite'
+            }} />
+          </Box>
+        </motion.div>
 
         <Grid container spacing={4} justifyContent="center">
           {prefooterItems.map((item, index) => {
@@ -74,8 +115,24 @@ function Prefooter() {
             return (
               <Grid item xs={12} sm={6} md={4} key={item.title}>
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  initial={{ opacity: 0, y: 30, rotateX: 45 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    y: -10,
+                    rotateY: 5,
+                    transition: { type: "spring", stiffness: 400 }
+                  }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.2,
+                    ease: "easeOut"
+                  }}
+                  viewport={{ once: true }}
+                  style={{
+                    perspective: '1000px',
+                    transformStyle: 'preserve-3d'
+                  }}
                 >
                   <Paper
                     component={Link}

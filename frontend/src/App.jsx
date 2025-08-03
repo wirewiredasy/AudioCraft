@@ -8,6 +8,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/NewHomePage'
 import ToolsPage from './pages/ToolsPage'
+import PrivacyPage from './pages/PrivacyPage'
+import HowToUsePage from './pages/HowToUsePage'
 import VocalRemoverPage from './pages/VocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
@@ -130,6 +132,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/tools" element={<ToolsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/how-to-use" element={<HowToUsePage />} />
             <Route path="/vocal-remover" element={<VocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />

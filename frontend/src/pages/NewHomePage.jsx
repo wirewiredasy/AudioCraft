@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { 
   Container, 
   Typography, 
@@ -8,45 +9,63 @@ import {
   CardContent, 
   Button,
   Box,
-  Paper
+  Paper,
+  IconButton
 } from '@mui/material'
 import {
   VolumeOff,
   Tune,
   SwapHoriz,
   ContentCut,
-  MusicNote
+  MusicNote,
+  PlayArrow,
+  Pause,
+  VolumeUp,
+  Equalizer,
+  GraphicEq
 } from '@mui/icons-material'
 import Prefooter from '../components/Prefooter'
 
 const tools = [
   {
     title: 'Vocal Remover',
-    description: 'Remove vocals from songs',
+    description: 'AI-powered vocal separation',
+    longDescription: 'Remove vocals from any song using advanced machine learning algorithms',
     icon: VolumeOff,
     path: '/vocal-remover',
-    waveform: '||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'
+    color: '#ef4444',
+    gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+    progress: 65
   },
   {
     title: 'Pitch + Tempo',
-    description: 'Adjust pitch and tempo',
+    description: 'Professional audio adjustment',
+    longDescription: 'Change pitch and tempo independently without quality loss',
     icon: Tune,
     path: '/pitch-tempo',
-    waveform: '||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'
+    color: '#3b82f6',
+    gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+    progress: 78
   },
   {
     title: 'Noise Reducer',
-    description: 'Remove noise and artifacts',
+    description: 'Crystal clear audio enhancement',
+    longDescription: 'Remove background noise and improve audio clarity instantly',
     icon: MusicNote,
     path: '/noise-reduction',
-    waveform: '||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'
+    color: '#10b981',
+    gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    progress: 45
   },
   {
     title: 'Format Converter',
-    description: 'Convert audio formats',
+    description: 'Universal audio conversion',
+    longDescription: 'Convert between all popular audio formats with perfect quality',
     icon: SwapHoriz,
     path: '/format-converter',
-    waveform: '||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'
+    color: '#8b5cf6',
+    gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+    progress: 90
   }
 ]
 
@@ -76,202 +95,390 @@ function NewHomePage() {
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, pt: 8 }}>
         {/* Hero Section */}
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography 
-            variant="h1" 
-            sx={{
-              fontSize: { xs: '3rem', md: '4.5rem', lg: '5.5rem' },
-              fontWeight: 300,
-              color: 'white',
-              lineHeight: 1.1,
-              mb: 4
-            }}
-          >
-            Remove vocals.
-            <br />
-            Change pitch.
-            <br />
-            Convert formats.
-          </Typography>
-          
-          <Button 
-            variant="contained"
-            size="large"
-            sx={{
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              color: '#1a1d29',
-              fontWeight: 600,
-              fontSize: '1.1rem',
-              px: 4,
-              py: 1.5,
-              borderRadius: '25px',
-              '&:hover': {
-                backgroundColor: 'white',
-                transform: 'translateY(-2px)',
-              },
-              transition: 'all 0.3s ease'
-            }}
-          >
-            GET STARTED
-          </Button>
-        </Box>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Box sx={{ textAlign: 'center', mb: 8, position: 'relative' }}>
+            {/* Floating Icons */}
+            <motion.div
+              animate={{ 
+                y: [0, -20, 0],
+                rotate: [0, 5, 0]
+              }}
+              transition={{ 
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                position: 'absolute',
+                top: 20,
+                left: '10%',
+                zIndex: 0
+              }}
+            >
+              <GraphicEq sx={{ fontSize: 40, color: 'rgba(74, 222, 128, 0.3)' }} />
+            </motion.div>
+
+            <motion.div
+              animate={{ 
+                y: [0, 15, 0],
+                rotate: [0, -3, 0]
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+              style={{
+                position: 'absolute',
+                top: 50,
+                right: '15%',
+                zIndex: 0
+              }}
+            >
+              <VolumeUp sx={{ fontSize: 35, color: 'rgba(59, 130, 246, 0.3)' }} />
+            </motion.div>
+
+            <motion.div
+              animate={{ 
+                y: [0, -10, 0],
+                x: [0, 5, 0]
+              }}
+              transition={{ 
+                duration: 3.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5
+              }}
+              style={{
+                position: 'absolute',
+                bottom: 100,
+                left: '20%',
+                zIndex: 0
+              }}
+            >
+              <Equalizer sx={{ fontSize: 30, color: 'rgba(139, 92, 246, 0.3)' }} />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <Typography 
+                variant="h1" 
+                sx={{
+                  fontSize: { xs: '3rem', md: '4.5rem', lg: '5.5rem' },
+                  fontWeight: 300,
+                  color: 'white',
+                  lineHeight: 1.1,
+                  mb: 4,
+                  position: 'relative',
+                  zIndex: 1,
+                  background: 'linear-gradient(45deg, #ffffff 30%, #4ade80 70%, #3b82f6 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                Remove vocals.
+                <br />
+                Change pitch.
+                <br />
+                Convert formats.
+              </Typography>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                component={Link}
+                to="/tools"
+                variant="contained"
+                size="large"
+                className="enhanced-button"
+                sx={{
+                  background: 'linear-gradient(45deg, #4ade80, #22c55e)',
+                  color: 'white',
+                  fontWeight: 600,
+                  fontSize: '1.2rem',
+                  px: 6,
+                  py: 2,
+                  borderRadius: '30px',
+                  boxShadow: '0 8px 32px rgba(74, 222, 128, 0.3)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  '&:hover': {
+                    background: 'linear-gradient(45deg, #22c55e, #16a34a)',
+                    boxShadow: '0 12px 40px rgba(74, 222, 128, 0.4)',
+                    transform: 'translateY(-3px)',
+                  },
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                GET STARTED
+              </Button>
+            </motion.div>
+          </Box>
+        </motion.div>
 
         {/* Audio Tools Grid */}
-        <Grid container spacing={3} sx={{ mb: 8 }}>
+        <Grid container spacing={4} sx={{ mb: 8 }}>
           {tools.map((tool, index) => {
             const Icon = tool.icon
             return (
               <Grid item xs={12} sm={6} lg={3} key={tool.title}>
-                <Paper
-                  sx={{
-                    backgroundColor: 'rgba(45, 55, 72, 0.8)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '12px',
-                    p: 3,
-                    height: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      backgroundColor: 'rgba(55, 65, 82, 0.9)',
-                    }
+                <motion.div
+                  initial={{ opacity: 0, y: 50, rotateX: 30 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.15,
+                    ease: "easeOut"
                   }}
-                  component={Link}
-                  to={tool.path}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -8,
+                    rotateY: 5,
+                    transition: { type: "spring", stiffness: 300 }
+                  }}
+                  style={{
+                    perspective: '1000px',
+                    transformStyle: 'preserve-3d'
+                  }}
                 >
-                  <Box sx={{ mb: 2 }}>
-                    <Typography variant="h6" sx={{ color: 'white', fontWeight: 600, mb: 1 }}>
-                      {tool.title}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                      {tool.description}
-                    </Typography>
-                  </Box>
-
-                  {/* Audio Waveform Visualization */}
-                  <Box sx={{ 
-                    flex: 1, 
-                    display: 'flex', 
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    mb: 2
-                  }}>
-                    <Box sx={{
-                      width: '100%',
-                      height: '60px',
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '8px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Simulated waveform */}
-                      <Box sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        height: '40px',
-                        gap: '1px'
-                      }}>
-                        {Array.from({ length: 40 }, (_, i) => (
-                          <Box
-                            key={i}
-                            sx={{
-                              width: '2px',
-                              height: `${Math.random() * 30 + 5}px`,
-                              backgroundColor: '#4ade80',
-                              borderRadius: '1px',
-                              opacity: 0.8
-                            }}
-                          />
-                        ))}
-                      </Box>
-                      
-                      {/* Play button overlay */}
-                      <Box sx={{
-                        position: 'absolute',
-                        right: 8,
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        width: 24,
-                        height: 24,
-                        backgroundColor: '#4ade80',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer'
-                      }}>
-                        <Box sx={{
-                          width: 0,
-                          height: 0,
-                          borderLeft: '6px solid white',
-                          borderTop: '4px solid transparent',
-                          borderBottom: '4px solid transparent',
-                          marginLeft: '1px'
-                        }} />
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  {/* Controls */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Box sx={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '4px',
-                      px: 1,
-                      py: 0.5
-                    }}>
-                      <Typography variant="caption" sx={{ color: 'white' }}>
-                        {String(Math.floor(Math.random() * 60)).padStart(2, '0')}
-                      </Typography>
-                    </Box>
-                    <Box sx={{ flex: 1, mx: 1 }}>
-                      <Box sx={{
-                        height: '2px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                        borderRadius: '1px',
-                        position: 'relative'
-                      }}>
-                        <Box sx={{
-                          width: `${Math.random() * 60 + 20}%`,
-                          height: '100%',
-                          backgroundColor: '#4ade80',
-                          borderRadius: '1px'
-                        }} />
-                      </Box>
-                    </Box>
-                    <Box sx={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '4px',
-                      px: 1,
-                      py: 0.5
-                    }}>
-                      <Typography variant="caption" sx={{ color: 'white' }}>
-                        03:24
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Button
-                    variant="contained"
-                    fullWidth
+                  <Paper
+                    component={Link}
+                    to={tool.path}
                     sx={{
-                      mt: 2,
-                      backgroundColor: '#4ade80',
-                      color: 'white',
-                      fontWeight: 600,
+                      backgroundColor: 'rgba(45, 55, 72, 0.8)',
+                      backdropFilter: 'blur(15px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '20px',
+                      p: 3,
+                      height: '380px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
                       '&:hover': {
-                        backgroundColor: '#22c55e',
+                        backgroundColor: 'rgba(55, 65, 82, 0.9)',
+                        border: `1px solid ${tool.color}`,
+                        boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px ${tool.color}20`,
+                      },
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '3px',
+                        background: tool.gradient,
+                        borderRadius: '20px 20px 0 0'
                       }
                     }}
                   >
-                    Open Better
-                  </Button>
-                </Paper>
+                    {/* Header */}
+                    <Box sx={{ mb: 3, position: 'relative' }}>
+                      <Box sx={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: '16px',
+                        background: tool.gradient,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        mb: 2,
+                        boxShadow: `0 8px 24px ${tool.color}30`,
+                        position: 'relative'
+                      }}>
+                        <Icon sx={{ fontSize: 30, color: 'white' }} />
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                          style={{
+                            position: 'absolute',
+                            width: '70px',
+                            height: '70px',
+                            border: `2px solid ${tool.color}30`,
+                            borderTop: `2px solid ${tool.color}`,
+                            borderRadius: '50%',
+                            top: -5,
+                            left: -5
+                          }}
+                        />
+                      </Box>
+                      
+                      <Typography variant="h6" sx={{ color: 'white', fontWeight: 600, mb: 1 }}>
+                        {tool.title}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mb: 1 }}>
+                        {tool.description}
+                      </Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                        {tool.longDescription}
+                      </Typography>
+                    </Box>
+
+                    {/* Enhanced Waveform Visualization */}
+                    <Box sx={{ 
+                      flex: 1, 
+                      display: 'flex', 
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mb: 3
+                    }}>
+                      <Box sx={{
+                        width: '100%',
+                        height: '80px',
+                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                        borderRadius: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                      }}>
+                        {/* Animated waveform */}
+                        <Box sx={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          height: '50px',
+                          gap: '1px'
+                        }}>
+                          {Array.from({ length: 35 }, (_, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ height: 5 }}
+                              animate={{ 
+                                height: [5, Math.random() * 40 + 10, 5],
+                                backgroundColor: [tool.color, `${tool.color}80`, tool.color]
+                              }}
+                              transition={{ 
+                                duration: 2,
+                                repeat: Infinity,
+                                delay: i * 0.1,
+                                ease: "easeInOut"
+                              }}
+                              style={{
+                                width: '3px',
+                                borderRadius: '2px',
+                                opacity: 0.9
+                              }}
+                            />
+                          ))}
+                        </Box>
+                        
+                        {/* Play/Pause button */}
+                        <IconButton sx={{
+                          position: 'absolute',
+                          right: 8,
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          width: 32,
+                          height: 32,
+                          backgroundColor: tool.color,
+                          color: 'white',
+                          '&:hover': {
+                            backgroundColor: tool.color,
+                            filter: 'brightness(1.1)',
+                            transform: 'translateY(-50%) scale(1.1)',
+                          },
+                          transition: 'all 0.2s ease'
+                        }}>
+                          <PlayArrow sx={{ fontSize: 16 }} />
+                        </IconButton>
+                      </Box>
+                    </Box>
+
+                    {/* Progress and Controls */}
+                    <Box sx={{ mb: 2 }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                        <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                          00:00
+                        </Typography>
+                        <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                          03:24
+                        </Typography>
+                      </Box>
+                      <Box sx={{
+                        height: '4px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderRadius: '2px',
+                        position: 'relative',
+                        overflow: 'hidden'
+                      }}>
+                        <motion.div
+                          initial={{ width: '0%' }}
+                          animate={{ width: `${tool.progress}%` }}
+                          transition={{ duration: 2, delay: index * 0.3 }}
+                          style={{
+                            height: '100%',
+                            background: tool.gradient,
+                            borderRadius: '2px'
+                          }}
+                        />
+                      </Box>
+                    </Box>
+
+                    {/* Enhanced Button */}
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          background: tool.gradient,
+                          color: 'white',
+                          fontWeight: 600,
+                          py: 1.5,
+                          borderRadius: '12px',
+                          textTransform: 'none',
+                          fontSize: '1rem',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          '&:hover': {
+                            background: tool.gradient,
+                            filter: 'brightness(1.1)',
+                            boxShadow: `0 8px 24px ${tool.color}40`,
+                          },
+                          '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: '-50%',
+                            left: '-50%',
+                            width: '200%',
+                            height: '200%',
+                            background: 'linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent)',
+                            transform: 'rotate(45deg)',
+                            transition: 'all 0.5s ease',
+                            opacity: 0
+                          },
+                          '&:hover::before': {
+                            animation: 'shine 0.5s ease-in-out'
+                          }
+                        }}
+                      >
+                        Open Tool
+                      </Button>
+                    </motion.div>
+                  </Paper>
+                </motion.div>
               </Grid>
             )
           })}
