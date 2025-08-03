@@ -6,14 +6,14 @@ import { Toaster } from 'sonner'
 
 // Import pages
 import HomePage from './pages/HomePage'
-import ModernHomePage from './pages/ModernHomePage'
+import CleanHomePage from './pages/CleanHomePage'
 import VocalRemoverPage from './pages/VocalRemoverPage'
-import ModernVocalRemoverPage from './pages/ModernVocalRemoverPage'
+import CleanVocalRemoverPage from './pages/CleanVocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
 import FormatConverterPage from './pages/FormatConverterPage'
 import AudioEditorPage from './pages/AudioEditorPage'
 import NoiseReductionPage from './pages/NoiseReductionPage'
-import ToolsPage from './pages/ToolsPage'
+import CleanToolsPage from './pages/CleanToolsPage'
 
 // Footer pages
 import AboutPage from './pages/AboutPage'
@@ -58,13 +58,13 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<ModernHomePage />} />
-            <Route path="/vocal-remover" element={<ModernVocalRemoverPage />} />
+            <Route path="/" element={<CleanHomePage />} />
+            <Route path="/vocal-remover" element={<CleanVocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />
             <Route path="/audio-editor" element={<AudioEditorPage />} />
             <Route path="/noise-reduction" element={<NoiseReductionPage />} />
-            <Route path="/tools" element={<ToolsPage />} />
+            <Route path="/tools" element={<CleanToolsPage />} />
 
             {/* Footer pages */}
             <Route path="/about" element={<AboutPage />} />
