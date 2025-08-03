@@ -68,19 +68,30 @@ function HomePage() {
     <Container maxWidth="lg">
       <Box sx={{ textAlign: 'center', mb: 6 }}>
         <Typography 
-          variant="h2" 
+          variant="h1" 
           component="h1" 
           gutterBottom
           sx={{
-            fontWeight: 'bold',
-            background: 'linear-gradient(45deg, #3b82f6, #8b5cf6)',
+            fontWeight: 800,
+            fontSize: { xs: '2.5rem', md: '4rem', lg: '5rem' },
+            background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            mb: 2
+            mb: 2,
+            textShadow: '0 0 40px rgba(59, 130, 246, 0.3)',
+            animation: 'glow 2s ease-in-out infinite alternate',
+            '@keyframes glow': {
+              '0%': {
+                filter: 'brightness(1)',
+              },
+              '100%': {
+                filter: 'brightness(1.2)',
+              },
+            },
           }}
         >
-          Audio Processing Studio
+          🎵 Audio Studio Pro
         </Typography>
         
         <Typography 
