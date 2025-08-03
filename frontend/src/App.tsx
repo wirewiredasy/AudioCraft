@@ -4,8 +4,7 @@ import {
   Music, Headphones, Settings, Volume2, Filter, Shield, 
   ArrowRight, Star, Users, Zap, Globe, Mail, Github, Twitter, 
   Menu, X, Home, Info, Phone, Sparkles, AudioWaveform, Play,
-  Download, CheckCircle, Clock, Cpu, Lock, Award, Mic, BarChart3,
-  Heart, TrendingUp, MousePointer, Layers
+  Download, CheckCircle, Clock, Cpu, Lock, Award, Mic, BarChart3
 } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs'
 import { Button } from './components/ui/button'
@@ -41,29 +40,70 @@ function App() {
     setMobileMenuOpen(false)
   }
 
+  // Wave animation component
+  const WaveAnimation = () => (
+    <motion.svg
+      className="absolute bottom-0 left-0 w-full h-32 text-primary/20"
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+      initial={{ pathLength: 0 }}
+      animate={{ pathLength: 1 }}
+      transition={{ duration: 3, ease: "easeInOut" }}
+    >
+      <motion.path
+        d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"
+        fill="currentColor"
+        animate={{
+          d: [
+            "M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z",
+            "M0,40 C300,80 900,20 1200,40 L1200,120 L0,120 Z",
+            "M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"
+          ]
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </motion.svg>
+  )
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="odoremover-theme">
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative overflow-hidden">
+      <div className="min-h-screen bg-[#0d1117] text-[#e6edf3] relative overflow-hidden">
         
-        {/* Animated Background Elements */}
+        {/* Animated Background Particles */}
         <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-secondary/20 rounded-full blur-2xl animate-pulse delay-2000" />
+          {Array.from({ length: 50 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white/10 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.3, 1, 0.3],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
         </div>
 
         {/* Navigation Header */}
         <motion.nav 
           className={`fixed top-0 w-full z-50 transition-all duration-500 ${
             isScrolled 
-              ? 'glass-effect border-b border-white/10' 
+              ? 'bg-[#0d1117]/80 backdrop-blur-xl border-b border-gray-800' 
               : 'bg-transparent'
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-20">
               
               {/* Logo */}
@@ -74,79 +114,61 @@ function App() {
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="relative">
-                  <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-2xl group-hover:shadow-2xl group-hover:shadow-primary/50 transition-all duration-300">
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl group-hover:shadow-2xl group-hover:shadow-blue-500/25 transition-all duration-300">
                     <AudioWaveform className="h-8 w-8 text-white" />
                   </div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full animate-pulse" />
                 </div>
-                <span className="text-3xl font-black gradient-text tracking-tight">
+                <span className="text-2xl font-black text-white tracking-tight">
                   ODOREMOVER
                 </span>
               </motion.div>
 
               {/* Desktop Navigation */}
-              <div className="hidden lg:flex items-center gap-1">
+              <div className="hidden lg:flex items-center gap-8">
                 {[
-                  { id: 'home', label: 'Home', icon: Home },
-                  { id: 'tools', label: 'Tools', icon: Settings },
-                  { id: 'features', label: 'Features', icon: Star },
-                  { id: 'about', label: 'About', icon: Info }
+                  { id: 'home', label: 'Home' },
+                  { id: 'tools', label: 'Tools' },
+                  { id: 'about', label: 'About' },
+                  { id: 'contact', label: 'Contact' }
                 ].map((item) => (
                   <motion.button 
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-medium transition-all duration-300 ${
-                      activeSection === item.id 
-                        ? 'bg-primary/20 text-primary shadow-lg shadow-primary/20' 
-                        : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
-                    }`}
+                    className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
                     whileHover={{ y: -2 }}
-                    whileTap={{ y: 0 }}
                   >
-                    <item.icon className="h-5 w-5" />
                     {item.label}
                   </motion.button>
                 ))}
               </div>
 
-              {/* Actions */}
+              {/* Action Buttons */}
               <div className="flex items-center gap-4">
-                <ThemeToggle />
                 <Button 
-                  className="hidden lg:flex btn-gradient text-white font-semibold px-6 py-3 rounded-2xl"
+                  variant="outline"
+                  className="hidden md:flex border-gray-700 text-gray-300 hover:bg-gray-800 px-6 py-2 rounded-full"
+                >
+                  Hotjig
+                </Button>
+                <Button 
+                  className="hidden md:flex bg-gray-200 text-black hover:bg-white px-6 py-2 rounded-full font-semibold"
                   onClick={() => scrollToSection('tools')}
                 >
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  Dood Mo
                 </Button>
+                <ThemeToggle />
                 
                 {/* Mobile Menu Button */}
                 <motion.button 
-                  className="lg:hidden p-3 rounded-2xl bg-white/10 backdrop-blur-sm"
+                  className="lg:hidden p-3 rounded-xl bg-gray-800/50"
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   whileTap={{ scale: 0.95 }}
                 >
                   <AnimatePresence mode="wait">
                     {mobileMenuOpen ? (
-                      <motion.div
-                        key="close"
-                        initial={{ rotate: -90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: 90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <X className="h-6 w-6" />
-                      </motion.div>
+                      <X className="h-6 w-6" />
                     ) : (
-                      <motion.div
-                        key="menu"
-                        initial={{ rotate: 90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: -90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Menu className="h-6 w-6" />
-                      </motion.div>
+                      <Menu className="h-6 w-6" />
                     )}
                   </AnimatePresence>
                 </motion.button>
@@ -157,28 +179,25 @@ function App() {
             <AnimatePresence>
               {mobileMenuOpen && (
                 <motion.div 
-                  className="lg:hidden py-6 border-t border-white/10"
+                  className="lg:hidden py-6 border-t border-gray-800"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
                 >
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-4">
                     {[
-                      { id: 'home', label: 'Home', icon: Home },
-                      { id: 'tools', label: 'Tools', icon: Settings },
-                      { id: 'features', label: 'Features', icon: Star },
-                      { id: 'about', label: 'About', icon: Info }
+                      { id: 'home', label: 'Home' },
+                      { id: 'tools', label: 'Tools' },
+                      { id: 'about', label: 'About' },
+                      { id: 'contact', label: 'Contact' }
                     ].map((item) => (
-                      <motion.button 
+                      <button 
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className="flex items-center gap-3 px-6 py-4 rounded-2xl text-left hover:bg-white/5 transition-all duration-300"
-                        whileHover={{ x: 10 }}
+                        className="text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all"
                       >
-                        <item.icon className="h-5 w-5" />
                         {item.label}
-                      </motion.button>
+                      </button>
                     ))}
                   </div>
                 </motion.div>
@@ -188,267 +207,227 @@ function App() {
         </motion.nav>
 
         {/* Hero Section */}
-        <section id="home" className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-          <div className="container mx-auto px-6 relative z-10">
-            <motion.div 
-              className="text-center max-w-6xl mx-auto"
+        <section id="home" className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 min-h-screen flex items-center">
+          {/* Hero Background Wave */}
+          <WaveAnimation />
+          
+          <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
               {/* Main Heading */}
-              <motion.div
-                className="flex items-center justify-center mb-8"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <div className="relative">
-                  <motion.div 
-                    className="p-6 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl pulse-glow"
-                    animate={{ 
-                      background: [
-                        "linear-gradient(135deg, #8b5cf6 0%, #06d6a0 100%)",
-                        "linear-gradient(135deg, #06d6a0 0%, #8b5cf6 100%)",
-                        "linear-gradient(135deg, #8b5cf6 0%, #06d6a0 100%)"
-                      ]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
-                    <AudioWaveform className="h-16 w-16 text-white" />
-                  </motion.div>
-                  <motion.div 
-                    className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
-              </motion.div>
-              
               <motion.h1 
                 className="text-6xl lg:text-8xl font-black mb-8 leading-tight"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-white">Remove vocals.</span>
+                <br />
+                <span className="text-white">Change pitch.</span>
+                <br />
+                <span className="text-white">Convert formats.</span>
+              </motion.h1>
+              
+              <motion.p 
+                className="text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed max-w-4xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <span className="gradient-text">ODOREMOVER</span>
-                <br />
-                <span className="text-3xl lg:text-5xl font-bold text-muted-foreground">
-                  Pro Audio Suite
-                </span>
-              </motion.h1>
+                Professional audio processing powered by AI. Transform your music with studio-quality results in seconds.
+              </motion.p>
               
-              <motion.p 
-                className="text-xl lg:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-4xl mx-auto"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Transform your audio with cutting-edge AI technology. Remove vocals, adjust pitch & tempo, 
-                convert formats, edit segments, and reduce noise with studio-quality results in seconds.
-              </motion.p>
-              
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-              >
                 <Button 
                   size="lg" 
-                  className="btn-gradient text-white font-bold px-10 py-6 text-lg rounded-2xl shadow-2xl shadow-primary/30"
+                  className="bg-gray-200 text-black hover:bg-white font-bold px-12 py-6 text-xl rounded-full shadow-2xl"
                   onClick={() => scrollToSection('tools')}
                 >
-                  <Play className="mr-3 h-6 w-6" />
-                  Start Processing
+                  GET STARTED
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="px-10 py-6 text-lg font-semibold rounded-2xl border-2 border-primary/30 hover:border-primary/60 glass-effect"
-                  onClick={() => scrollToSection('features')}
-                >
-                  <Sparkles className="mr-3 h-6 w-6" />
-                  Explore Features
-                </Button>
-              </motion.div>
-
-              {/* Stats Section */}
-              <motion.div 
-                className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-              >
-                {[
-                  { number: "500K+", label: "Files Processed", icon: BarChart3 },
-                  { number: "99.9%", label: "Uptime", icon: CheckCircle },
-                  { number: "< 30s", label: "Processing Time", icon: Clock },
-                  { number: "5★", label: "User Rating", icon: Star }
-                ].map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    className="text-center professional-card p-6 rounded-3xl"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
-                    <div className="text-3xl font-black gradient-text mb-2">{stat.number}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </motion.div>
-                ))}
               </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="features" className="py-20 lg:py-32 relative">
-          <div className="container mx-auto px-6">
+        {/* Audio Tools Grid */}
+        <section id="tools" className="py-20 lg:py-32 relative">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div 
-              className="text-center mb-20"
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl lg:text-6xl font-black mb-6">
-                <span className="gradient-text">Why Choose</span> ODOREMOVER?
+              <h2 className="text-4xl lg:text-6xl font-black mb-6 text-white">
+                Professional Audio Tools
               </h2>
-              <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Industry-leading AI technology meets intuitive design for professional audio processing
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Choose from our comprehensive suite of AI-powered processing tools
               </p>
             </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+            {/* Tools Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                {
-                  icon: Zap,
-                  title: "Lightning Fast",
-                  description: "Process audio files in seconds with our optimized AI algorithms and cloud infrastructure",
-                  gradient: "from-yellow-400 to-orange-500"
+                { 
+                  title: "Vocal Remover", 
+                  description: "AI-powered vocal isolation and removal",
+                  component: <VocalRemover />,
+                  icon: Headphones,
+                  color: "from-red-500 to-pink-500"
                 },
-                {
+                { 
+                  title: "Pitch + Tempo", 
+                  description: "Adjust pitch and tempo independently",
+                  component: <PitchTempo />,
+                  icon: Settings,
+                  color: "from-blue-500 to-cyan-500"
+                },
+                { 
+                  title: "Noise Reducer", 
+                  description: "Clean up background noise and artifacts",
+                  component: <NoiseReducer />,
                   icon: Shield,
-                  title: "Secure & Private",
-                  description: "Your files are encrypted during processing and automatically deleted after completion",
-                  gradient: "from-green-400 to-blue-500"
+                  color: "from-green-500 to-emerald-500"
                 },
-                {
-                  icon: Award,
-                  title: "Studio Quality",
-                  description: "Professional-grade results that rival expensive desktop software and hardware",
-                  gradient: "from-purple-400 to-pink-500"
-                },
-                {
-                  icon: Globe,
-                  title: "Always Available",
-                  description: "Cloud-based processing accessible from anywhere, on any device, anytime",
-                  gradient: "from-blue-400 to-purple-500"
-                },
-                {
-                  icon: Cpu,
-                  title: "AI Powered",
-                  description: "Advanced machine learning models trained on millions of audio samples",
-                  gradient: "from-cyan-400 to-blue-500"
-                },
-                {
-                  icon: Heart,
-                  title: "User Friendly",
-                  description: "Intuitive interface designed for both beginners and professional audio engineers",
-                  gradient: "from-pink-400 to-red-500"
+                { 
+                  title: "Format Converter", 
+                  description: "Convert between audio formats",
+                  component: <FormatConverter />,
+                  icon: Volume2,
+                  color: "from-purple-500 to-violet-500"
                 }
-              ].map((feature, index) => (
+              ].map((tool, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -10 }}
-                  className="group"
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group cursor-pointer"
                 >
-                  <Card className="h-full professional-card p-8 text-center border-0 group-hover:shadow-2xl transition-all duration-500">
-                    <CardContent className="p-0">
-                      <div className={`p-4 bg-gradient-to-r ${feature.gradient} rounded-2xl w-fit mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                        <feature.icon className="h-10 w-10 text-white" />
+                  <Card className="h-full bg-gray-900/50 border-gray-700 hover:border-gray-600 transition-all duration-300 backdrop-blur-sm">
+                    <CardContent className="p-8">
+                      {/* Icon */}
+                      <div className={`p-4 bg-gradient-to-r ${tool.color} rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                        <tool.icon className="h-8 w-8 text-white" />
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{feature.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                      
+                      {/* Title */}
+                      <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors">
+                        {tool.title}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p className="text-gray-400 mb-6 leading-relaxed">
+                        {tool.description}
+                      </p>
+                      
+                      {/* Audio Waveform Visualization */}
+                      <div className="mb-6">
+                        <div className="flex items-end gap-1 h-16 justify-center">
+                          {Array.from({ length: 20 }).map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className="bg-gradient-to-t from-gray-600 to-gray-400 rounded-full"
+                              style={{
+                                width: '3px',
+                                height: `${Math.random() * 60 + 10}%`,
+                              }}
+                              animate={{
+                                height: [
+                                  `${Math.random() * 60 + 10}%`,
+                                  `${Math.random() * 60 + 10}%`,
+                                  `${Math.random() * 60 + 10}%`
+                                ]
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                delay: i * 0.1,
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Slider Control */}
+                      <div className="mb-6">
+                        <input 
+                          type="range" 
+                          min="0" 
+                          max="100" 
+                          defaultValue="50"
+                          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                        />
+                      </div>
+                      
+                      {/* Action Button */}
+                      <Button 
+                        className="w-full bg-gray-200 text-black hover:bg-white font-semibold py-3 rounded-full transition-all duration-300"
+                      >
+                        Doon Datter
+                      </Button>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Audio Tools Section */}
-        <section id="tools" className="py-20 lg:py-32 relative">
-          <div className="container mx-auto px-6">
-            <motion.div 
-              className="text-center mb-20"
+            {/* Advanced Tools Section */}
+            <motion.div
+              className="mt-20"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl lg:text-6xl font-black mb-6">
-                <span className="gradient-text">Professional</span> Audio Tools
-              </h2>
-              <p className="text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                Choose from our comprehensive suite of AI-powered audio processing tools designed for creators and professionals
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="w-full max-w-7xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
               <Tabs defaultValue="vocal-remover" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 mb-12 h-20 p-3 glass-effect rounded-3xl border border-white/10">
+                <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 mb-12 h-16 p-2 bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-700">
                   <TabsTrigger 
                     value="vocal-remover" 
-                    className="flex items-center gap-3 text-base font-semibold h-14 rounded-2xl data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300"
+                    className="flex items-center gap-2 text-sm font-semibold h-12 rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                   >
-                    <Headphones className="h-5 w-5" />
-                    <span className="hidden sm:inline">Vocal Remover</span>
-                    <span className="sm:hidden">Vocals</span>
+                    <Headphones className="h-4 w-4" />
+                    Vocal Remover
                   </TabsTrigger>
                   <TabsTrigger 
                     value="pitch-tempo" 
-                    className="flex items-center gap-3 text-base font-semibold h-14 rounded-2xl data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300"
+                    className="flex items-center gap-2 text-sm font-semibold h-12 rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                   >
-                    <Settings className="h-5 w-5" />
-                    <span className="hidden sm:inline">Pitch & Tempo</span>
-                    <span className="sm:hidden">Pitch</span>
+                    <Settings className="h-4 w-4" />
+                    Pitch & Tempo
                   </TabsTrigger>
                   <TabsTrigger 
                     value="converter" 
-                    className="flex items-center gap-3 text-base font-semibold h-14 rounded-2xl data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300"
+                    className="flex items-center gap-2 text-sm font-semibold h-12 rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                   >
-                    <Volume2 className="h-5 w-5" />
-                    <span className="hidden sm:inline">Format Converter</span>
-                    <span className="sm:hidden">Convert</span>
+                    <Volume2 className="h-4 w-4" />
+                    Converter
                   </TabsTrigger>
                   <TabsTrigger 
                     value="cutter" 
-                    className="flex items-center gap-3 text-base font-semibold h-14 rounded-2xl data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300"
+                    className="flex items-center gap-2 text-sm font-semibold h-12 rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                   >
-                    <Filter className="h-5 w-5" />
-                    <span className="hidden sm:inline">Cut & Join</span>
-                    <span className="sm:hidden">Edit</span>
+                    <Filter className="h-4 w-4" />
+                    Cut & Join
                   </TabsTrigger>
                   <TabsTrigger 
                     value="noise-reducer" 
-                    className="flex items-center gap-3 text-base font-semibold h-14 rounded-2xl data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300"
+                    className="flex items-center gap-2 text-sm font-semibold h-12 rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                   >
-                    <Shield className="h-5 w-5" />
-                    <span className="hidden sm:inline">Noise Reducer</span>
-                    <span className="sm:hidden">Noise</span>
+                    <Shield className="h-4 w-4" />
+                    Noise Reducer
                   </TabsTrigger>
                 </TabsList>
 
@@ -478,85 +457,82 @@ function App() {
 
         {/* About Section */}
         <section id="about" className="py-20 lg:py-32 relative">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-5xl lg:text-6xl font-black mb-8">
-                  <span className="gradient-text">About</span> ODOREMOVER
-                </h2>
-                <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed mb-12">
-                  We're passionate about making professional audio processing accessible to everyone. 
-                  Our AI-powered tools deliver studio-quality results without the complexity or cost 
-                  of traditional audio software.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                  {[
-                    { icon: Users, title: "500K+ Users", desc: "Trusted by creators worldwide" },
-                    { icon: Download, title: "10M+ Downloads", desc: "Files processed successfully" },
-                    { icon: TrendingUp, title: "99.9% Uptime", desc: "Reliable cloud infrastructure" }
-                  ].map((stat, index) => (
-                    <motion.div
-                      key={index}
-                      className="professional-card p-8 rounded-3xl text-center"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <stat.icon className="h-12 w-12 text-primary mx-auto mb-4" />
-                      <h3 className="text-2xl font-bold mb-2">{stat.title}</h3>
-                      <p className="text-muted-foreground">{stat.desc}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl lg:text-6xl font-black mb-8 text-white">
+                About ODOREMOVER
+              </h2>
+              <p className="text-xl lg:text-2xl text-gray-400 leading-relaxed mb-12 max-w-4xl mx-auto">
+                We're passionate about making professional audio processing accessible to everyone. 
+                Our AI-powered tools deliver studio-quality results without the complexity.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  { icon: Users, title: "500K+ Users", desc: "Trusted by creators worldwide" },
+                  { icon: Download, title: "10M+ Files", desc: "Successfully processed" },
+                  { icon: CheckCircle, title: "99.9% Uptime", desc: "Reliable cloud infrastructure" }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <stat.icon className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold mb-2 text-white">{stat.title}</h3>
+                    <p className="text-gray-400">{stat.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-16 border-t border-white/10 glass-effect">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        {/* Contact Section */}
+        <section id="contact" className="py-20 border-t border-gray-800 bg-gray-900/20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               
               {/* Brand */}
               <div className="md:col-span-2">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-2xl">
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
                     <AudioWaveform className="h-8 w-8 text-white" />
                   </div>
-                  <span className="text-2xl font-black gradient-text">ODOREMOVER</span>
+                  <span className="text-2xl font-black text-white">ODOREMOVER</span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed mb-6 max-w-md">
-                  Professional AI-powered audio processing suite designed for creators, musicians, and audio professionals worldwide.
+                <p className="text-gray-400 leading-relaxed mb-6 max-w-md">
+                  Professional AI-powered audio processing suite for creators and musicians worldwide.
                 </p>
                 <div className="flex gap-4">
                   {[Github, Twitter, Mail].map((Icon, index) => (
                     <motion.button
                       key={index}
-                      className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors"
+                      className="p-3 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Icon className="h-6 w-6" />
+                      <Icon className="h-6 w-6 text-gray-400" />
                     </motion.button>
                   ))}
                 </div>
               </div>
 
-              {/* Links */}
+              {/* Quick Links */}
               <div>
-                <h3 className="font-bold mb-4">Tools</h3>
+                <h3 className="font-bold mb-4 text-white">Tools</h3>
                 <div className="space-y-3">
                   {['Vocal Remover', 'Pitch & Tempo', 'Format Converter', 'Audio Cutter', 'Noise Reducer'].map((tool) => (
-                    <div key={tool} className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                    <div key={tool} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
                       {tool}
                     </div>
                   ))}
@@ -564,10 +540,10 @@ function App() {
               </div>
 
               <div>
-                <h3 className="font-bold mb-4">Company</h3>
+                <h3 className="font-bold mb-4 text-white">Company</h3>
                 <div className="space-y-3">
                   {['About Us', 'Privacy Policy', 'Terms of Service', 'Support', 'Contact'].map((link) => (
-                    <div key={link} className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                    <div key={link} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
                       {link}
                     </div>
                   ))}
@@ -575,18 +551,18 @@ function App() {
               </div>
             </div>
             
-            <div className="border-t border-white/10 mt-12 pt-8 text-center text-muted-foreground">
+            <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
               <p>&copy; 2024 ODOREMOVER. All rights reserved. Built with ❤️ for audio creators.</p>
             </div>
           </div>
-        </footer>
+        </section>
 
         <Toaster 
           position="top-center" 
           richColors 
           toastOptions={{
             style: {
-              background: 'rgba(0, 0, 0, 0.8)',
+              background: 'rgba(0, 0, 0, 0.9)',
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
               color: 'white',

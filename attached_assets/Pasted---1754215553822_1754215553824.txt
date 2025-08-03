@@ -1,0 +1,189 @@
+ज़रूर, मैं आपको तीसरी इमेज जैसा डिज़ाइन बनाने का पूरा प्रोसेस स्टेप-बाय-स्टेप बताता हूँ।
+
+इस प्रोजेक्ट को बनाने के लिए हम Next.js (React फ्रेमवर्क), Tailwind CSS (स्टाइलिंग के लिए), और Framer Motion (एनीमेशन के लिए) का इस्तेमाल करेंगे।
+
+स्टेप 1: प्रोजेक्ट सेटअप करना
+
+सबसे पहले, आपको अपने कंप्यूटर पर Node.js और npm (या yarn) इंस्टॉल करना होगा। इसके बाद, टर्मिनल (Command Prompt या PowerShell) में नीचे दिए गए कमांड को चलाएँ।
+
+Next.js और Tailwind CSS के साथ नया प्रोजेक्ट बनाएँ:
+यह कमांड एक नया Next.js प्रोजेक्ट बनाएगा और साथ ही Tailwind CSS को भी कॉन्फ़िगर कर देगा।
+
+Generated bash
+npx create-next-app@latest odoremover-clone -e with-tailwindcss
+
+
+इस कमांड के बाद, आपसे कुछ सवाल पूछे जाएँगे, आप डिफ़ॉल्ट ऑप्शन चुन सकते हैं।
+
+प्रोजेक्ट डायरेक्टरी में जाएँ:
+
+Generated bash
+cd odoremover-clone
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+Framer Motion इंस्टॉल करें:
+एनीमेशन के लिए हम Framer Motion लाइब्रेरी इंस्टॉल करेंगे।
+
+Generated bash
+npm install framer-motion
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+प्रोजेक्ट को रन करें:
+यह देखने के लिए कि सब कुछ ठीक से सेट हुआ है या नहीं, प्रोजेक्ट को चलाएँ।
+
+Generated bash
+npm run dev
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+अब आप अपने ब्राउज़र में http://localhost:3000 पर जाकर देख सकते हैं।
+
+स्टेप 2: फ़ोल्डर स्ट्रक्चर और ग्लोबल स्टाइलिंग
+
+फ़ोल्डर बनाएँ:
+अपने प्रोजेक्ट को व्यवस्थित रखने के लिए components नाम का एक फोल्डर बनाएँ। इसमें हम वेबसाइट के छोटे-छोटे हिस्से (जैसे Navbar, Button, Card) रखेंगे।
+
+बैकग्राउंड कलर और फॉन्ट सेट करें:
+app/globals.css फ़ाइल में जाकर पूरी वेबसाइट के लिए डार्क बैकग्राउंड कलर और डिफ़ॉल्ट टेक्स्ट कलर सेट करें।
+
+Generated css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0d1117; /* डार्क बैकग्राउंड */
+  color: #e6edf3; /* हल्का टेक्स्ट कलर */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+स्टेप 3: Navbar (नेविगेशन बार) बनाना
+
+components फोल्डर में Navbar.js नाम की एक नई फाइल बनाएँ।
+
+इसमें वेबसाइट का लोगो, नेविगेशन लिंक (Home, Tools, About, Contact), और दो बटन ("Hotjig" और "Dood Mo") बनाएँ।
+
+लेआउट के लिए: Flexbox का इस्तेमाल करें (flex, justify-between, items-center)।
+
+स्टाइलिंग के लिए: Tailwind CSS की क्लासेस का इस्तेमाल करें (जैसे bg-transparent, text-white, px-4, py-2, rounded-full)।
+
+इस Navbar कॉम्पोनेंट को app/layout.js में इम्पोर्ट करें ताकि यह हर पेज पर दिखे।
+
+स्टेप 4: Hero सेक्शन (मुख्य हेडिंग और वेव एनीमेशन)
+
+यह वेबसाइट का सबसे पहला और आकर्षक हिस्सा है।
+
+हेडिंग और बटन:
+app/page.js में, मुख्य हेडिंग ("Remove vocals. Change pitch. Convert formats.") और "GET STARTED" बटन बनाएँ।
+
+टेक्स्ट को बड़ा और आकर्षक बनाने के लिए Tailwind की क्लासेस (text-6xl, font-bold, text-center) का इस्तेमाल करें।
+
+बटन को स्टाइल करें (bg-gray-200, text-black, font-semibold, py-3, px-6, rounded-full)।
+
+एनिमेटेड वेव (Animated Wave):
+यह थोड़ा मुश्किल हो सकता है, लेकिन इसे बनाने के कई तरीके हैं:
+
+SVG एनीमेशन: आप एक SVG वेव बना सकते हैं और CSS या Framer Motion का उपयोग करके उसे एनिमेट कर सकते हैं।
+
+थर्ड-पार्टी लाइब्रेरी: react-tsparticles या इसी तरह की अन्य लाइब्रेरी का उपयोग करके आप आसानी से वेव जैसा बैकग्राउंड बना सकते हैं।
+
+Framer Motion के साथ एक सिम्पल वेव एनीमेशन का उदाहरण:
+आप एक SVG को motion.path का उपयोग करके एनिमेट कर सकते हैं ताकि वह स्मूथ तरीके से मूव करे।
+
+स्टेप 5: फ़ीचर कार्ड्स बनाना (Vocal Remover, Pitch + Tempo, etc.)
+
+यह सेक्शन वेबसाइट की मुख्य कार्यक्षमता को दिखाता है।
+
+एक कार्ड कॉम्पोनेंट बनाएँ:
+components फोल्डर में FeatureCard.js नाम की एक फाइल बनाएँ। इस कार्ड में ये चीज़ें होंगी:
+
+एक आइकॉन और टाइटल (जैसे "Vocal Remover")।
+
+एक डिस्क्रिप्शन।
+
+एक ऑडियो वेवफॉर्म जैसा दिखने वाला ग्राफ़िक (इसे आप एक इमेज या SVG से बना सकते हैं)।
+
+एक स्लाइडर (HTML का <input type="range">)।
+
+एक बटन ("Doon Datter")।
+
+कार्ड की स्टाइलिंग:
+
+कार्ड को डार्क बैकग्राउंड और हल्का बॉर्डर दें (bg-gray-900, border border-gray-700, rounded-lg)।
+
+अंदर के एलिमेंट्स को व्यवस्थित करने के लिए Flexbox या Grid का इस्तेमाल करें।
+
+ग्रिड में कार्ड्स को दिखाना:
+app/page.js में, FeatureCard कॉम्पोनेंट को चार बार इम्पोर्ट करें और उन्हें एक ग्रिड में दिखाएँ।
+
+Generated jsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <FeatureCard title="Vocal Remover" />
+  <FeatureCard title="Pitch + Tempo" />
+  <FeatureCard title="Noise Reducer" />
+  <FeatureCard title="Format Converter" />
+</div>
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Jsx
+IGNORE_WHEN_COPYING_END
+
+gap-8 कार्ड्स के बीच स्पेस देगा और grid-cols-* इसे अलग-अलग स्क्रीन साइज के लिए रिस्पॉन्सिव बनाएगा।
+
+स्टेप 6: बाकी के सेक्शंस बनाना (About, etc.)
+
+About सेक्शन:
+app/page.js में एक नया सेक्शन बनाएँ। इसमें एक हेडिंग और पैराग्राफ टेक्स्ट डालें। लेआउट के लिए Flexbox और स्टाइलिंग के लिए Tailwind CSS का उपयोग करें।
+
+अन्य कॉम्पोनेंट्स:
+डिज़ाइन में नीचे की तरफ जो टीम मेम्बर या अन्य जानकारी वाले कार्ड्स हैं, उन्हें भी आप अलग कॉम्पोनेंट बनाकर app/page.js में जोड़ सकते हैं।
+
+स्टेप 7: वेबसाइट को रिस्पॉन्सिव बनाना
+
+Tailwind CSS मोबाइल-फर्स्ट अप्रोच पर काम करता है। इसका मतलब है कि आप पहले मोबाइल के लिए स्टाइल लिखते हैं और फिर बड़ी स्क्रीन के लिए।
+
+उदाहरण: grid-cols-1 md:grid-cols-2 lg:grid-cols-4 का मतलब है:
+
+छोटी स्क्रीन पर: 1 कॉलम (grid-cols-1)
+
+मीडियम स्क्रीन (768px से ऊपर) पर: 2 कॉलम (md:grid-cols-2)
+
+बड़ी स्क्रीन (1024px से ऊपर) पर: 4 कॉलम (lg:grid-cols-4)
+
+आपको यह सुनिश्चित करना होगा कि हेडिंग, टेक्स्ट, और सभी कॉम्पोनेंट्स अलग-अलग डिवाइस (मोबाइल, टैबलेट, डेस्कटॉप) पर अच्छे दिखें।
+
+सारांश (Summary):
+
+सेटअप: Next.js + Tailwind CSS प्रोजेक्ट बनाएँ।
+
+ग्लोबल स्टाइल: globals.css में डार्क थीम सेट करें।
+
+कॉम्पोनेंट्स बनाएँ: Navbar, FeatureCard, और Button जैसे छोटे-छोटे, दोबारा इस्तेमाल होने वाले कॉम्पोनेंट्स बनाएँ।
+
+पेज को असेंबल करें: app/page.js में इन सभी कॉम्पोनेंट्स (Navbar, Hero Section, Feature Cards Grid, About Section) को एक साथ लाएँ।
+
+एनीमेशन जोड़ें: Framer Motion का उपयोग करके वेव और अन्य subtle एनीमेशन जोड़ें।
+
+रिस्पॉन्सिवनेस: Tailwind की md:, lg: जैसी क्लासेस का उपयोग करके वेबसाइट को सभी स्क्रीन साइज के लिए ऑप्टिमाइज़ करें।
+
+इस प्रोसेस को फॉलो करके आप एक प्रोफेशनल और मॉडर्न वेबसाइट बना सकते हैं जो तीसरी इमेज जैसी दिखेगी।
