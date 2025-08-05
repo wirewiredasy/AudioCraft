@@ -26,8 +26,7 @@ app.add_middleware(
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-# Mount static files and frontend assets
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Mount frontend assets only
 app.mount("/assets", StaticFiles(directory="frontend/dist/assets"), name="assets")
 
 # Service endpoints mapping
@@ -102,8 +101,8 @@ async def remove_vocals(file: UploadFile = File(...)):
         return {
             "success": True,
             "message": "Vocals removed successfully",
-            "output_file": f"/static/processed/{output_filename}",
-            "download_url": f"/static/processed/{output_filename}"
+            "output_file": f"/download/{output_filename}",
+            "download_url": f"/download/{output_filename}"
         }
         
     except Exception as e:
@@ -151,8 +150,8 @@ async def adjust_pitch_tempo(
         return {
             "success": True,
             "message": "Pitch and tempo adjusted successfully",
-            "output_file": f"/static/processed/{output_filename}",
-            "download_url": f"/static/processed/{output_filename}",
+            "output_file": f"/download/{output_filename}",
+            "download_url": f"/download/{output_filename}",
             "parameters": {"pitch_shift": pitch_shift, "tempo_change": tempo_change}
         }
         
@@ -193,8 +192,8 @@ async def convert_format(
         return {
             "success": True,
             "message": f"Audio converted to {target_format} successfully",
-            "output_file": f"/static/processed/{output_filename}",
-            "download_url": f"/static/processed/{output_filename}",
+            "output_file": f"/download/{output_filename}",
+            "download_url": f"/download/{output_filename}",
             "target_format": target_format
         }
         
@@ -257,8 +256,8 @@ async def cut_join_audio(
         return {
             "success": True,
             "message": f"Audio {operation} completed successfully",
-            "output_file": f"/static/processed/{output_filename}",
-            "download_url": f"/static/processed/{output_filename}",
+            "output_file": f"/download/{output_filename}",
+            "download_url": f"/download/{output_filename}",
             "operation": operation
         }
         
@@ -316,8 +315,8 @@ async def reduce_noise(
         return {
             "success": True,
             "message": "Noise reduction completed successfully",
-            "output_file": f"/static/processed/{output_filename}",
-            "download_url": f"/static/processed/{output_filename}",
+            "output_file": f"/download/{output_filename}",
+            "download_url": f"/download/{output_filename}",
             "noise_reduction_strength": noise_reduction_strength
         }
         
@@ -336,6 +335,19 @@ async def play_audio(file_id: str):
         "file_id": file_id,
         "note": "Service will be connected when all dependencies are installed"
     }
+
+@app.get("/download/{filename}")
+async def download_file(filename: str):
+    """Download processed audio files"""
+    file_path = f"{PROCESSED_DIR}/{filename}"
+    if os.path.exists(file_path):
+        return FileResponse(
+            file_path,
+            media_type="application/octet-stream",
+            filename=filename
+        )
+    else:
+        raise HTTPException(status_code=404, detail="File not found")
 
 # Catch-all route for React Router (SPA)
 @app.get("/{full_path:path}")
