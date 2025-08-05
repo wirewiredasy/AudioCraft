@@ -26,9 +26,6 @@ app.add_middleware(
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-# Mount frontend assets only
-app.mount("/assets", StaticFiles(directory="frontend/dist/assets"), name="assets")
-
 # Service endpoints mapping
 SERVICES = {
     "vocal_remover": "http://127.0.0.1:8001",
@@ -41,13 +38,24 @@ SERVICES = {
 
 @app.get("/")
 async def root():
-    """Serve React frontend"""
-    return FileResponse("frontend/dist/index.html")
-
-@app.get("/debug")
-async def debug_check():
-    """Debug endpoint to test server functionality"""
-    return FileResponse("debug-check.html")
+    """Audio Processing API Gateway"""
+    return {
+        "name": "Audio Processing API Gateway",
+        "version": "1.0.0",
+        "description": "Professional audio processing backend with microservices",
+        "status": "running",
+        "endpoints": {
+            "vocal_removal": "/remove-vocals",
+            "pitch_tempo": "/adjust-pitch-tempo", 
+            "format_conversion": "/convert-format",
+            "audio_editing": "/cut-join-audio",
+            "noise_reduction": "/reduce-noise",
+            "file_download": "/download/{filename}",
+            "health_check": "/health",
+            "api_docs": "/docs"
+        },
+        "documentation": "/docs"
+    }
 
 @app.get("/api")
 async def api_status():
@@ -354,11 +362,7 @@ async def download_file(filename: str):
     else:
         raise HTTPException(status_code=404, detail="File not found")
 
-# Catch-all route for React Router (SPA)
-@app.get("/{full_path:path}")
-async def serve_react_app(full_path: str):
-    """Serve React app for all unmatched routes"""
-    return FileResponse("frontend/dist/index.html")
+
 
 if __name__ == "__main__":
     import uvicorn
