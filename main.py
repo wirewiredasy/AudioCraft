@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import os
 from typing import Optional
@@ -25,6 +25,10 @@ app.add_middleware(
 # Create necessary directories
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
+os.makedirs("static", exist_ok=True)
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Service endpoints mapping
 SERVICES = {
@@ -36,26 +40,22 @@ SERVICES = {
     "audio_player": "http://127.0.0.1:8006"
 }
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def root():
-    """Audio Processing API Gateway"""
-    return {
-        "name": "Audio Processing API Gateway",
-        "version": "1.0.0",
-        "description": "Professional audio processing backend with microservices",
-        "status": "running",
-        "endpoints": {
-            "vocal_removal": "/remove-vocals",
-            "pitch_tempo": "/adjust-pitch-tempo", 
-            "format_conversion": "/convert-format",
-            "audio_editing": "/cut-join-audio",
-            "noise_reduction": "/reduce-noise",
-            "file_download": "/download/{filename}",
-            "health_check": "/health",
-            "api_docs": "/docs"
-        },
-        "documentation": "/docs"
-    }
+    """Serve the main frontend application"""
+    try:
+        with open("static/index.html", "r") as f:
+            return f.read()
+    except FileNotFoundError:
+        return HTMLResponse("""
+        <html>
+            <body>
+                <h1>AudioStudio API Gateway</h1>
+                <p>Professional audio processing backend is running!</p>
+                <a href="/docs">View API Documentation</a>
+            </body>
+        </html>
+        """)
 
 @app.get("/api")
 async def api_status():
