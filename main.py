@@ -25,10 +25,6 @@ app.add_middleware(
 # Create necessary directories
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
-os.makedirs("static", exist_ok=True)
-
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Service endpoints mapping
 SERVICES = {
@@ -40,22 +36,27 @@ SERVICES = {
     "audio_player": "http://127.0.0.1:8006"
 }
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def root():
-    """Serve the main frontend application"""
-    try:
-        with open("static/index.html", "r") as f:
-            return f.read()
-    except FileNotFoundError:
-        return HTMLResponse("""
-        <html>
-            <body>
-                <h1>AudioStudio API Gateway</h1>
-                <p>Professional audio processing backend is running!</p>
-                <a href="/docs">View API Documentation</a>
-            </body>
-        </html>
-        """)
+    """Audio Processing API Gateway"""
+    return {
+        "name": "AudioStudio API Gateway",
+        "version": "1.0.0",
+        "description": "Professional audio processing backend with React frontend",
+        "status": "running",
+        "frontend": "React + Vite with Netflix/Disney+ style",
+        "endpoints": {
+            "vocal_removal": "/remove-vocals",
+            "pitch_tempo": "/adjust-pitch-tempo", 
+            "format_conversion": "/convert-format",
+            "audio_editing": "/cut-join-audio",
+            "noise_reduction": "/reduce-noise",
+            "file_download": "/download/{filename}",
+            "health_check": "/health",
+            "api_docs": "/docs"
+        },
+        "documentation": "/docs"
+    }
 
 @app.get("/api")
 async def api_status():

@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
-import { Button } from '../components/ui/button'
-import { Music, Volume2, Zap, FileAudio, Scissors, RotateCcw, ArrowRight } from 'lucide-react'
+import { Music, Volume2, Zap, FileAudio, Scissors, RotateCcw, ArrowRight, Code, Play } from 'lucide-react'
 
 const tools = [
   {
@@ -10,35 +8,48 @@ const tools = [
     description: 'AI-powered vocal separation using advanced center channel extraction',
     icon: Volume2,
     href: '/vocal-remover',
-    gradient: 'from-purple-500 to-pink-500'
+    gradient: 'bg-vocal-remover',
+    status: 'available'
   },
   {
     title: 'Pitch & Tempo',
     description: 'Independent pitch and tempo adjustment with real-time controls',
     icon: Zap,
     href: '/pitch-tempo',
-    gradient: 'from-blue-500 to-cyan-500'
+    gradient: 'bg-pitch-tempo',
+    status: 'coming-soon'
   },
   {
     title: 'Format Converter',
     description: 'Support for all major audio formats with quality options',
     icon: FileAudio,
     href: '/converter',
-    gradient: 'from-green-500 to-emerald-500'
+    gradient: 'bg-format-converter',
+    status: 'coming-soon'
   },
   {
     title: 'Audio Editor',
     description: 'Cut and join audio files with visual waveform editing',
     icon: Scissors,
     href: '/editor',
-    gradient: 'from-yellow-500 to-orange-500'
+    gradient: 'bg-audio-editor',
+    status: 'coming-soon'
   },
   {
     title: 'Noise Reduction',
     description: 'Advanced noise removal with adjustable strength settings',
     icon: RotateCcw,
     href: '/noise-reduction',
-    gradient: 'from-red-500 to-pink-500'
+    gradient: 'bg-noise-reduction',
+    status: 'coming-soon'
+  },
+  {
+    title: 'API Access',
+    description: 'Full REST API for developers and integrations',
+    icon: Code,
+    href: '/docs',
+    gradient: 'bg-api-access',
+    status: 'available'
   }
 ]
 
