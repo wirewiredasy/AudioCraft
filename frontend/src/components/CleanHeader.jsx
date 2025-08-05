@@ -8,10 +8,10 @@ const CleanHeader = () => {
   const location = useLocation()
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Tools', href: '/tools' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Home', to: '/' },
+    { name: 'Tools', to: '/tools' },
+    { name: 'About', to: '/about' },
+    { name: 'Contact', to: '/contact' }
   ]
 
   const toggleDarkMode = () => {
@@ -42,9 +42,9 @@ const CleanHeader = () => {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.href}
+                to={item.to}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === item.href
+                  location.pathname === item.to
                     ? 'text-blue-600 dark:text-blue-400'
                     : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                 }`}
@@ -91,10 +91,10 @@ const CleanHeader = () => {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.href}
+                  to={item.to}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    location.pathname === item.href
+                    location.pathname === item.to
                       ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/20'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800'
                   }`}
