@@ -60,6 +60,23 @@ export default {
           to: { height: "0" },
         },
       },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        'hero-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'gradient-netflix': 'linear-gradient(135deg, #e50914 0%, #b20710 100%)',
+        'gradient-disney': 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+        'vocal-remover': 'linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)',
+        'pitch-tempo': 'linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)',
+        'format-converter': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+        'audio-editor': 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+        'noise-reduction': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'api-access': 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+      },
+      backdropBlur: {
+        'xs': '2px',
+      }
     },
   },
   plugins: [],
