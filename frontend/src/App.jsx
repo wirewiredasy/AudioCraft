@@ -7,6 +7,7 @@ import { Toaster } from 'sonner'
 // Import pages
 import HomePage from './pages/HomePage'
 import CleanHomePage from './pages/CleanHomePage'
+import SimpleTest from './components/SimpleTest'
 import VocalRemoverPage from './pages/VocalRemoverPage'
 import CleanVocalRemoverPage from './pages/CleanVocalRemoverPage'
 import PitchTempoPage from './pages/PitchTempoPage'
@@ -58,7 +59,8 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<CleanHomePage />} />
+            <Route path="/" element={<SimpleTest />} />
+            <Route path="/home" element={<CleanHomePage />} />
             <Route path="/vocal-remover" element={<CleanVocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />

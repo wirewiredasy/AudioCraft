@@ -4,10 +4,8 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  // Disable preflight to avoid conflicts with Material-UI
-  corePlugins: {
-    preflight: false,
-  },
+  // Enable preflight for proper CSS resets
+  darkMode: 'class',
   theme: {
     extend: {
       // Only extend utilities, don't override base styles
