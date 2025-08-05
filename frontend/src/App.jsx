@@ -54,40 +54,37 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<CleanHomePage />} />
-            <Route path="/vocal-remover" element={<CleanVocalRemoverPage />} />
-            <Route path="/pitch-tempo" element={<PitchTempoPage />} />
-            <Route path="/format-converter" element={<FormatConverterPage />} />
-            <Route path="/audio-editor" element={<AudioEditorPage />} />
-            <Route path="/noise-reduction" element={<NoiseReductionPage />} />
-            <Route path="/tools" element={<CleanToolsPage />} />
+        <Routes>
+          <Route path="/" element={<CleanHomePage />} />
+          <Route path="/vocal-remover" element={<CleanVocalRemoverPage />} />
+          <Route path="/pitch-tempo" element={<PitchTempoPage />} />
+          <Route path="/format-converter" element={<FormatConverterPage />} />
+          <Route path="/audio-editor" element={<AudioEditorPage />} />
+          <Route path="/noise-reduction" element={<NoiseReductionPage />} />
+          <Route path="/tools" element={<CleanToolsPage />} />
 
-            {/* Footer pages */}
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/help" element={<HelpPage />} />
-            <Route path="/docs" element={<DocsPage />} />
-            <Route path="/community" element={<CommunityPage />} />
-            <Route path="/cookies" element={<CookiesPage />} />
+          {/* Footer pages */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/help" element={<HelpPage />} />
+          <Route path="/docs" element={<DocsPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/cookies" element={<CookiesPage />} />
 
-            {/* How-to pages */}
-            <Route path="/how-to-use-vocal-remover" element={<HowToUseVocalRemover />} />
-            <Route path="/how-to-use-pitch-tempo" element={<HowToUsePitchTempo />} />
-            <Route path="/how-to-use-format-converter" element={<HowToUseFormatConverter />} />
-            <Route path="/how-to-use-audio-editor" element={<HowToUseAudioEditor />} />
-            <Route path="/how-to-use-noise-reduction" element={<HowToUseNoiseReduction />} />
-          </Routes>
-        </Layout>
+          {/* How-to pages */}
+          <Route path="/how-to-use-vocal-remover" element={<HowToUseVocalRemover />} />
+          <Route path="/how-to-use-pitch-tempo" element={<HowToUsePitchTempo />} />
+          <Route path="/how-to-use-format-converter" element={<HowToUseFormatConverter />} />
+          <Route path="/how-to-use-audio-editor" element={<HowToUseAudioEditor />} />
+          <Route path="/how-to-use-noise-reduction" element={<HowToUseNoiseReduction />} />
+        </Routes>
       </Router>
       <Toaster position="top-right" />
-    </ThemeProvider>
+    </>
   )
 }
 

@@ -44,6 +44,11 @@ async def root():
     """Serve React frontend"""
     return FileResponse("frontend/dist/index.html")
 
+@app.get("/debug")
+async def debug_check():
+    """Debug endpoint to test server functionality"""
+    return FileResponse("debug-check.html")
+
 @app.get("/api")
 async def api_status():
     """API health check endpoint"""
