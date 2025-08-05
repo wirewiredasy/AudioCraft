@@ -6,6 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    host: '0.0.0.0',
+    allowedHosts: [
+      'localhost',
+      '*.replit.dev',
+      '*.repl.co',
+      '694273af-7140-4123-b61b-ff079dc8abbf-00-z965ewv12ibk.spock.replit.dev'
+    ],
     proxy: {
       '/api': 'http://localhost:5000',
       '/remove-vocals': 'http://localhost:5000',
