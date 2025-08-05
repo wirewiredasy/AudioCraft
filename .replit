@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "Full Stack Development"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -16,6 +16,10 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "API Gateway"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Frontend Dev Server"
 
 [[workflows.workflow]]
 name = "API Gateway"
@@ -60,6 +64,15 @@ args = "python main.py"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
+
+[[workflows.workflow]]
+name = "Frontend Dev Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+waitForPort = 3000
 
 [[ports]]
 localPort = 443

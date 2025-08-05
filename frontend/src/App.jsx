@@ -59,8 +59,7 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<SimpleTest />} />
-            <Route path="/home" element={<CleanHomePage />} />
+            <Route path="/" element={<CleanHomePage />} />
             <Route path="/vocal-remover" element={<CleanVocalRemoverPage />} />
             <Route path="/pitch-tempo" element={<PitchTempoPage />} />
             <Route path="/format-converter" element={<FormatConverterPage />} />
