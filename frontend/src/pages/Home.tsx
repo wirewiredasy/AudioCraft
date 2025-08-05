@@ -55,88 +55,110 @@ const tools = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-main custom-scrollbar">
       {/* Hero Section */}
-      <section className="py-20 px-4 text-center">
+      <section className="pt-32 pb-20 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
-          <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-primary rounded-2xl mb-6">
-              <Music className="w-10 h-10 text-white" />
+          <div className="mb-12">
+            <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-disney rounded-3xl mb-8 shadow-xl">
+              <Music className="w-12 h-12 text-white" />
             </div>
-            <h1 className="text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-6xl md:text-7xl font-black text-gradient-rainbow mb-8 leading-tight">
               Professional Audio Processing
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
               Transform your audio with AI-powered tools. Remove vocals, adjust pitch and tempo, 
               convert formats, edit audio, and reduce noise with professional quality results.
             </p>
-            <div className="flex gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-primary hover:opacity-90">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-netflix text-lg px-8 py-4 rounded-xl font-bold flex items-center gap-3"
+                onClick={() => document.querySelector('.tools-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Play className="w-5 h-5" />
                 Get Started
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-              <Button variant="outline" size="lg">
-                View Documentation
-              </Button>
+              </motion.button>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/docs"
+                target="_blank"
+                className="btn-ghost text-lg px-8 py-4 rounded-xl font-semibold flex items-center gap-3"
+              >
+                <Code className="w-5 h-5" />
+                API Documentation
+              </motion.a>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Tools Grid */}
-      <section className="py-16 px-4">
+      {/* Tools Grid Section */}
+      <section className="tools-section py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               Powerful Audio Tools
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
               Everything you need for professional audio processing in one platform
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="tools-grid">
             {tools.map((tool, index) => {
               const Icon = tool.icon
+              const isAvailable = tool.status === 'available'
+              
               return (
                 <motion.div
                   key={tool.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group"
                 >
-                  <Card className="group hover:shadow-xl transition-all duration-300 border-border/50 glass">
-                    <CardHeader>
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${tool.gradient} flex items-center justify-center mb-4`}>
-                        <Icon className="w-6 h-6 text-white" />
+                  <div className="netflix-card glass-card overflow-hidden">
+                    <div className={`absolute inset-0 ${tool.gradient} opacity-90 flex flex-col justify-between p-8`}>
+                      <div>
+                        <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm">
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4">
+                          {tool.title}
+                        </h3>
+                        <p className="text-white/90 text-sm leading-relaxed">
+                          {tool.description}
+                        </p>
                       </div>
-                      <CardTitle className="text-xl">{tool.title}</CardTitle>
-                      <CardDescription className="text-muted-foreground">
-                        {tool.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <Link to={tool.href}>
-                        <Button 
-                          variant="outline" 
-                          className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
-                        >
-                          Try Now
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
+                      <div className="mt-6">
+                        {isAvailable ? (
+                          <Link
+                            to={tool.href}
+                            className="block w-full bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/20 py-3 px-6 rounded-xl text-white font-semibold text-center transition-all duration-300 hover:scale-105"
+                          >
+                            {tool.title === 'API Access' ? 'View Docs' : 'Try Now'}
+                          </Link>
+                        ) : (
+                          <div className="block w-full bg-white/10 border border-white/20 py-3 px-6 rounded-xl text-white/70 font-semibold text-center">
+                            Coming Soon
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               )
             })}
@@ -145,32 +167,41 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 bg-secondary/20">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold text-foreground mb-8">
+            <h2 className="text-4xl font-black text-white mb-16">
               Why Choose AudioStudio?
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="glass p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4">Fast Processing</h3>
-                <p className="text-muted-foreground">
+              <div className="glass-card p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-netflix rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">Fast Processing</h3>
+                <p className="text-white/70">
                   Lightning-fast audio processing with optimized algorithms
                 </p>
               </div>
-              <div className="glass p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4">High Quality</h3>
-                <p className="text-muted-foreground">
+              <div className="glass-card p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-disney rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                  <Music className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">High Quality</h3>
+                <p className="text-white/70">
                   Professional-grade results with minimal quality loss
                 </p>
               </div>
-              <div className="glass p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4">Easy to Use</h3>
-                <p className="text-muted-foreground">
+              <div className="glass-card p-8 text-center">
+                <div className="w-16 h-16 bg-vocal-remover rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                  <ArrowRight className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">Easy to Use</h3>
+                <p className="text-white/70">
                   Intuitive interface designed for both beginners and pros
                 </p>
               </div>

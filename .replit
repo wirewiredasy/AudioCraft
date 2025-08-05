@@ -17,6 +17,10 @@ author = "agent"
 task = "workflow.run"
 args = "API Gateway"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Frontend Dev Server"
+
 [[workflows.workflow]]
 name = "API Gateway"
 author = "agent"
@@ -61,6 +65,15 @@ args = "python main.py"
 task = "shell.exec"
 args = "cd frontend && npm run dev"
 
+[[workflows.workflow]]
+name = "Frontend Dev Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+waitForPort = 3000
+
 [[ports]]
 localPort = 443
 externalPort = 3002
@@ -69,6 +82,7 @@ exposeLocalhost = true
 [[ports]]
 localPort = 3000
 externalPort = 3000
+exposeLocalhost = true
 
 [[ports]]
 localPort = 3001

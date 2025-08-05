@@ -3,8 +3,6 @@ import { useDropzone } from 'react-dropzone'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import { toast } from 'sonner'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
-import { Button } from '../components/ui/button'
 import { Upload, Download, Volume2, FileAudio, Loader2 } from 'lucide-react'
 
 export default function VocalRemover() {
@@ -66,174 +64,166 @@ export default function VocalRemover() {
   }
 
   return (
-    <div className="min-h-screen py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-main">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-4">
-              <Volume2 className="w-8 h-8 text-white" />
+          <div className="text-center mb-16 fade-in">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-vocal-remover rounded-3xl mb-8 shadow-xl">
+              <Volume2 className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-foreground mb-4">
+            <h1 className="text-5xl md:text-6xl font-black text-gradient-rainbow mb-6">
               Vocal Remover
             </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
               Remove vocals from any audio track using AI-powered center channel extraction. 
               Perfect for creating karaoke tracks or instrumental versions.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8 mb-16">
             {/* Upload Section */}
-            <Card className="glass border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Upload className="w-5 h-5" />
-                  Upload Audio File
-                </CardTitle>
-                <CardDescription>
-                  Supports MP3, WAV, FLAC, M4A, AAC, and OGG formats
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div
-                  {...getRootProps()}
-                  className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-                    isDragActive
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <input {...getInputProps()} />
-                  <FileAudio className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                  {uploadedFile ? (
-                    <div>
-                      <p className="text-foreground font-medium">{uploadedFile.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
-                      </p>
-                    </div>
-                  ) : isDragActive ? (
-                    <p className="text-foreground">Drop the audio file here...</p>
-                  ) : (
-                    <div>
-                      <p className="text-foreground mb-2">
-                        Drag & drop an audio file here, or click to select
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Maximum file size: 100MB
-                      </p>
-                    </div>
-                  )}
-                </div>
+            <div className="glass-card p-8">
+              <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
+                <Upload className="w-6 h-6" />
+                Upload Audio File
+              </h2>
+              <p className="text-white/70 mb-6">
+                Supports MP3, WAV, FLAC, M4A, AAC, and OGG formats
+              </p>
+              
+              <div
+                {...getRootProps()}
+                className={`upload-zone ${isDragActive ? 'dragover' : ''}`}
+              >
+                <input {...getInputProps()} />
+                <FileAudio className="w-12 h-12 text-white/50 mx-auto mb-4" />
+                {isDragActive ? (
+                  <p className="text-white font-semibold">Drop the audio file here...</p>
+                ) : (
+                  <>
+                    <p className="text-white font-semibold mb-2">
+                      Drag & drop an audio file here, or click to select
+                    </p>
+                    <p className="text-white/60 text-sm">Maximum file size: 100MB</p>
+                  </>
+                )}
+              </div>
 
-                <Button
-                  onClick={processAudio}
-                  disabled={!uploadedFile || isProcessing}
-                  className="w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90"
-                  size="lg"
-                >
-                  {isProcessing ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    <>
-                      <Volume2 className="w-4 h-4 mr-2" />
-                      Remove Vocals
-                    </>
-                  )}
-                </Button>
-              </CardContent>
-            </Card>
+              {uploadedFile && (
+                <div className="mt-6 p-4 bg-white/10 rounded-lg">
+                  <p className="text-white font-medium">Selected: {uploadedFile.name}</p>
+                  <p className="text-white/70 text-sm">
+                    Size: {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+                </div>
+              )}
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={processAudio}
+                disabled={!uploadedFile || isProcessing}
+                className={`w-full mt-6 btn-netflix flex items-center justify-center gap-3 py-4 text-lg font-bold ${
+                  (!uploadedFile || isProcessing) ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-5 h-5" />
+                    Remove Vocals
+                  </>
+                )}
+              </motion.button>
+            </div>
 
             {/* Results Section */}
-            <Card className="glass border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Download className="w-5 h-5" />
-                  Processed Audio
-                </CardTitle>
-                <CardDescription>
-                  Download your vocal-removed audio file
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {processedFile ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-center p-8"
-                  >
-                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Download className="w-8 h-8 text-green-500" />
+            <div className="glass-card p-8">
+              <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
+                <Download className="w-6 h-6" />
+                Processed Audio
+              </h2>
+              <p className="text-white/70 mb-6">
+                Download your vocal-removed audio file
+              </p>
+
+              {processedFile ? (
+                <div className="space-y-6">
+                  <div className="p-6 bg-gradient-disney/20 rounded-xl border border-white/10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-disney rounded-xl flex items-center justify-center">
+                        <FileAudio className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold">Processing Complete!</p>
+                        <p className="text-white/70 text-sm">Your instrumental track is ready</p>
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
-                      Processing Complete!
-                    </h3>
-                    <p className="text-muted-foreground mb-6">
-                      Your vocal-removed audio is ready for download
-                    </p>
-                    <Button
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={downloadFile}
-                      className="bg-green-500 hover:bg-green-600"
+                      className="w-full btn-disney flex items-center justify-center gap-3 py-3 font-bold"
                     >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download File
-                    </Button>
-                  </motion.div>
-                ) : (
-                  <div className="text-center p-8 text-muted-foreground">
-                    <FileAudio className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p>Upload and process an audio file to see results here</p>
+                      <Download className="w-5 h-5" />
+                      Download Instrumental
+                    </motion.button>
                   </div>
-                )}
-              </CardContent>
-            </Card>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <FileAudio className="w-8 h-8 text-white/50" />
+                  </div>
+                  <p className="text-white/60">
+                    Upload and process an audio file to see results here
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Information Section */}
-          <Card className="mt-8 glass border-border/50">
-            <CardHeader>
-              <CardTitle>How It Works</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-primary font-bold">1</span>
-                  </div>
-                  <h3 className="font-semibold mb-2">Upload</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Upload your audio file in any supported format
-                  </p>
+          {/* How It Works Section */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-black text-white mb-12">How It Works</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="glass-card p-6 text-center">
+                <div className="w-16 h-16 bg-gradient-netflix rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                  <span className="text-white font-black text-xl">1</span>
                 </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-primary font-bold">2</span>
-                  </div>
-                  <h3 className="font-semibold mb-2">Process</h3>
-                  <p className="text-sm text-muted-foreground">
-                    AI analyzes and removes vocals using center channel extraction
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-primary font-bold">3</span>
-                  </div>
-                  <h3 className="font-semibold mb-2">Download</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Get your instrumental track ready for karaoke or remixing
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Upload</h3>
+                <p className="text-white/70">
+                  Upload your audio file in any supported format
+                </p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="glass-card p-6 text-center">
+                <div className="w-16 h-16 bg-gradient-disney rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                  <span className="text-white font-black text-xl">2</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Process</h3>
+                <p className="text-white/70">
+                  AI analyzes and removes vocals using center channel extraction
+                </p>
+              </div>
+              <div className="glass-card p-6 text-center">
+                <div className="w-16 h-16 bg-vocal-remover rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                  <span className="text-white font-black text-xl">3</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Download</h3>
+                <p className="text-white/70">
+                  Get your instrumental track ready for karaoke or remixing
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
