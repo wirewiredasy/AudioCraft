@@ -1,23 +1,30 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import { Layout } from './components/Layout'
-import Home from './pages/Home'
-import VocalRemover from './pages/VocalRemover'
+import Header from './components/Header'
+import HomePage from './pages/HomePage'
+import VocalRemoverPage from './pages/VocalRemoverPage'
+import PitchTempoPage from './pages/PitchTempoPage'
+import ConverterPage from './pages/ConverterPage'
+import EditorPage from './pages/EditorPage'
+import NoiseReductionPage from './pages/NoiseReductionPage'
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/vocal-remover" element={<VocalRemover />} />
-          <Route path="/pitch-tempo" element={<div className="p-8 text-center">Pitch & Tempo - Coming Soon</div>} />
-          <Route path="/converter" element={<div className="p-8 text-center">Format Converter - Coming Soon</div>} />
-          <Route path="/editor" element={<div className="p-8 text-center">Audio Editor - Coming Soon</div>} />
-          <Route path="/noise-reduction" element={<div className="p-8 text-center">Noise Reduction - Coming Soon</div>} />
-        </Routes>
-      </Layout>
-      <Toaster position="top-right" richColors />
+      <div className="min-h-screen bg-black">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/vocal-remover" element={<VocalRemoverPage />} />
+            <Route path="/pitch-tempo" element={<PitchTempoPage />} />
+            <Route path="/converter" element={<ConverterPage />} />
+            <Route path="/editor" element={<EditorPage />} />
+            <Route path="/noise-reduction" element={<NoiseReductionPage />} />
+          </Routes>
+        </main>
+        <Toaster position="top-right" richColors theme="dark" />
+      </div>
     </Router>
   )
 }
