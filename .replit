@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "Project"
+runButton = "Full Stack Production"
 
 [[workflows.workflow]]
 name = "Project"
@@ -87,6 +87,19 @@ task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 3000
 
+[[workflows.workflow]]
+name = "Full Stack Production"
+author = 46024673
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+
 [[ports]]
 localPort = 443
 externalPort = 3002
@@ -121,7 +134,7 @@ localPort = 8000
 externalPort = 8000
 
 [deployment]
-run = ["sh", "-c", "node services/vocal_remover/main.py"]
+run = ["sh", "-c", "python main.py"]
 
 [agent]
 expertMode = true

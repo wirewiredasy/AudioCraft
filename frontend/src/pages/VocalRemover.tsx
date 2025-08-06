@@ -1,4 +1,3 @@
-
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Upload, VolumeX, Download, Play, Pause, FileAudio, CheckCircle, Loader2 } from 'lucide-react'
@@ -39,7 +38,7 @@ export default function VocalRemover() {
 
   const handleProcess = async () => {
     if (!file) return
-    
+
     setProcessing(true)
     setUploadProgress(0)
 
@@ -58,7 +57,7 @@ export default function VocalRemover() {
         })
       }, 300)
 
-      const response = await fetch('/api/vocal-remover/process', {
+      const response = await fetch('http://localhost:5000/remove-vocals', {
         method: 'POST',
         body: formData,
       })
@@ -135,11 +134,11 @@ export default function VocalRemover() {
             <VolumeX className="w-4 h-4 mr-2" />
             AI-Powered Vocal Removal
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
             ODOREMOVER
           </h1>
-          
+
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Remove vocals from any song using advanced AI algorithms. Perfect for creating karaoke tracks or instrumental versions.
           </p>
