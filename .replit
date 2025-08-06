@@ -3,7 +3,7 @@ run = "node services/vocal_remover/services/vocal_remover/main.py"
 
 [nix]
 channel = "stable-25_05"
-packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
+packages = ["ffmpeg", "ffmpeg-full", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
 
 [workflows]
 runButton = "Project"
