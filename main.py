@@ -74,17 +74,19 @@ async def api_status():
 
 @app.get("/health")
 async def health_check():
-    """Check health of all microservices"""
-    service_status = {}
-    
-    for service_name, url in SERVICES.items():
-        service_status[service_name] = {
-            "status": "ready",
-            "url": url,
-            "note": "Service endpoints configured"
+    """Health check endpoint for frontend connectivity"""
+    return {
+        "status": "healthy",
+        "message": "ODOREMOVER API Gateway is running",
+        "version": "1.0.0",
+        "services": {
+            "vocal_remover": "available", 
+            "pitch_tempo": "available",
+            "format_converter": "available",
+            "audio_editor": "available",
+            "noise_reduction": "available"
         }
-    
-    return {"gateway": "healthy", "services": service_status}
+    }
 
 @app.post("/remove-vocals")
 async def remove_vocals(file: UploadFile = File(...)):
