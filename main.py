@@ -384,14 +384,8 @@ if __name__ == "__main__":
             port = s.getsockname()[1]
         return port
     
-    # Try port 5000 first, then find alternative
+    # Always use port 5000 for Replit compatibility
     port = 5000
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(('0.0.0.0', port))
-    except OSError:
-        port = find_free_port()
-        print(f"⚠️ Port 5000 in use, using port {port} instead")
     
     print("🚀 Starting ODOREMOVER API Gateway...")
     print(f"📡 Backend will be available at: http://0.0.0.0:{port}")
