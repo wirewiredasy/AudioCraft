@@ -8,7 +8,7 @@
         <div class="shape"></div>
         <div class="shape"></div>
       </div>
-      
+
       <div class="max-w-6xl mx-auto text-center relative z-10">
         <div class="animate-slide-up">
           <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
@@ -16,10 +16,10 @@
             <span class="gradient-text-2 block">Audio Experience</span>
           </h1>
           <p class="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed">
-            Professional-grade audio processing tools powered by AI. Remove vocals, adjust pitch, 
+            Professional-grade audio processing tools powered by AI. Remove vocals, adjust pitch,
             convert formats, and enhance your sound quality with studio-level precision.
           </p>
-          
+
           <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <NuxtLink to="/vocal-remover" class="btn-primary text-lg font-semibold px-10 py-4 animate-pulse-glow">
               🎵 Start Processing Now
@@ -28,7 +28,7 @@
               🛠️ Explore All Tools
             </NuxtLink>
           </div>
-          
+
           <!-- Quick Stats -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div class="feature-card text-center animate-scale-in">
@@ -56,7 +56,7 @@
             Powerful <span class="gradient-text">Audio Tools</span>
           </h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Transform your audio with our comprehensive suite of AI-powered tools. 
+            Transform your audio with our comprehensive suite of AI-powered tools.
             Each tool is designed for professional results with consumer-friendly simplicity.
           </p>
         </div>
@@ -71,7 +71,7 @@
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3">🎤 Vocal Remover</h3>
             <p class="text-gray-600 mb-6 leading-relaxed">
-              Extract vocals from any song using advanced AI algorithms. Perfect for creating karaoke tracks, 
+              Extract vocals from any song using advanced AI algorithms. Perfect for creating karaoke tracks,
               instrumentals, or isolating specific audio elements.
             </p>
             <div class="flex items-center text-blue-600 font-semibold group-hover:text-purple-600 transition-colors">
@@ -91,7 +91,7 @@
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3">🎵 Pitch & Tempo</h3>
             <p class="text-gray-600 mb-6 leading-relaxed">
-              Adjust pitch and tempo independently with studio-quality algorithms. Change key without affecting 
+              Adjust pitch and tempo independently with studio-quality algorithms. Change key without affecting
               speed, or vice versa, for perfect audio manipulation.
             </p>
             <div class="flex items-center text-green-600 font-semibold group-hover:text-blue-600 transition-colors">
@@ -111,7 +111,7 @@
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3">🔄 Format Converter</h3>
             <p class="text-gray-600 mb-6 leading-relaxed">
-              Convert between all major audio formats (MP3, WAV, FLAC, AAC, OGG) with customizable 
+              Convert between all major audio formats (MP3, WAV, FLAC, AAC, OGG) with customizable
               quality settings and batch processing capabilities.
             </p>
             <div class="flex items-center text-purple-600 font-semibold group-hover:text-pink-600 transition-colors">
@@ -131,7 +131,7 @@
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3">✂️ Audio Editor</h3>
             <p class="text-gray-600 mb-6 leading-relaxed">
-              Cut, trim, merge, and join audio files with precision timing controls. 
+              Cut, trim, merge, and join audio files with precision timing controls.
               Professional editing made simple with waveform visualization.
             </p>
             <div class="flex items-center text-orange-600 font-semibold group-hover:text-red-600 transition-colors">
@@ -152,7 +152,7 @@
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3">🔇 Noise Reducer</h3>
             <p class="text-gray-600 mb-6 leading-relaxed">
-              Remove background noise, hums, and unwanted sounds using advanced AI-powered 
+              Remove background noise, hums, and unwanted sounds using advanced AI-powered
               noise reduction algorithms. Clean up your recordings instantly.
             </p>
             <div class="flex items-center text-red-600 font-semibold group-hover:text-purple-600 transition-colors">
@@ -172,7 +172,7 @@
             </div>
             <h3 class="text-2xl font-bold text-gray-600 mb-3">🚀 More Tools</h3>
             <p class="text-gray-500 mb-6 leading-relaxed">
-              Exciting new audio processing tools are in development. Stay tuned for 
+              Exciting new audio processing tools are in development. Stay tuned for
               AI mastering, vocal synthesis, and advanced audio analysis features.
             </p>
             <div class="flex items-center text-gray-400 font-semibold">
@@ -248,7 +248,7 @@
               <div class="animate-spin inline-block w-6 h-6 border-2 border-gray-300 border-t-blue-600 rounded-full mr-2"></div>
               Checking system status...
             </div>
-            <div v-else-if="apiStatus === 'healthy'" class="text-green-600">
+            <div v-else-if="apiStatus === 'connected'" class="text-green-600">
               <svg class="inline w-8 h-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
@@ -277,17 +277,41 @@ useHead({
 })
 
 // API health check
-const { getHealthStatus } = useApi()
+const { getHealthStatus } = useApi() // Assuming useApi provides getHealthStatus
 const apiStatus = ref('loading')
 
 // Check API status on mount
 onMounted(async () => {
-  try {
-    await getHealthStatus()
-    apiStatus.value = 'healthy'
-  } catch (error) {
-    console.error('API health check failed:', error)
-    apiStatus.value = 'error'
+  const checkApiHealth = async () => {
+    try {
+      await getHealthStatus()
+      apiStatus.value = 'connected'
+      console.log('✅ API Connection Success')
+    } catch (error) {
+      apiStatus.value = 'failed'
+      console.log('❌ API Connection Failed:', error)
+
+      // Try multiple fallback URLs
+      const fallbackUrls = [
+        `${window.location.protocol}//${window.location.hostname}:5000/health`,
+        'http://0.0.0.0:5000/health',
+        `${window.location.origin.replace(':3000', ':5000')}/health`
+      ]
+
+      for (const url of fallbackUrls) {
+        try {
+          const response = await $fetch(url)
+          apiStatus.value = 'connected'
+          console.log('✅ Fallback API Success:', url, response)
+          return
+        } catch (fallbackError) {
+          console.log('⚠️ Fallback failed for:', url)
+        }
+      }
+      console.log('❌ All fallback URLs failed')
+    }
   }
+
+  await checkApiHealth()
 })
 </script>

@@ -24,5 +24,11 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
-  }
+  },
+  router: {
+    options: {
+      strict: false
+    }
+  },
+  ssr: false
 })

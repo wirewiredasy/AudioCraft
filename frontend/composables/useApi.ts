@@ -16,11 +16,17 @@ export const useApi = () => {
     
     // Add Replit-specific URL patterns
     if (currentOrigin.includes('replit.dev')) {
+      // Handle different Replit URL patterns
       const replitBackendUrl = currentOrigin.replace('-3000.', '-5000.')
+      const altReplitUrl = currentOrigin.replace(':3000', ':5000')
       apiUrls.unshift(replitBackendUrl) // Add as first priority
+      apiUrls.push(altReplitUrl)
     } else {
+      // Local development
       const localBackendUrl = currentOrigin.replace(':3000', ':5000')
+      const altLocalUrl = `${window.location.protocol}//${window.location.hostname}:5000`
       apiUrls.push(localBackendUrl)
+      apiUrls.push(altLocalUrl)
     }
   }
 
