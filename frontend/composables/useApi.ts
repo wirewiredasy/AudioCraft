@@ -3,12 +3,12 @@ import axios from 'axios'
 export const useApi = () => {
   const config = useRuntimeConfig()
 
-  // Use multiple API endpoints for better connectivity
+  // Try multiple API endpoints with proper URLs
   const apiUrls = [
     config.public.apiBase,
-    'http://localhost:5000',
     'http://0.0.0.0:5000',
-    'http://127.0.0.1:5000'
+    'http://localhost:5000',
+    window.location.origin.replace(':3000', ':5000')
   ]
 
   const api = axios.create({

@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "Full Stack App"
+runButton = "ODOREMOVER App"
 
 [[workflows.workflow]]
 name = "Project"
@@ -99,6 +99,19 @@ author = "agent"
 task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 3000
+
+[[workflows.workflow]]
+name = "ODOREMOVER App"
+author = 46052744
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
 
 [[ports]]
 localPort = 443
