@@ -40,11 +40,11 @@ SERVICES = {
 async def root():
     """Audio Processing API Gateway"""
     return {
-        "name": "AudioStudio API Gateway",
+        "name": "ODOREMOVER API Gateway",
         "version": "1.0.0",
-        "description": "Professional audio processing backend with React frontend",
+        "description": "Professional audio processing backend with Vue + Nuxt frontend",
         "status": "running",
-        "frontend": "React + Vite with Netflix/Disney+ style",
+        "frontend": "Vue + Nuxt with professional clean design",
         "endpoints": {
             "vocal_removal": "/remove-vocals",
             "pitch_tempo": "/adjust-pitch-tempo", 

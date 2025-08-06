@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const useApi = () => {
   const config = useRuntimeConfig()
-  const apiBase = config.public.apiBase
+  const apiBase = config.public.apiBase || 'http://localhost:5000'
 
   const api = axios.create({
     baseURL: apiBase,
