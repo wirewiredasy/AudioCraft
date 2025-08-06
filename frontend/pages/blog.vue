@@ -1,19 +1,5 @@
 
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-20">
-    <h1 class="text-4xl font-bold text-gray-900 mb-8">Blog</h1>
-    <div class="card p-8">
-      <p class="text-gray-600 text-lg">Blog content coming soon...</p>
-    </div>
-  </div>
-</template>
-
-<script setup>
-useHead({
-  title: 'Blog - ODOREMOVER'
-})
-</script>
-<template>
   <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-16">

@@ -7,12 +7,12 @@ export default {
     "module": true,
     "resourceType": "script"
   },
-  "/home/runner/workspace/frontend/node_modules/nuxt/dist/app/entry.async.js": {
+  "/home/runner/workspace/node_modules/nuxt/dist/app/entry.async.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "isEntry": true,
-    "file": "/home/runner/workspace/frontend/node_modules/nuxt/dist/app/entry.async.js"
+    "file": "/home/runner/workspace/node_modules/nuxt/dist/app/entry.async.js"
   }
 }

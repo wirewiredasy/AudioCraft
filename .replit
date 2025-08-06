@@ -1,12 +1,12 @@
-modules = ["python-3.11", "nodejs-20"]
-run = "node services/vocal_remover/main.py"
+modules = ["vue-node-20", "nodejs-20", "python-3.11", "web"]
+run = "node services/vocal_remover/services/vocal_remover/main.py"
 
 [nix]
 channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "ODOREMOVER App"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -151,7 +151,7 @@ localPort = 52711
 externalPort = 5173
 
 [deployment]
-run = ["sh", "-c", "node services/vocal_remover/main.py"]
+run = ["sh", "-c", "node services/vocal_remover/services/vocal_remover/main.py"]
 
 [agent]
 expertMode = true
