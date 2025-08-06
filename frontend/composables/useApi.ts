@@ -13,20 +13,20 @@ export const useApi = () => {
   // Browser-safe URL detection for Replit
   if (typeof window !== 'undefined') {
     const currentOrigin = window.location.origin
-    
+
     // Add Replit-specific URL patterns
     if (currentOrigin.includes('replit.dev')) {
-      // Handle different Replit URL patterns
-      const replitBackendUrl = currentOrigin.replace('-3000.', '-5000.')
-      const altReplitUrl = currentOrigin.replace(':3000', ':5000')
+      // Extract the Repl ID and construct backend URL
+      const replId = currentOrigin.split('.')[0].replace('https://', '').replace('http://', '')
+      const replitBackendUrl = `https://${replId}-5000.${currentOrigin.split('.').slice(1).join('.')}`
       apiUrls.unshift(replitBackendUrl) // Add as first priority
-      apiUrls.push(altReplitUrl)
+
+      // Also try port 80 mapping
+      const port80Url = currentOrigin.replace('-3000.', '-80.')
+      apiUrls.push(port80Url)
     } else {
-      // Local development
       const localBackendUrl = currentOrigin.replace(':3000', ':5000')
-      const altLocalUrl = `${window.location.protocol}//${window.location.hostname}:5000`
       apiUrls.push(localBackendUrl)
-      apiUrls.push(altLocalUrl)
     }
   }
 
