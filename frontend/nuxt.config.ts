@@ -7,7 +7,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
-      apiBase: process.env.NODE_ENV === 'production' ? 'https://your-backend-domain.com' : 'http://localhost:5000'
+      apiBase: process.env.NODE_ENV === 'production' 
+        ? process.env.REPLIT_DEV_DOMAIN?.replace('-3000.', '-5000.') || 'http://0.0.0.0:5000'
+        : 'http://0.0.0.0:5000'
     }
   },
   app: {

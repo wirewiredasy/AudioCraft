@@ -647,7 +647,7 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
-    "apiBase": "http://localhost:5000"
+    "apiBase": "http://0.0.0.0:5000"
   }
 };
 const envOptions = {

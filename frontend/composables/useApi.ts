@@ -10,10 +10,18 @@ export const useApi = () => {
     'http://localhost:5000'
   ]
 
-  // Browser-safe URL detection
+  // Browser-safe URL detection for Replit
   if (typeof window !== 'undefined') {
-    const currentOrigin = window.location.origin.replace(':3000', ':5000')
-    apiUrls.push(currentOrigin)
+    const currentOrigin = window.location.origin
+    
+    // Add Replit-specific URL patterns
+    if (currentOrigin.includes('replit.dev')) {
+      const replitBackendUrl = currentOrigin.replace('-3000.', '-5000.')
+      apiUrls.unshift(replitBackendUrl) // Add as first priority
+    } else {
+      const localBackendUrl = currentOrigin.replace(':3000', ':5000')
+      apiUrls.push(localBackendUrl)
+    }
   }
 
   const api = axios.create({
