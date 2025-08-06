@@ -2,12 +2,12 @@
 
 ## Overview
 
-This is a professional audio processing backend system built with FastAPI. The system provides a centralized API that handles multiple specialized audio processing tasks including vocal removal, pitch/tempo adjustment, format conversion, audio cutting/joining, noise reduction, and audio playback. The backend is designed as a pure API service for integration with any frontend, mobile app, or direct API usage.
+This is a professional fullstack audio processing application called "ODOREMOVER" built with Vue + Nuxt frontend and FastAPI backend. The system provides a beautiful, modern interface for audio processing tasks including vocal removal, pitch/tempo adjustment, format conversion, audio cutting/joining, and noise reduction. The frontend features glassmorphism design with gradient backgrounds and smooth animations.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Architecture preference: Backend-only API service with FastAPI.
+Architecture preference: Fullstack application with Vue + Nuxt frontend and FastAPI backend.
 
 ## System Architecture
 
@@ -88,14 +88,15 @@ Comprehensive validation layer including:
 
 ### Recent Changes
 - **Date**: August 6, 2025
-- **Change**: Frontend Completely Removed
-- **Reason**: User requested complete removal of frontend
-- **Impact**: System now operates as pure backend API service only
+- **Change**: Added Vue + Nuxt Frontend (ODOREMOVER)
+- **Reason**: User requested beautiful Vue + Nuxt frontend with specific structure
+- **Impact**: Complete fullstack application with modern frontend and FastAPI backend
 - **Technical Changes**:
-  - **FRONTEND REMOVED**: Deleted entire React + Vite frontend directory
-  - **API-ONLY ARCHITECTURE**: Now pure FastAPI backend service
-  - **NODE DEPENDENCIES REMOVED**: Cleaned up package.json and related files
-  - **BACKEND FOCUS**: System designed for direct API integration or external frontend connection
+  - **FRONTEND ADDED**: Created complete Vue + Nuxt frontend with beautiful glassmorphism design
+  - **FULLSTACK ARCHITECTURE**: Backend API (Port 5000) + Frontend (Port 3000)
+  - **MODERN UI**: Glass card effects, gradient backgrounds, responsive design
+  - **COMPLETE TOOLKIT**: All audio processing tools with beautiful interfaces
+  - **STRUCTURED LAYOUT**: Organized pages, components, and composables as requested
 
 ### API Features
 - **Vocal Removal**: AI-powered vocal separation using center channel extraction

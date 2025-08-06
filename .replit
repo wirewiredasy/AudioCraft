@@ -1,4 +1,4 @@
-modules = ["python-3.11"]
+modules = ["python-3.11", "nodejs-20"]
 run = "node services/vocal_remover/main.py"
 
 [nix]
@@ -16,6 +16,10 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "API Gateway"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Frontend"
 
 [[workflows.workflow]]
 name = "API Gateway"
@@ -86,6 +90,15 @@ args = "python main.py"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
+
+[[workflows.workflow]]
+name = "Frontend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+waitForPort = 3000
 
 [[ports]]
 localPort = 443
