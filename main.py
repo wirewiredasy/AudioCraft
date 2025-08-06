@@ -372,7 +372,26 @@ async def download_file(filename: str):
 
 if __name__ == "__main__":
     import uvicorn
+    import socket
+    
+    # Find available port
+    def find_free_port():
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind(('', 0))
+            s.listen(1)
+            port = s.getsockname()[1]
+        return port
+    
+    # Try port 5000 first, then find alternative
+    port = 5000
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind(('0.0.0.0', port))
+    except OSError:
+        port = find_free_port()
+        print(f"⚠️ Port 5000 in use, using port {port} instead")
+    
     print("🚀 Starting ODOREMOVER API Gateway...")
-    print("📡 Backend will be available at: http://0.0.0.0:5000")
+    print(f"📡 Backend will be available at: http://0.0.0.0:{port}")
     print("🎵 All audio processing endpoints ready!")
-    uvicorn.run(app, host="0.0.0.0", port=5000, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
