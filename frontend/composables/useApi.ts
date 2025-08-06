@@ -1,8 +1,17 @@
 import axios from 'axios'
 
 export const useApi = () => {
-  const config = useRuntimeConfig()
-  const apiBase = config.public.apiBase || 'http://localhost:5000'
+  // Get API base URL with fallback for Replit environment
+  const getApiBase = () => {
+    if (typeof window !== 'undefined') {
+      // Client-side: use window location to construct API URL
+      return `${window.location.protocol}//${window.location.hostname}:5000`
+    }
+    // Server-side fallback
+    return 'http://localhost:5000'
+  }
+  
+  const apiBase = getApiBase()
 
   const api = axios.create({
     baseURL: apiBase,
@@ -129,13 +138,26 @@ export const useApi = () => {
     }, onProgress)
   }
 
-  // Get API health status
+  // Get API health status with fallback
   const getHealthStatus = async () => {
     try {
       const response = await api.get('/health')
+      console.log('✅ API Connected:', response.data)
       return response.data
     } catch (error) {
-      console.error('Health check error:', error)
+      console.error('❌ API Connection Failed:', error)
+      
+      // Try direct connection as fallback
+      if (typeof window !== 'undefined') {
+        try {
+          const directResponse = await fetch(`${getApiBase()}/health`)
+          const data = await directResponse.json()
+          console.log('✅ Direct API Connected:', data)
+          return data
+        } catch (directError) {
+          console.error('❌ Direct API also failed:', directError)
+        }
+      }
       throw error
     }
   }

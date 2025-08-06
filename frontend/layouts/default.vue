@@ -1,46 +1,42 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
     <!-- Header -->
-    <header class="w-full bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
-      <nav class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <NuxtLink to="/" class="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-          ODOREMOVER
+    <header class="w-full bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-white/20">
+      <nav class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <NuxtLink to="/" class="text-2xl font-black gradient-text hover:scale-105 transition-transform">
+          🎵 ODOREMOVER
         </NuxtLink>
-        <ul class="hidden md:flex space-x-8 text-sm font-medium text-gray-700">
+        <ul class="hidden md:flex space-x-6 text-sm font-semibold">
           <li>
             <NuxtLink 
               to="/" 
-              class="hover:text-blue-600 transition-colors px-3 py-2 rounded-md hover:bg-gray-50"
-              active-class="text-blue-600 bg-blue-50"
+              class="text-gray-700 hover:text-blue-600 transition-all px-3 py-2 rounded-lg hover:bg-white/50 hover:scale-105"
             >
-              Home
+              🏠 Home
             </NuxtLink>
           </li>
           <li>
             <NuxtLink 
               to="/tools" 
-              class="hover:text-blue-600 transition-colors px-3 py-2 rounded-md hover:bg-gray-50"
-              active-class="text-blue-600 bg-blue-50"
+              class="text-gray-700 hover:text-green-600 transition-all px-3 py-2 rounded-lg hover:bg-white/50 hover:scale-105"
             >
-              Tools
+              🛠️ Tools
             </NuxtLink>
           </li>
           <li>
             <NuxtLink 
               to="/about" 
-              class="hover:text-blue-600 transition-colors px-3 py-2 rounded-md hover:bg-gray-50"
-              active-class="text-blue-600 bg-blue-50"
+              class="text-gray-700 hover:text-purple-600 transition-all px-3 py-2 rounded-lg hover:bg-white/50 hover:scale-105"
             >
-              About
+              ℹ️ About
             </NuxtLink>
           </li>
           <li>
             <NuxtLink 
               to="/contact" 
-              class="hover:text-blue-600 transition-colors px-3 py-2 rounded-md hover:bg-gray-50"
-              active-class="text-blue-600 bg-blue-50"
+              class="text-gray-700 hover:text-orange-600 transition-all px-3 py-2 rounded-lg hover:bg-white/50 hover:scale-105"
             >
-              Contact
+              📞 Contact
             </NuxtLink>
           </li>
         </ul>
@@ -48,7 +44,7 @@
         <!-- Mobile menu button -->
         <button 
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+          class="md:hidden p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-white/50 transition-all hover:scale-105"
         >
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -57,35 +53,35 @@
       </nav>
       
       <!-- Mobile menu -->
-      <div v-if="mobileMenuOpen" class="md:hidden border-t border-gray-200 bg-white">
-        <div class="px-4 py-2 space-y-1">
+      <div v-if="mobileMenuOpen" class="md:hidden border-t border-white/20 bg-white/95 backdrop-blur-md">
+        <div class="px-4 py-4 space-y-2">
           <NuxtLink 
             to="/" 
             @click="mobileMenuOpen = false"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            class="block px-4 py-3 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-white/50 rounded-lg transition-all"
           >
-            Home
+            🏠 Home
           </NuxtLink>
           <NuxtLink 
             to="/tools" 
             @click="mobileMenuOpen = false"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            class="block px-4 py-3 text-sm font-semibold text-gray-700 hover:text-green-600 hover:bg-white/50 rounded-lg transition-all"
           >
-            Tools
+            🛠️ Tools
           </NuxtLink>
           <NuxtLink 
             to="/about" 
             @click="mobileMenuOpen = false"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            class="block px-4 py-3 text-sm font-semibold text-gray-700 hover:text-purple-600 hover:bg-white/50 rounded-lg transition-all"
           >
-            About
+            ℹ️ About
           </NuxtLink>
           <NuxtLink 
             to="/contact" 
             @click="mobileMenuOpen = false"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            class="block px-4 py-3 text-sm font-semibold text-gray-700 hover:text-orange-600 hover:bg-white/50 rounded-lg transition-all"
           >
-            Contact
+            📞 Contact
           </NuxtLink>
         </div>
       </div>
