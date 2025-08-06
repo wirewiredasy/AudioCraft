@@ -7,9 +7,14 @@ export const useApi = () => {
   const apiUrls = [
     config.public.apiBase,
     'http://0.0.0.0:5000',
-    'http://localhost:5000',
-    window.location.origin.replace(':3000', ':5000')
+    'http://localhost:5000'
   ]
+
+  // Browser-safe URL detection
+  if (typeof window !== 'undefined') {
+    const currentOrigin = window.location.origin.replace(':3000', ':5000')
+    apiUrls.push(currentOrigin)
+  }
 
   const api = axios.create({
     timeout: 30000, // 30 seconds timeout
