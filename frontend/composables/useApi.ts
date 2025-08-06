@@ -16,14 +16,18 @@ export const useApi = () => {
 
     // Add Replit-specific URL patterns
     if (currentOrigin.includes('replit.dev')) {
-      // Extract the Repl ID and construct backend URL
-      const replId = currentOrigin.split('.')[0].replace('https://', '').replace('http://', '')
-      const replitBackendUrl = `https://${replId}-5000.${currentOrigin.split('.').slice(1).join('.')}`
+      // Extract base domain and construct proper backend URL
+      const domain = currentOrigin.split('://')[1] // Remove https://
+      const baseDomain = domain.split('-')[0] // Get repl ID
+      const repl = domain.split('.')[0].split('-').slice(1).join('-') // Get remaining repl name
+
+      // Proper Replit backend URL construction
+      const replitBackendUrl = `https://${baseDomain}-5000.${domain.split('.').slice(1).join('.')}`
       apiUrls.unshift(replitBackendUrl) // Add as first priority
 
-      // Also try port 80 mapping
-      const port80Url = currentOrigin.replace('-3000.', '-80.')
-      apiUrls.push(port80Url)
+      // Also try direct port mapping
+      const portMappedUrl = currentOrigin.replace(':3000', ':5000')
+      apiUrls.push(portMappedUrl)
     } else {
       const localBackendUrl = currentOrigin.replace(':3000', ':5000')
       apiUrls.push(localBackendUrl)
