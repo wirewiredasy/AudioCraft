@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile"]
 
 [workflows]
-runButton = "Project"
+runButton = "Full Stack App"
 
 [[workflows.workflow]]
 name = "Project"

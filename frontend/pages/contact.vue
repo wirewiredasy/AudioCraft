@@ -234,3 +234,41 @@ const submitForm = async () => {
   }
 }
 </script>
+<template>
+  <div class="max-w-4xl mx-auto px-4 py-20">
+    <h1 class="text-4xl font-bold text-gray-900 mb-8">Contact Us</h1>
+    <div class="card p-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Get In Touch</h3>
+          <p class="text-gray-600 mb-6">
+            Have questions about our audio processing tools? We'd love to hear from you.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <span>support@odoremover.com</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Send Message</h3>
+          <form class="space-y-4">
+            <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg">
+            <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg">
+            <textarea placeholder="Your Message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg"></textarea>
+            <button type="submit" class="btn-primary w-full">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+useHead({
+  title: 'Contact Us - ODOREMOVER'
+})
+</script>
