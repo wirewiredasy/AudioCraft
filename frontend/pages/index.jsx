@@ -8,7 +8,7 @@ import {
   Sliders,
   ShieldCheck,
   Settings,
-  HelpCircle,
+  User,
   Play,
   TrendingUp,
   BarChart3,
@@ -17,340 +17,297 @@ import {
   Edit3,
   Wand2,
   RotateCcw,
-  ArrowRight,
-  Sparkles
+  Upload,
+  Download,
+  Equalizer3,
+  FileAudio,
+  Waves,
+  Filter,
+  Shuffle,
+  MoreHorizontal,
+  Search,
+  Bell,
+  Home,
+  LayoutDashboard
 } from 'lucide-react'
 
-export default function Home() {
+export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState('dashboard')
+
+  const sidebarItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'vocal', label: 'Vocal', icon: Mic, color: 'bg-blue-500' },
+    { id: 'pitch', label: 'Pitch Editor', icon: TrendingUp, color: 'bg-purple-500' },
+    { id: 'equalizer', label: 'Equalizer', icon: BarChart3, color: 'bg-teal-500' },
+    { id: 'equalize', label: 'Equalize', icon: Sliders, color: 'bg-cyan-500' },
+    { id: 'metadata', label: 'Metadata', icon: Edit3, color: 'bg-gray-500' },
+    { id: 'nopixce', label: 'Nopixce', icon: ShieldCheck, color: 'bg-pink-500' },
+    { id: 'more', label: 'MoreSerial', icon: MoreHorizontal, color: 'bg-slate-600' },
+    { id: 'script', label: 'ScriptRant', icon: FileAudio, color: 'bg-slate-600' }
+  ]
 
   const tools = [
     {
-      title: "Vocal Remover",
-      subtitle: "Perfect instrument Extractor",
-      rating: "7",
-      type: "FREE",
-      description: "Precise vocal and chorus separation. Separate voiced and vocal split chorus",
-      href: "/tools/vocal-remover",
-      icon: Play,
-      gradient: "from-red-500 to-pink-600"
+      title: "Noise Removal",
+      subtitle: "Upmlixaore",
+      description: "Remove background noise and enhance audio clarity",
+      icon: () => (
+        <div className="w-full h-full bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center text-3xl font-bold text-white">
+          U
+        </div>
+      ),
+      status: "Active",
+      action: "Open",
+      href: "/tools/vocal-remover"
     },
     {
-      title: "Pitch Changer", 
-      subtitle: "Precise Enhance Transpose",
-      rating: "7",
-      type: "FREE", 
-      description: "Enhance, boost or change transient, sharpen landscape background sound, enhance and decrease sound",
-      href: "/tools/pitch-tempo",
-      icon: TrendingUp,
-      gradient: "from-blue-500 to-cyan-600"
+      title: "Audio Analysis",
+      subtitle: "Regualez",
+      description: "Advanced audio frequency analysis and visualization",
+      icon: () => (
+        <div className="w-full h-full bg-slate-800 rounded-xl flex flex-col items-center justify-center p-3">
+          <div className="flex space-x-1 mb-2">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="w-1 bg-gradient-to-t from-orange-400 to-yellow-300 rounded-sm"
+                style={{ height: `${Math.random() * 20 + 10}px` }}
+              />
+            ))}
+          </div>
+          <div className="w-4 h-4 bg-cyan-400 rounded-full"/>
+        </div>
+      ),
+      status: "Processing",
+      action: "Ooflia Isna",
+      href: "/tools/equalizer"
     },
     {
-      title: "Audio Converter",
-      subtitle: "Enhance & Reduce",
-      rating: "7",
-      type: "FREE",
-      description: "Resample favorite change sharpen sharpest responsive/real-time Shaper contrast with voice all format enhancement stereo",
-      href: "/tools/converter",
-      icon: RefreshCw,
-      gradient: "from-green-500 to-emerald-600"
+      title: "Voice Enhancer", 
+      subtitle: "Motlion",
+      description: "Enhance and optimize voice recordings",
+      icon: () => (
+        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center text-white">
+          <Mic className="w-8 h-8" />
+        </div>
+      ),
+      status: "Ready",
+      action: "Configure",
+      href: "/tools/pitch-tempo"
     },
     {
-      title: "Equalizer",
-      subtitle: "Feeling/Channel/Pro Sharper",
-      rating: "7", 
-      type: "FREE",
-      description: "boost/sub-bass, in-music cut/find Filtering, Enhancer by Alyse, Event enhancement and, balance and to music split",
-      href: "/tools/equalizer",
-      icon: BarChart3,
-      gradient: "from-purple-500 to-indigo-600"
+      title: "Recent Uploads",
+      subtitle: "Deageim Unotstir",
+      description: "Manage and process your uploaded audio files",
+      icon: () => (
+        <div className="w-full h-full bg-slate-800 rounded-xl p-3">
+          <div className="space-y-2">
+            <div className="h-1 bg-cyan-300 rounded-full w-full"/>
+            <div className="h-1 bg-cyan-300 rounded-full w-3/4"/>
+            <div className="h-1 bg-cyan-300 rounded-full w-1/2"/>
+          </div>
+          <div className="mt-3 flex justify-between items-center">
+            <span className="text-xs text-gray-400">004</span>
+            <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+              <div className="w-2 h-2 bg-white rounded-full"/>
+            </div>
+          </div>
+        </div>
+      ),
+      status: "Active",
+      action: "Odpore",
+      href: "/tools/converter"
     },
     {
-      title: "Noise Reducer",
-      subtitle: "Clean Audio Enhancement",
-      rating: "7",
-      type: "FREE",
-      description: "Remove background noise and improve audio quality using advanced algorithms",
-      href: "/tools/noise-reducer",
-      icon: ShieldCheck,
-      gradient: "from-yellow-500 to-orange-600"
+      title: "Red Process",
+      subtitle: "Noiran",
+      description: "Advanced audio processing pipeline",
+      icon: () => (
+        <div className="w-full h-full bg-gradient-to-br from-red-400 to-orange-300 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center">
+            <div className="w-3 h-6 bg-red-500 rounded-full"/>
+          </div>
+        </div>
+      ),
+      status: "Processing",
+      action: "Monitor",
+      href: "/tools/noise-reducer"
     },
     {
-      title: "Volume Normalizer",
-      subtitle: "Audio Level Control",
-      rating: "7",
-      type: "FREE",
-      description: "Enhance audio volume with professional normalization and gain control",
-      href: "/tools/volume-normalizer",
-      icon: Volume2,
-      gradient: "from-pink-500 to-rose-600"
-    },
-    {
-      title: "Audio Editor",
-      subtitle: "Cut & Join Tool",
-      rating: "7",
-      type: "FREE",
-      description: "Cut, trim, and join audio files with precision timing controls",
-      href: "/tools/cutter-joiner",
-      icon: Scissors,
-      gradient: "from-violet-500 to-purple-600"
-    },
-    {
-      title: "Metadata Editor",
-      subtitle: "Tag Information",
-      rating: "7",
-      type: "FREE",
-      description: "Edit MP3 tags including title, artist, album, and year information",
-      href: "/tools/metadata-editor",
-      icon: Edit3,
-      gradient: "from-indigo-500 to-blue-600"
-    },
-    {
-      title: "Fade Effects",
-      subtitle: "Smooth Transitions",
-      rating: "7",
-      type: "FREE",
-      description: "Add professional fade in/out effects to create smooth audio transitions",
-      href: "/tools/fade-effect",
-      icon: Wand2,
-      gradient: "from-teal-500 to-cyan-600"
-    },
-    {
-      title: "Audio Reverser",
-      subtitle: "Reverse Playback",
-      rating: "7",
-      type: "FREE",
-      description: "Reverse audio playback completely for special effects and creative projects",
-      href: "/tools/audio-reverse",
-      icon: RotateCcw,
-      gradient: "from-orange-500 to-red-600"
+      title: "Noise Filter",
+      subtitle: "Noize",
+      description: "Remove unwanted noise from audio recordings",
+      icon: () => (
+        <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+          <Filter className="w-8 h-8 text-white" />
+        </div>
+      ),
+      status: "Ready",
+      action: "Configure",
+      href: "/tools/volume-normalizer"
     }
   ]
 
   return (
     <>
       <Head>
-        <title>Odoremover - Professional Audio Processing Tools</title>
-        <meta name="description" content="Remove vocals, enhance sound with professional audio processing tools" />
+        <title>Odoremover Pro - Professional Audio Dashboard</title>
+        <meta name="description" content="Professional audio processing dashboard with advanced tools" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
-        {/* Header */}
-        <header className="backdrop-blur-xl bg-slate-900/80 border-b border-purple-500/20 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
-              {/* Logo */}
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
-                </div>
-                <h1 className="text-2xl font-bold text-white">
-                  Odoremover
-                </h1>
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-200 flex">
+        {/* Sidebar */}
+        <div className="w-64 bg-white/80 backdrop-blur-xl border-r border-gray-200 flex flex-col">
+          {/* User Profile */}
+          <div className="p-6 border-b border-gray-200">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <User className="w-5 h-5 text-white" />
               </div>
-
-              {/* Navigation */}
-              <nav className="hidden md:flex space-x-8">
-                {[
-                  { name: 'Home', href: '/' },
-                  { name: 'Settings', href: '/settings', icon: Settings },
-                  { name: 'Help', href: '/help', icon: HelpCircle }
-                ].map((item, index) => (
-                  <Link 
-                    key={`${item.name}-${index}`}
-                    href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-2"
-                  >
-                    {item.icon && <item.icon className="w-4 h-4" />}
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
-              </nav>
-
-              {/* Right Side */}
-              <div className="flex items-center space-x-4">
-                <button className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 text-white font-medium hover:scale-105 transition-transform shadow-lg">
-                  Scomiecer
-                </button>
+              <div>
+                <h3 className="font-semibold text-gray-900">Soupfant</h3>
+                <p className="text-sm text-gray-500">Soupfent</p>
               </div>
             </div>
           </div>
-        </header>
 
-        {/* Hero Section */}
-        <section className="relative overflow-hidden py-20 lg:py-32">
-          {/* Animated Background */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900" />
-            
-            {/* Floating Orbs */}
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-orange-500/20 to-purple-600/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-            
-            {/* Waveform Animation */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
-              <div className="flex items-end justify-center h-full space-x-1 px-4">
-                {Array.from({ length: 150 }).map((_, i) => (
+          {/* Navigation */}
+          <nav className="flex-1 p-4 space-y-2">
+            {sidebarItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                  activeTab === item.id
+                    ? 'bg-blue-50 text-blue-600 border border-blue-200'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                <div className={`w-6 h-6 rounded-md flex items-center justify-center ${item.color || 'bg-gray-200'}`}>
+                  <item.icon className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-medium">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col">
+          {/* Header */}
+          <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200 px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium">
+                  Odoremover Pro
+                </button>
+                <button className="px-4 py-2 text-gray-500 hover:text-gray-700">
+                  Songs
+                </button>
+              </div>
+              <button className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                Setup
+              </button>
+            </div>
+          </header>
+
+          {/* Page Content */}
+          <div className="flex-1 p-6">
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Odoremover Pro</h1>
+              <p className="text-gray-600">Professional audio processing dashboard</p>
+            </div>
+
+            {/* Tools Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {tools.map((tool, index) => (
+                <Link 
+                  key={tool.title}
+                  href={tool.href}
+                  className="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all group"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full" />
+                      </div>
+                      <h3 className="font-semibold text-gray-900">{tool.title}</h3>
+                    </div>
+                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* Tool Icon */}
+                  <div className="w-full h-24 mb-4">
+                    <tool.icon />
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <h4 className="font-medium text-gray-900">{tool.subtitle}</h4>
+                      <p className="text-sm text-gray-500">{tool.description}</p>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-4 h-4 bg-gray-300 rounded" />
+                        <span className="text-sm text-gray-600">{tool.action}</span>
+                      </div>
+                      <div className="w-4 h-4 bg-gray-300 rounded" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Bottom Audio Player */}
+            <div className="mt-8 bg-slate-800 rounded-2xl p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="flex space-x-2">
+                  <button className="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center text-white">
+                    +
+                  </button>
+                  <button className="px-4 py-2 bg-gray-700 text-white rounded-lg text-sm">
+                    Non
+                  </button>
+                  <button className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                    5
+                  </button>
+                  <button className="px-4 py-2 bg-gray-700 text-white rounded-lg text-sm">
+                    4kb
+                  </button>
+                  <button className="w-8 h-8 bg-gray-700 rounded-lg flex items-center justify-center text-white">
+                    ♥
+                  </button>
+                  <button className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                    🎵
+                  </button>
+                  <button className="w-8 h-8 bg-slate-600 rounded-lg flex items-center justify-center text-white">
+                    ⚙
+                  </button>
+                  <button className="w-8 h-8 bg-slate-600 rounded-lg flex items-center justify-center text-white">
+                    📁
+                  </button>
+                </div>
+              </div>
+
+              {/* Waveform */}
+              <div className="h-20 bg-slate-700 rounded-lg flex items-end justify-center space-x-1 p-2">
+                {Array.from({ length: 80 }).map((_, i) => (
                   <div
-                    key={`wave-${i}`}
-                    className="bg-gradient-to-t from-orange-500/60 via-purple-500/40 to-transparent rounded-sm"
+                    key={i}
+                    className="bg-gradient-to-t from-teal-400 to-blue-400 rounded-sm"
                     style={{
                       width: '2px',
-                      height: `${20 + Math.sin(i * 0.1) * 40 + Math.random() * 20}%`,
-                      animation: `wave 2s ease-in-out infinite ${i * 0.02}s`
+                      height: `${10 + Math.sin(i * 0.2) * 30 + Math.random() * 20}%`
                     }}
                   />
                 ))}
               </div>
             </div>
           </div>
-          
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="mb-8">
-              <span className="inline-block px-4 py-2 bg-gradient-to-r from-orange-500/20 to-purple-600/20 rounded-full text-orange-400 text-sm font-medium border border-orange-500/20">
-                Professional Audio Processing
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Remove Vocals,
-              <br />
-              <span className="bg-gradient-to-r from-orange-400 to-purple-400 bg-clip-text text-transparent">
-                Enhance Sound
-              </span>
-            </h1>
-            
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Transform your audio with cutting-edge AI technology. Professional tools for 
-              creators, musicians, and producers worldwide.
-            </p>
-            
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link 
-                href="/tools" 
-                className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-full font-semibold transition-all transform hover:scale-105 shadow-xl hover:shadow-orange-500/25"
-              >
-                <span className="flex items-center space-x-2">
-                  <span>Start now</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
-              </Link>
-              
-              <Link 
-                href="/tools" 
-                className="px-8 py-4 bg-slate-800/50 backdrop-blur-sm text-white border border-purple-500/30 rounded-full font-semibold hover:bg-slate-700/50 transition-all transform hover:scale-105"
-              >
-                View all tools
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Tools Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Professional Audio Tools
-                <span className="bg-gradient-to-r from-orange-400 to-purple-400 bg-clip-text text-transparent block mt-2">
-                  All Free to Use
-                </span>
-              </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Transform your audio with our complete collection of professional-grade tools. 
-                Remove vocals, adjust pitch, convert formats, and enhance your audio.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {tools.map((tool, index) => (
-                <div
-                  key={tool.title}
-                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl border border-purple-500/20 p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {/* Glow Effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-3xl`} />
-                  
-                  {/* Tool Header */}
-                  <div className="flex items-center justify-between mb-6 relative z-10">
-                    <div className={`p-4 bg-gradient-to-br ${tool.gradient} rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow`}>
-                      <tool.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-orange-400 mb-1 font-medium">
-                        ⭐ {tool.rating}
-                      </div>
-                      <div className="text-xs px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full font-semibold">
-                        {tool.type}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Tool Info */}
-                  <div className="relative z-10">
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
-                      {tool.title}
-                    </h3>
-                    <p className="text-sm text-gray-400 mb-4 font-medium">
-                      {tool.subtitle}
-                    </p>
-
-                    {/* Free Badge */}
-                    <div className="mb-4">
-                      <div className="inline-block px-4 py-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30 rounded-full text-sm font-bold">
-                        100% FREE
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-400 mb-6 line-clamp-3 leading-relaxed">
-                      {tool.description}
-                    </p>
-
-                    {/* Action Button */}
-                    <Link
-                      href={tool.href}
-                      className={`block w-full py-4 px-6 bg-gradient-to-r ${tool.gradient} text-white rounded-2xl text-center font-semibold transition-all duration-300 transform group-hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden`}
-                    >
-                      <span className="relative z-10">Start now</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="bg-slate-900/80 backdrop-blur-xl border-t border-purple-500/20 py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <div className="flex items-center space-x-6 mb-4 md:mb-0">
-                <div className="p-3 bg-gradient-to-r from-orange-500/20 to-purple-600/20 rounded-xl border border-orange-500/20">
-                  <Volume2 className="w-5 h-5 text-orange-400" />
-                </div>
-                <div className="p-3 bg-gradient-to-r from-purple-500/20 to-blue-600/20 rounded-xl border border-purple-500/20">
-                  <Mic className="w-5 h-5 text-purple-400" />
-                </div>
-                <div className="p-3 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 rounded-xl border border-blue-500/20">
-                  <Music className="w-5 h-5 text-blue-400" />
-                </div>
-                <button className="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-xl text-sm font-medium transition-all hover:scale-105 border border-slate-600">
-                  Contact
-                </button>
-              </div>
-              
-              <div className="text-center text-sm text-gray-400">
-                Download Odoremover Application to Try Audio → Mixtape of Programs from More.
-              </div>
-            </div>
-          </div>
-        </footer>
+        </div>
       </div>
     </>
   )

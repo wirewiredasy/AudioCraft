@@ -132,9 +132,9 @@ export default function AllTools() {
         <meta name="description" content="Complete collection of professional audio processing tools" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-200">
         {/* Header */}
-        <header className="backdrop-blur-xl bg-slate-900/80 border-b border-purple-500/20">
+        <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               {/* Logo */}
@@ -142,7 +142,7 @@ export default function AllTools() {
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-2xl font-bold text-white">Odoremover</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Odoremover</h1>
               </div>
 
               {/* Navigation */}
@@ -161,8 +161,8 @@ export default function AllTools() {
               </nav>
 
               {/* Right Side */}
-              <button className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 text-white font-medium hover:scale-105 transition-transform shadow-lg">
-                Scomiecer
+              <button className="px-6 py-2 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors">
+                Setup
               </button>
             </div>
           </div>
@@ -171,17 +171,17 @@ export default function AllTools() {
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Back Button */}
-          <Link href="/" className="inline-flex items-center space-x-2 text-gray-400 hover:text-white mb-8 transition-colors">
+          <Link href="/" className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
+            <span>Back to Dashboard</span>
           </Link>
 
           {/* Title */}
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
               All Audio Tools
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Complete collection of professional audio processing tools for creators, musicians, and producers.
             </p>
           </div>
@@ -198,7 +198,7 @@ export default function AllTools() {
                 placeholder="Search tools..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-purple-500/30 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all"
+                className="w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
               />
             </div>
 
@@ -210,8 +210,8 @@ export default function AllTools() {
                   onClick={() => setSelectedCategory(category)}
                   className={`px-6 py-3 rounded-full font-medium transition-all transform hover:scale-105 ${
                     selectedCategory === category
-                      ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-lg'
-                      : 'bg-slate-800/50 text-gray-300 hover:text-white border border-slate-600'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
                   }`}
                 >
                   {category}
@@ -225,7 +225,7 @@ export default function AllTools() {
             {filteredTools.map((tool, index) => (
               <div
                 key={tool.title}
-                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl border border-purple-500/20 p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+                className="group relative overflow-hidden rounded-3xl bg-white border border-gray-200 p-6 transition-all duration-500 hover:scale-105 hover:shadow-xl"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Glow Effect */}

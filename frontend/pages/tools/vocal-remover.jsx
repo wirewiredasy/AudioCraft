@@ -74,9 +74,9 @@ export default function VocalRemover() {
         <meta name="description" content="Remove vocals from your audio files with professional quality" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-200">
         {/* Header */}
-        <header className="backdrop-blur-xl bg-slate-900/80 border-b border-purple-500/20">
+        <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               {/* Logo */}
@@ -84,27 +84,27 @@ export default function VocalRemover() {
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-2xl font-bold text-white">Odoremover</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Odoremover</h1>
               </div>
 
               {/* Navigation */}
               <nav className="hidden md:flex space-x-8">
-                <Link href="/" className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-2">
+                <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors font-medium flex items-center space-x-2">
                   <span>Home</span>
                 </Link>
-                <Link href="/settings" className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-2">
+                <Link href="/settings" className="text-gray-600 hover:text-gray-900 transition-colors font-medium flex items-center space-x-2">
                   <Settings className="w-4 h-4" />
                   <span>Settings</span>
                 </Link>
-                <Link href="/help" className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-2">
+                <Link href="/help" className="text-gray-600 hover:text-gray-900 transition-colors font-medium flex items-center space-x-2">
                   <HelpCircle className="w-4 h-4" />
                   <span>Help</span>
                 </Link>
               </nav>
 
               {/* Right Side */}
-              <button className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 text-white font-medium hover:scale-105 transition-transform shadow-lg">
-                Scomiecer
+              <button className="px-6 py-2 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors">
+                Setup
               </button>
             </div>
           </div>
@@ -113,27 +113,24 @@ export default function VocalRemover() {
         {/* Main Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Back Button */}
-          <Link href="/" className="inline-flex items-center space-x-2 text-gray-400 hover:text-white mb-8 transition-colors">
+          <Link href="/" className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Tools</span>
+            <span>Back to Dashboard</span>
           </Link>
 
           {/* Title */}
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
               Vocal Remover
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              OVER 110K OPTIYE OPT SV YSV ORIGINAL SRW ARHD WER.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Remove vocals from your audio files with professional AI technology
             </p>
           </div>
 
           {/* Main Tool Interface */}
           <div className="relative">
-            {/* Glow Container */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 via-purple-600/20 to-blue-600/20 rounded-3xl blur-xl opacity-60" />
-            
-            <div className="relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl border border-purple-500/30 rounded-3xl p-8">
+            <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-8">
               
               {!file ? (
                 /* Upload Zone */
@@ -157,46 +154,46 @@ export default function VocalRemover() {
                     onChange={handleFileSelect}
                   />
                   
-                  <div className="w-20 h-20 bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-slate-600">
-                    <Upload className="w-8 h-8 text-gray-400" />
+                  <div className="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-200">
+                    <Upload className="w-8 h-8 text-gray-500" />
                   </div>
                   
-                  <h3 className="text-2xl font-semibold text-white mb-4">
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                     Drag & Drop your audio file here
                   </h3>
                   
-                  <p className="text-gray-400 mb-8">
+                  <p className="text-gray-600 mb-8">
                     Supported file formats: MP3, WAV, FLAC, M4A, OGG
                   </p>
                   
                   <div className="text-sm text-gray-500">
-                    Webuntol frees obit 8 f Obit%Y, 4
+                    Maximum file size: 50MB
                   </div>
                 </div>
               ) : (
                 /* Audio Player Interface */
                 <div className="space-y-8">
                   {/* File Info */}
-                  <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center space-x-4">
-                      <FileAudio className="w-8 h-8 text-orange-400" />
+                      <FileAudio className="w-8 h-8 text-blue-600" />
                       <div>
-                        <p className="text-white font-medium">{file.name}</p>
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-900 font-medium">{file.name}</p>
+                        <p className="text-gray-500 text-sm">
                           {(file.size / (1024 * 1024)).toFixed(2)} MB
                         </p>
                       </div>
                     </div>
                     <button 
                       onClick={removeFile}
-                      className="p-2 rounded-full bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors"
+                      className="p-2 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
                     >
                       <X className="w-5 h-5" />
                     </button>
                   </div>
 
                   {/* Audio Player Controls */}
-                  <div className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50">
+                  <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
                     <div className="flex items-center justify-center space-x-6 mb-8">
                       <button className="p-3 rounded-full bg-slate-700 text-gray-400 hover:text-white transition-colors">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -211,7 +208,7 @@ export default function VocalRemover() {
                       </button>
                       
                       <button 
-                        className="p-4 rounded-full bg-white text-slate-900 hover:scale-105 transition-transform shadow-lg"
+                        className="p-4 rounded-full bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 transition-all shadow-lg"
                         onClick={() => setIsPlaying(!isPlaying)}
                       >
                         {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-1" />}
@@ -276,7 +273,7 @@ export default function VocalRemover() {
                     {!processed && !processing && (
                       <button 
                         onClick={processAudio}
-                        className="px-12 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-full font-semibold text-lg hover:scale-105 transition-transform shadow-lg hover:shadow-orange-500/25"
+                        className="px-12 py-4 bg-blue-600 text-white rounded-full font-semibold text-lg hover:bg-blue-700 hover:scale-105 transition-all shadow-lg"
                       >
                         Remove Vocals
                       </button>
@@ -284,24 +281,23 @@ export default function VocalRemover() {
 
                     {processing && (
                       <div className="flex items-center justify-center space-x-4 py-4">
-                        <Loader2 className="w-6 h-6 text-orange-500 animate-spin" />
-                        <span className="text-white font-medium">Processing audio...</span>
+                        <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
+                        <span className="text-gray-900 font-medium">Processing audio...</span>
                       </div>
                     )}
 
                     {processed && (
                       <div className="space-y-6">
-                        <div className="flex items-center justify-center space-x-3 text-green-400">
+                        <div className="flex items-center justify-center space-x-3 text-green-600">
                           <CheckCircle className="w-6 h-6" />
                           <span className="font-medium">Processing complete!</span>
                         </div>
                         
-                        <button className="group relative px-12 py-4 bg-white text-slate-900 rounded-full font-semibold text-lg hover:scale-105 transition-all shadow-lg hover:shadow-white/25 overflow-hidden">
+                        <button className="group relative px-12 py-4 bg-green-600 text-white rounded-full font-semibold text-lg hover:bg-green-700 hover:scale-105 transition-all shadow-lg overflow-hidden">
                           <span className="flex items-center space-x-3 relative z-10">
                             <Download className="w-5 h-5" />
                             <span>Download</span>
                           </span>
-                          <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </button>
                       </div>
                     )}
