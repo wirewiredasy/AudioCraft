@@ -1,8 +1,8 @@
-# Project Documentation
+# ODOREMOVER Audio Suite - Project Documentation
 
 ## Overview
 
-This project requires analysis of the repository structure and codebase to provide a comprehensive overview. Please ensure the repository contents are available for proper documentation generation.
+This is the complete ODOREMOVER Audio Suite - a professional full-stack audio processing platform built with React + Next.js frontend and FastAPI microservices backend architecture. The project provides advanced tools for audio manipulation including vocal removal, pitch/tempo adjustment, format conversion, noise reduction, and more.
 
 ## User Preferences
 
@@ -11,49 +11,108 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Frontend Architecture
-- Technology stack to be determined based on repository analysis
-- Component structure and organization patterns
-- State management approach
-- Routing and navigation strategy
+- **Technology Stack**: React + Next.js 14 with TypeScript support
+- **UI Framework**: Tailwind CSS with custom glassmorphism design system
+- **Component Structure**: Modular components in `/components` directory
+- **Routing**: Next.js file-based routing with dynamic tool pages
+- **State Management**: Local React state with context API
+- **HTTP Client**: Axios for API communication
 
 ### Backend Architecture
-- Server framework and runtime environment
-- API design patterns and endpoint structure
-- Middleware and request processing pipeline
-- Error handling and logging mechanisms
+- **Server Framework**: FastAPI with async/await support
+- **Architecture Pattern**: Microservices with API Gateway
+- **API Gateway**: Central routing hub at `backend/api_gateway/main.py`
+- **Microservices**: Each tool runs as separate service in `backend/services/`
+- **Request Processing**: FastAPI multipart form handling
+- **Error Handling**: HTTP exception handling with detailed responses
+
+### Audio Processing
+- **Core Libraries**: Librosa for advanced audio analysis, Pydub for manipulation
+- **Processing Methods**: 
+  - Vocal removal using center channel extraction + spectral subtraction
+  - Pitch/tempo adjustment with independent control
+  - Format conversion with quality options
+  - Noise reduction using spectral subtraction
+  - Volume normalization with RMS analysis
+- **File Support**: MP3, WAV, FLAC, AAC, OGG, M4A, WMA
+- **Quality Control**: Professional normalization and anti-clipping
 
 ### Data Layer
-- Database technology and configuration
-- Schema design and relationships
-- Data access patterns and ORM usage
-- Migration and seeding strategies
-
-### Authentication & Authorization
-- Authentication mechanism implementation
-- User session management
-- Authorization patterns and role-based access
-- Security measures and best practices
+- **File Storage**: Local filesystem with organized upload/processed directories
+- **Temporary Files**: Automatic cleanup system
+- **File Management**: UUID-based naming for security
+- **Download System**: Static file serving through FastAPI
 
 ## External Dependencies
 
-### Third-Party Services
-- External APIs and service integrations
-- Payment processing systems
-- Email and notification services
-- Analytics and monitoring tools
+### Backend Dependencies
+- `fastapi==0.104.1` - Modern web framework
+- `uvicorn[standard]==0.24.0` - ASGI server
+- `librosa==0.10.1` - Audio analysis library
+- `soundfile==0.12.1` - Audio file I/O
+- `pydub==0.25.1` - Audio manipulation
+- `numpy==1.24.3` - Numerical computing
+- `python-multipart==0.0.6` - File upload handling
 
-### Development Dependencies
-- Build tools and bundlers
-- Testing frameworks and utilities
-- Code quality and linting tools
-- Deployment and CI/CD pipeline tools
+### Frontend Dependencies
+- `next@^14.0.3` - React framework
+- `react@^18.2.0` - UI library
+- `tailwindcss@^3.3.6` - CSS framework
+- `axios@^1.6.2` - HTTP client
+- `lucide-react@^0.294.0` - Icon library
+- `react-hot-toast@^2.4.1` - Toast notifications
+- `react-dropzone@^14.2.3` - File upload component
 
-### Runtime Dependencies
-- Core libraries and frameworks
-- Database drivers and ORMs
-- Utility libraries and helpers
-- Security and validation packages
+### Development Tools
+- PostCSS and Autoprefixer for CSS processing
+- ESLint for code quality
+- Docker support for containerization
+
+## Project Structure
+
+```
+├── backend/                # FastAPI Backend
+│   ├── api_gateway/        # Central API gateway
+│   ├── services/           # Audio microservices
+│   │   ├── vocal_remover/
+│   │   ├── pitch_tempo/
+│   │   ├── converter/
+│   │   └── [8 more tools]
+│   ├── shared/             # Common utilities
+│   └── requirements.txt
+├── frontend/               # React + Next.js Frontend
+│   ├── components/         # Reusable components
+│   ├── pages/              # Next.js pages
+│   ├── styles/             # Tailwind CSS
+│   └── package.json
+└── docker-compose.yml      # Container orchestration
+```
+
+## Recent Changes
+
+**Date: August 7, 2025**
+- ✅ Completed full project recreation with enhanced microservices architecture
+- ✅ Built comprehensive FastAPI backend with 10 audio processing services
+- ✅ Created professional React + Next.js frontend with glassmorphism design
+- ✅ Implemented all audio tools: vocal remover, pitch/tempo, converter, editor, etc.
+- ✅ Set up workflows for backend (port 8000) and frontend (port 3000)
+- ✅ Added Docker support and production-ready configuration
+- 🔄 Installing remaining frontend dependencies (lucide-react, etc.)
+
+## Development Workflow
+
+1. **Backend**: Runs on `http://localhost:8000` with API documentation at `/docs`
+2. **Frontend**: Runs on `http://localhost:3000` with hot reload
+3. **File Processing**: Upload → Process → Download workflow
+4. **API Communication**: Frontend calls backend endpoints with FormData
+
+## Deployment
+
+- Docker Compose setup for both services
+- Production-ready with Nginx reverse proxy
+- Environment variable configuration
+- Health checks and restart policies
 
 ---
 
-*Note: This documentation template requires repository contents to be analyzed for accurate and specific architectural details.*
+*Last updated: August 7, 2025*
