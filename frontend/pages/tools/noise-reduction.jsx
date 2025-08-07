@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { OdoremoverLogo } from '../../components/ui/OdoremoverLogo'
 import { useDropzone } from 'react-dropzone'
 import { ArrowLeft, Upload, Download, ShieldCheck, Volume2, Sliders } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
@@ -92,14 +93,8 @@ export default function NoiseReduction() {
         <header className="border-b border-gray-200 bg-white">
           <div className="max-w-6xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-3">
-                <ArrowLeft className="w-5 h-5" />
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                    <ShieldCheck className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="font-semibold">Noise Reduction</span>
-                </div>
+              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <OdoremoverLogo size={32} showText={true} textSize="xl" className="text-gray-900" />
               </Link>
               <div className="text-sm text-gray-500">
                 ODOREMOVER Audio Suite

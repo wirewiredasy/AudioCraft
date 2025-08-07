@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { OdoremoverLogo } from '../../components/ui/OdoremoverLogo'
 import { useDropzone } from 'react-dropzone'
 import { ArrowLeft, Upload, Download, Scissors, Clock, Play, Pause } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'

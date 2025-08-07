@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Music, Home, Wrench } from 'lucide-react'
+import { Menu, X, Home, Wrench } from 'lucide-react'
+import { OdoremoverLogo } from './ui/OdoremoverLogo'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -15,14 +16,9 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
-              <Music className="w-6 h-6 text-white" />
-            </div>
-            <Link href="/" className="text-2xl font-bold text-white hover:text-purple-300 transition-colors">
-              ODOREMOVER
-            </Link>
-          </div>
+          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+            <OdoremoverLogo size={40} showText={true} textSize="xl" />
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">

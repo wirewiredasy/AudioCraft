@@ -108,9 +108,8 @@ export default function Dashboard() {
         <div className="bg-gray-800 border-b border-gray-700 px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-3">
-                <OdoremoverLogo className="w-8 h-8 text-blue-400" />
-                <span className="text-xl font-bold">ODOREMOVER</span>
+              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <OdoremoverLogo size={32} showText={true} textSize="xl" />
               </Link>
               <div className="hidden md:block h-6 w-px bg-gray-600"></div>
               <div className="hidden md:block">

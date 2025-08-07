@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { OdoremoverLogo } from '../../components/ui/OdoremoverLogo'
 import { 
   ArrowLeft, 
   Upload, 
@@ -80,12 +81,9 @@ export default function VocalRemover() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               {/* Logo */}
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
-                </div>
-                <h1 className="text-2xl font-bold text-gray-900">Odoremover</h1>
-              </div>
+              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <OdoremoverLogo size={32} showText={true} textSize="xl" className="text-gray-900" />
+              </Link>
 
               {/* Navigation */}
               <nav className="hidden md:flex space-x-8">

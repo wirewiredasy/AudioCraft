@@ -93,7 +93,7 @@ export const MobileHeader = ({
               <X className="w-5 h-5" />
             </button>
           ) : (
-            <OdoremoverLogo className="w-8 h-8 text-white" />
+            <OdoremoverLogo size={32} showText={false} />
           )}
           <span className="text-lg font-bold truncate">{title}</span>
         </div>

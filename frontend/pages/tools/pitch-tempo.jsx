@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { OdoremoverLogo } from '../../components/ui/OdoremoverLogo'
 import { 
   Upload, 
   Download, 
@@ -144,15 +145,9 @@ export default function PitchTempoEditor() {
                   <span>Back to Home</span>
                 </Link>
                 <div className="h-6 w-px bg-gray-600"></div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
-                    <PitchTempoIcon className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h1 className="text-xl font-bold">Pitch & Tempo Editor</h1>
-                    <p className="text-sm text-gray-400">Independent Audio Control</p>
-                  </div>
-                </div>
+                <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                  <OdoremoverLogo size={32} showText={true} textSize="xl" />
+                </Link>
               </div>
             </div>
           </div>
