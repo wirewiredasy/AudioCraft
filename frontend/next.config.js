@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
+  // Fix cross-origin warning
+  allowedDevOrigins: ["*.replit.dev", "*.replit.co"],
+  
   // Optimization settings
   poweredByHeader: false,
   
