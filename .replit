@@ -1,5 +1,5 @@
 modules = ["nodejs-20", "python-3.11", "web"]
-run = "node index.js"
+run = "node backend/api_gateway/main.py"
 
 [nix]
 channel = "stable-25_05"
@@ -167,7 +167,7 @@ localPort = 52711
 externalPort = 5173
 
 [deployment]
-run = ["sh", "-c", "node index.js"]
+run = ["sh", "-c", "node backend/api_gateway/main.py"]
 
 [agent]
 expertMode = true
