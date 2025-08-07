@@ -3,7 +3,22 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
-
+  // Optimization settings
+  poweredByHeader: false,
+  
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }
+        ]
+      }
+    ]
+  },
   
   // API configuration
   async rewrites() {
@@ -23,7 +38,11 @@ const nextConfig = {
   // Image optimization
   images: {
     domains: ['localhost'],
+    unoptimized: true
   },
+  
+  // Compression
+  compress: true,
   
   // Webpack configuration for audio files
   webpack: (config) => {

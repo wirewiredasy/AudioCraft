@@ -2,48 +2,26 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { 
-  Menu,
-  X,
-  Upload,
-  User,
-  Globe,
-  Settings,
-  Zap,
-  ShieldCheck,
-  Music,
-  TrendingUp,
-  RefreshCw,
-  Scissors,
-  Volume2
-} from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import {
   OdoremoverLogo,
   VocalRemoverIcon,
   AudioSplitterIcon,
   PitchTempoIcon,
-  ConverterIcon,
-  RecorderIcon,
-  KaraokeIcon,
   CutterJoinerIcon,
   VolumeNormalizerIcon,
+  RecorderIcon,
+  KaraokeIcon,
   SupportIcon,
   AccountIcon,
   LanguageIcon
 } from '../components/CustomIcons'
+import { EnhancedHero } from '../components/EnhancedHero'
+import { useResponsiveLayout } from '../components/ResponsiveLayout'
 import Footer from '../components/Footer'
 
 export default function OdoremoverHome() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Check if mobile on mount
-  React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const { isMobile, isSidebarOpen, setIsSidebarOpen } = useResponsiveLayout()
 
   // Sidebar navigation items with custom icons
   const sidebarItems = [
@@ -297,131 +275,9 @@ export default function OdoremoverHome() {
             ? 'ml-0 pt-16' 
             : (isSidebarOpen ? 'ml-64' : 'ml-16')
         }`}>
-          {/* Main Header - HOW IT WORKS */}
-          <div className="text-center py-16 px-8">
-            <div className="max-w-4xl mx-auto">
-              <p className="text-gray-400 text-sm font-medium tracking-wider uppercase mb-4">
-                HOW IT WORKS
-              </p>
-
-              <div className="flex items-center justify-center mb-6">
-                <OdoremoverLogo className="w-16 h-16 mr-4 text-blue-400" />
-                <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                    ODOREMOVER
-                  </h1>
-                  <p className="text-lg text-blue-400 font-medium">Audio Processing Suite</p>
-                </div>
-              </div>
-
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-200">
-                Vocal Remover and Isolation
-              </h2>
-
-              <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                Separate voice from music out of a song free with powerful AI algorithms
-              </p>
-
-              {/* Audio Visualization */}
-              <div className="mb-12 max-w-md mx-auto">
-                <div className="space-y-4">
-                  {/* Music Track */}
-                  <div className="flex items-center space-x-4">
-                    <span className="text-gray-400 text-sm font-medium w-12 text-right">Music</span>
-                    <div className="flex-1 h-8 bg-gradient-to-r from-green-500 to-teal-400 rounded-lg relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-300 opacity-80"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-1 bg-white bg-opacity-30 rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Vocal Track */}
-                  <div className="flex items-center space-x-4">
-                    <span className="text-gray-400 text-sm font-medium w-12 text-right">Vocal</span>
-                    <div className="flex-1 h-8 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-400 opacity-80"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-1 bg-white bg-opacity-30 rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Upload Button */}
-              <div className="mb-16">
-                <Link 
-                  href="/tools/vocal-remover"
-                  className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold text-white transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  <Upload className="w-5 h-5 mr-2" />
-                  Browse my files
-                </Link>
-              </div>
-
-              {/* Features Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Zap className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">Fast Processing</h3>
-                  <p className="text-gray-400 text-sm">AI-powered vocal separation in seconds</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <ShieldCheck className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">100% Secure</h3>
-                  <p className="text-gray-400 text-sm">Your files are processed securely and deleted automatically</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Music className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">High Quality</h3>
-                  <p className="text-gray-400 text-sm">Professional results with advanced algorithms</p>
-                </div>
-              </div>
-
-              {/* Additional Tools Section */}
-              <div className="mt-20 pt-16 border-t border-gray-800">
-                <h2 className="text-2xl font-bold mb-8">Other Audio Tools</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                  <Link href="/tools/pitch-tempo" className="group">
-                    <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
-                      <PitchTempoIcon className="w-8 h-8 text-purple-400 mb-3 mx-auto" />
-                      <h3 className="text-xs md:text-sm font-semibold text-center">Pitch Tempo</h3>
-                    </div>
-                  </Link>
-
-                  <Link href="/tools/converter" className="group">
-                    <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
-                      <ConverterIcon className="w-8 h-8 text-cyan-400 mb-3 mx-auto" />
-                      <h3 className="text-xs md:text-sm font-semibold text-center">Converter</h3>
-                    </div>
-                  </Link>
-
-                  <Link href="/tools/audio-splitter" className="group">
-                    <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
-                      <AudioSplitterIcon className="w-8 h-8 text-green-400 mb-3 mx-auto" />
-                      <h3 className="text-xs md:text-sm font-semibold text-center">Splitter</h3>
-                    </div>
-                  </Link>
-
-                  <Link href="/tools/karaoke" className="group">
-                    <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
-                      <KaraokeIcon className="w-8 h-8 text-pink-400 mb-3 mx-auto" />
-                      <h3 className="text-xs md:text-sm font-semibold text-center">Karaoke</h3>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Enhanced Hero Section */}
+          <EnhancedHero />
+          
           {/* Footer */}
           <Footer />
         </div>
