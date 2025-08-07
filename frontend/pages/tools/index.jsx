@@ -22,7 +22,7 @@ import {
   MetadataEditorIcon,
   AudioReverseIcon,
   FadeEffectIcon
-} from '../components/CustomIcons'
+} from '../../components/CustomIcons'
 
 export default function AllTools() {
   const [searchTerm, setSearchTerm] = useState('')
