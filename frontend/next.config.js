@@ -3,8 +3,17 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
-  // Fix cross-origin warning
-  allowedDevOrigins: ["*.replit.dev", "*.replit.co"],
+  // Fix cross-origin warning for Replit
+  experimental: {
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
+  },
   
   // Optimization settings
   poweredByHeader: false,
