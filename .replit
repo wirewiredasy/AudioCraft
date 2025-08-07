@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
 
 [workflows]
-runButton = "Project"
+runButton = "ODOREMOVER Full Stack"
 
 [[workflows.workflow]]
 name = "Frontend Development"
