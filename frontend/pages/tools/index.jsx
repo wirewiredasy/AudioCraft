@@ -3,21 +3,26 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { 
   ArrowLeft, 
-  Settings, 
-  HelpCircle, 
-  Play, 
-  TrendingUp, 
-  BarChart3, 
-  Volume2,
-  Scissors,
-  Edit3,
-  Wand2,
-  RotateCcw,
-  Sparkles,
-  RefreshCw,
-  ShieldCheck,
-  Search
+  Search,
+  Star,
+  Zap
 } from 'lucide-react'
+import { 
+  OdoremoverLogo,
+  VocalRemoverIcon,
+  PitchTempoIcon,
+  ConverterIcon,
+  AudioSplitterIcon,
+  KaraokeIcon,
+  NoiseReductionIcon,
+  VolumeNormalizerIcon,
+  EqualizerIcon,
+  RecorderIcon,
+  CutterJoinerIcon,
+  MetadataEditorIcon,
+  AudioReverseIcon,
+  FadeEffectIcon
+} from '../components/CustomIcons'
 
 export default function AllTools() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -25,97 +30,126 @@ export default function AllTools() {
   const tools = [
     {
       title: "Vocal Remover",
-      subtitle: "Perfect instrument Extractor", 
-      description: "Precise vocal and chorus separation. Separate voiced and vocal split chorus",
+      subtitle: "AI-Powered Vocal Isolation", 
+      description: "Remove vocals from any song with advanced AI technology. Perfect for karaoke and instrumental versions.",
       href: "/tools/vocal-remover",
-      icon: Play,
-      gradient: "from-red-500 to-pink-600",
-      category: "Vocal"
+      icon: VocalRemoverIcon,
+      gradient: "from-blue-500 to-purple-600",
+      category: "Vocal",
+      popular: true
     },
     {
-      title: "Pitch Changer", 
-      subtitle: "Precise Enhance Transpose",
-      description: "Enhance, boost or change transient, sharpen landscape background sound",
+      title: "Pitch & Tempo", 
+      subtitle: "Independent Pitch & Speed Control",
+      description: "Change pitch and tempo independently without affecting audio quality. Professional music production tool.",
       href: "/tools/pitch-tempo",
-      icon: TrendingUp,
-      gradient: "from-blue-500 to-cyan-600",
-      category: "Effects"
-    },
-    {
-      title: "Audio Converter",
-      subtitle: "Enhance & Reduce",
-      description: "Convert audio files between different formats with professional quality",
-      href: "/tools/converter",
-      icon: RefreshCw,
-      gradient: "from-green-500 to-emerald-600",
-      category: "Convert"
-    },
-    {
-      title: "Equalizer",
-      subtitle: "Feeling/Channel/Pro Sharper",
-      description: "boost/sub-bass, in-music cut/find Filtering, Enhancer by Alyse",
-      href: "/tools/equalizer",
-      icon: BarChart3,
+      icon: PitchTempoIcon,
       gradient: "from-purple-500 to-indigo-600",
       category: "Effects"
     },
     {
+      title: "Audio Converter",
+      subtitle: "Universal Format Support",
+      description: "Convert between all major audio formats with high quality preservation. MP3, WAV, FLAC, AAC and more.",
+      href: "/tools/converter",
+      icon: ConverterIcon,
+      gradient: "from-cyan-500 to-blue-600",
+      category: "Convert"
+    },
+    {
+      title: "Audio Splitter",
+      subtitle: "Stereo Channel Separation",
+      description: "Split stereo audio into separate left and right channel tracks with perfect quality preservation.",
+      href: "/tools/audio-splitter",
+      icon: AudioSplitterIcon,
+      gradient: "from-green-500 to-emerald-600",
+      category: "Edit"
+    },
+    {
+      title: "Karaoke Maker",
+      subtitle: "Instant Karaoke Creation",
+      description: "Transform any song into professional karaoke tracks. Get both instrumental and vocal versions.",
+      href: "/tools/karaoke",
+      icon: KaraokeIcon,
+      gradient: "from-pink-500 to-rose-600",
+      category: "Vocal",
+      popular: true
+    },
+    {
       title: "Noise Reducer",
-      subtitle: "Clean Audio Enhancement",
-      description: "Remove background noise and improve audio quality using advanced algorithms",
-      href: "/tools/noise-reducer",
-      icon: ShieldCheck,
-      gradient: "from-yellow-500 to-orange-600",
+      subtitle: "Advanced Audio Cleaning",
+      description: "Remove background noise and unwanted sounds using spectral subtraction algorithms.",
+      href: "/tools/noise-reduction",
+      icon: NoiseReductionIcon,
+      gradient: "from-emerald-500 to-teal-600",
       category: "Enhance"
     },
     {
       title: "Volume Normalizer",
-      subtitle: "Audio Level Control",
-      description: "Enhance audio volume with professional normalization and gain control",
+      subtitle: "Professional Audio Leveling",
+      description: "Normalize audio volume levels for consistent playback across all devices and platforms.",
       href: "/tools/volume-normalizer",
-      icon: Volume2,
-      gradient: "from-pink-500 to-rose-600",
+      icon: VolumeNormalizerIcon,
+      gradient: "from-orange-500 to-red-600",
       category: "Enhance"
     },
     {
-      title: "Audio Editor",
-      subtitle: "Cut & Join Tool",
-      description: "Cut, trim, and join audio files with precision timing controls",
-      href: "/tools/cutter-joiner",
-      icon: Scissors,
-      gradient: "from-violet-500 to-purple-600",
-      category: "Edit"
-    },
-    {
-      title: "Metadata Editor",
-      subtitle: "Tag Information",
-      description: "Edit MP3 tags including title, artist, album, and year information",
-      href: "/tools/metadata-editor",
-      icon: Edit3,
-      gradient: "from-indigo-500 to-blue-600",
-      category: "Edit"
-    },
-    {
-      title: "Fade Effects",
-      subtitle: "Smooth Transitions",
-      description: "Add professional fade in/out effects to create smooth audio transitions",
-      href: "/tools/fade-effect",
-      icon: Wand2,
+      title: "Audio Equalizer",
+      subtitle: "Frequency Response Control",
+      description: "Fine-tune audio frequencies with professional 5-band equalizer. Perfect for mixing and mastering.",
+      href: "/tools/equalizer",
+      icon: EqualizerIcon,
       gradient: "from-teal-500 to-cyan-600",
       category: "Effects"
     },
     {
-      title: "Audio Reverser",
-      subtitle: "Reverse Playback",
-      description: "Reverse audio playback completely for special effects and creative projects",
+      title: "Audio Recorder",
+      subtitle: "High-Quality Recording",
+      description: "Record professional quality audio directly from your microphone with advanced noise suppression.",
+      href: "/tools/recorder",
+      icon: RecorderIcon,
+      gradient: "from-red-500 to-pink-600",
+      category: "Record"
+    },
+    {
+      title: "Cutter & Joiner",
+      subtitle: "Precision Audio Editing",
+      description: "Cut audio at precise timestamps or join multiple files seamlessly with professional results.",
+      href: "/tools/cutter-joiner",
+      icon: CutterJoinerIcon,
+      gradient: "from-yellow-500 to-orange-600",
+      category: "Edit"
+    },
+    {
+      title: "Metadata Editor",
+      subtitle: "Audio Tag Management",
+      description: "Edit MP3 tags and metadata including title, artist, album, year, and artwork information.",
+      href: "/tools/metadata-editor",
+      icon: MetadataEditorIcon,
+      gradient: "from-emerald-500 to-green-600",
+      category: "Edit"
+    },
+    {
+      title: "Audio Reverse",
+      subtitle: "Creative Audio Effects",
+      description: "Reverse audio playback completely for special effects, creative projects, and sound design.",
       href: "/tools/audio-reverse",
-      icon: RotateCcw,
-      gradient: "from-orange-500 to-red-600",
+      icon: AudioReverseIcon,
+      gradient: "from-violet-500 to-purple-600",
+      category: "Effects"
+    },
+    {
+      title: "Fade Effect",
+      subtitle: "Smooth Audio Transitions",
+      description: "Add professional fade in/out effects with custom duration controls for smooth audio transitions.",
+      href: "/tools/fade-effect",
+      icon: FadeEffectIcon,
+      gradient: "from-amber-500 to-yellow-600",
       category: "Effects"
     }
   ]
 
-  const categories = ["All", "Vocal", "Effects", "Convert", "Enhance", "Edit"]
+  const categories = ["All", "Vocal", "Effects", "Convert", "Enhance", "Edit", "Record"]
   const [selectedCategory, setSelectedCategory] = useState("All")
 
   const filteredTools = tools.filter(tool => {
@@ -132,74 +166,84 @@ export default function AllTools() {
         <meta name="description" content="Complete collection of professional audio processing tools" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-200">
+      <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
+        
+        {/* Animated background elements */}
+        <div className="fixed top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="fixed bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200">
+        <header className="relative z-10 border-b border-gray-800 bg-gray-800/50 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
+            <div className="flex justify-between items-center py-6">
               {/* Logo */}
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
-                </div>
-                <h1 className="text-2xl font-bold text-gray-900">Odoremover</h1>
-              </div>
-
-              {/* Navigation */}
-              <nav className="hidden md:flex space-x-8">
-                <Link href="/" className="text-gray-300 hover:text-white transition-colors font-medium">
-                  Home
-                </Link>
-                <Link href="/settings" className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-2">
-                  <Settings className="w-4 h-4" />
-                  <span>Settings</span>
-                </Link>
-                <Link href="/help" className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-2">
-                  <HelpCircle className="w-4 h-4" />
-                  <span>Help</span>
-                </Link>
-              </nav>
+              <Link href="/" className="flex items-center space-x-3">
+                <OdoremoverLogo className="w-10 h-10 text-white" />
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">ODOREMOVER</h1>
+              </Link>
 
               {/* Right Side */}
-              <button className="px-6 py-2 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors">
-                Setup
-              </button>
+              <Link 
+                href="/"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 flex items-center space-x-2"
+              >
+                <Zap className="w-4 h-4" />
+                <span>Dashboard</span>
+              </Link>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Back Button */}
-          <Link href="/" className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors">
-            <ArrowLeft className="w-4 h-4" />
+          <Link href="/" className="inline-flex items-center space-x-2 text-gray-400 hover:text-white mb-8 transition-colors group">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             <span>Back to Dashboard</span>
           </Link>
 
           {/* Title */}
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-              All Audio Tools
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <OdoremoverLogo className="w-16 h-16 text-white" />
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
+              Professional Audio Tools
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Complete collection of professional audio processing tools for creators, musicians, and producers.
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Complete collection of AI-powered audio processing tools for creators, musicians, and producers. 
+              Transform your audio with cutting-edge technology.
             </p>
+            <div className="mt-8 flex items-center justify-center space-x-6">
+              <div className="flex items-center space-x-2 text-green-400">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-sm font-medium">13 Tools Available</span>
+              </div>
+              <div className="flex items-center space-x-2 text-blue-400">
+                <Zap className="w-4 h-4" />
+                <span className="text-sm font-medium">AI-Powered Processing</span>
+              </div>
+            </div>
           </div>
 
           {/* Search and Filters */}
-          <div className="mb-12">
+          <div className="mb-16">
             {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto mb-8">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className="w-5 h-5 text-gray-400" />
+            <div className="relative max-w-3xl mx-auto mb-12">
+              <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                <Search className="w-6 h-6 text-gray-400" />
               </div>
               <input
                 type="text"
-                placeholder="Search tools..."
+                placeholder="Search for audio tools..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                className="w-full pl-16 pr-6 py-5 bg-gray-800/50 border border-gray-700 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all backdrop-blur-xl text-lg"
               />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
 
             {/* Category Filters */}
@@ -208,101 +252,121 @@ export default function AllTools() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all transform hover:scale-105 ${
+                  className={`px-8 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 backdrop-blur-xl ${
                     selectedCategory === category
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl shadow-blue-500/25'
+                      : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border border-gray-700 hover:border-gray-600'
                   }`}
                 >
                   {category}
+                  {selectedCategory === category && (
+                    <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">
+                      {filteredTools.length}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
           </div>
 
           {/* Tools Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredTools.map((tool, index) => (
-              <div
-                key={tool.title}
-                className="group relative overflow-hidden rounded-3xl bg-white border border-gray-200 p-6 transition-all duration-500 hover:scale-105 hover:shadow-xl"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Glow Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
-                <div className={`absolute -inset-1 bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-3xl`} />
-                
-                {/* Tool Header */}
-                <div className="flex items-center justify-between mb-6 relative z-10">
-                  <div className={`p-4 bg-gradient-to-br ${tool.gradient} rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow`}>
-                    <tool.icon className="w-8 h-8 text-white" />
+              <Link key={tool.title} href={tool.href}>
+                <div
+                  className="group relative overflow-hidden rounded-3xl bg-gray-800/50 border border-gray-700 p-8 transition-all duration-500 hover:scale-105 hover:shadow-2xl backdrop-blur-xl hover:bg-gray-800/70"
+                  style={{ 
+                    animationDelay: `${index * 0.1}s`,
+                    animation: 'fadeInUp 0.6s ease-out forwards'
+                  }}
+                >
+                  {/* Popular Badge */}
+                  {tool.popular && (
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs px-3 py-1 rounded-full font-bold flex items-center shadow-lg">
+                      <Star className="w-3 h-3 mr-1" />
+                      Popular
+                    </div>
+                  )}
+                  
+                  {/* Glow Effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-opacity duration-500 rounded-3xl`} />
+                  
+                  {/* Tool Header */}
+                  <div className="relative z-10 mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`p-4 bg-gradient-to-br ${tool.gradient} rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110`}>
+                        <tool.icon className="w-10 h-10 text-white" />
+                      </div>
+                      <div className="text-xs px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full font-semibold">
+                        FREE
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      {tool.title}
+                    </h3>
+                    <p className="text-sm font-medium text-blue-400 mb-4">
+                      {tool.subtitle}
+                    </p>
                   </div>
-                  <div className="text-right">
-                    <div className="text-xs px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full font-semibold">
-                      FREE
+
+                  {/* Tool Info */}
+                  <div className="relative z-10">
+                    {/* Category Badge */}
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 text-xs bg-gray-700/50 text-gray-300 rounded-lg font-medium border border-gray-600/50">
+                        {tool.category}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm text-gray-400 mb-8 leading-relaxed line-clamp-3">
+                      {tool.description}
+                    </p>
+
+                    {/* Action Section */}
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs text-gray-500 font-medium">
+                        Ready to use
+                      </div>
+                      <div className="flex items-center text-blue-400 group-hover:text-white transition-colors text-sm font-semibold">
+                        Try Now
+                        <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Tool Info */}
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
-                    {tool.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 mb-4 font-medium">
-                    {tool.subtitle}
-                  </p>
-
-                  {/* Category Badge */}
-                  <div className="mb-4">
-                    <span className="inline-block px-3 py-1 text-xs bg-slate-700/50 text-slate-300 rounded-full">
-                      {tool.category}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-gray-400 mb-6 line-clamp-3 leading-relaxed">
-                    {tool.description}
-                  </p>
-
-                  {/* Action Button */}
-                  <Link
-                    href={tool.href}
-                    className={`block w-full py-4 px-6 bg-gradient-to-r ${tool.gradient} text-white rounded-2xl text-center font-semibold transition-all duration-300 transform group-hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden`}
-                  >
-                    <span className="relative z-10">Use Tool</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
 
           {/* No Results */}
           {filteredTools.length === 0 && (
-            <div className="text-center py-16">
-              <div className="w-24 h-24 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Search className="w-12 h-12 text-gray-400" />
+            <div className="text-center py-20">
+              <div className="w-32 h-32 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-8 backdrop-blur-xl border border-gray-700">
+                <Search className="w-16 h-16 text-gray-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">No tools found</h3>
-              <p className="text-gray-400 mb-8">Try adjusting your search or filter criteria</p>
+              <h3 className="text-3xl font-bold text-white mb-4">No tools found</h3>
+              <p className="text-gray-400 mb-8 max-w-md mx-auto leading-relaxed">
+                Try adjusting your search terms or browse a different category to find the perfect audio tool.
+              </p>
               <button
                 onClick={() => {
                   setSearchTerm('')
                   setSelectedCategory('All')
                 }}
-                className="px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-full font-medium hover:scale-105 transition-transform"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
               >
-                Clear Filters
+                <span className="flex items-center">
+                  <Zap className="w-5 h-5 mr-2" />
+                  Show All Tools
+                </span>
               </button>
             </div>
           )}
-        </div>
-
-        {/* Floating Background Elements */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-orange-500/10 to-purple-600/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
       </div>
     </>

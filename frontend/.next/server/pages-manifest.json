@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/tools/volume-normalizer": "pages/tools/volume-normalizer.js",
-  "/": "pages/index.js",
-  "/tools/audio-splitter": "pages/tools/audio-splitter.js"
+  "/": "pages/index.js"
 }
