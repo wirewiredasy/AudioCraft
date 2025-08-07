@@ -3,7 +3,7 @@ run = "node index.js"
 
 [nix]
 channel = "stable-25_05"
-packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
+packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "pkg-config", "postgresql", "xsimd"]
 
 [workflows]
 runButton = "Project"
