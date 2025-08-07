@@ -1,304 +1,193 @@
 import React, { useState } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
-import { useDropzone } from 'react-dropzone'
-import { ArrowLeft, Upload, Download, Equalizer3, BarChart3 } from 'lucide-react'
+import { Upload, Download, BarChart3, Sliders } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
+import { ToolPageLayout } from '../../components/ToolPageLayout'
+import { EqualizerIcon } from '../../components/CustomIcons'
+import { EnhancedUpload } from '../../components/EnhancedUpload'
 
 export default function Equalizer() {
-  const [audioFile, setAudioFile] = useState(null)
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [processedAudio, setProcessedAudio] = useState(null)
-  const [lowGain, setLowGain] = useState(0.0)
-  const [midGain, setMidGain] = useState(0.0)
-  const [highGain, setHighGain] = useState(0.0)
-
-  const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0]
-    if (file) {
-      if (file.type.startsWith('audio/')) {
-        setAudioFile(file)
-        setProcessedAudio(null)
-        toast.success('Audio file ready for equalization!')
-      } else {
-        toast.error('Please select an audio file')
-      }
-    }
-  }
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      'audio/*': ['.mp3', '.wav', '.flac', '.ogg', '.m4a', '.aac']
-    },
-    multiple: false
+  const [eqSettings, setEqSettings] = useState({
+    bass: 0,
+    mid: 0,
+    treble: 0,
+    lowMid: 0,
+    highMid: 0
   })
+  const [processedAudio, setProcessedAudio] = useState(null)
+  const [downloadUrl, setDownloadUrl] = useState(null)
 
-  const processAudio = async () => {
-    if (!audioFile) {
-      toast.error('Please select an audio file first')
-      return
-    }
-
-    setIsProcessing(true)
-    const formData = new FormData()
-    formData.append('file', audioFile)
-    formData.append('low_gain', lowGain.toString())
-    formData.append('mid_gain', midGain.toString())
-    formData.append('high_gain', highGain.toString())
-
+  const handleFileUpload = async (file, options = {}) => {
     try {
-      const response = await axios.post('http://localhost:8000/equalizer', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        responseType: 'blob'
+      options.onStageChange?.('Uploading file...')
+      
+      const formData = new FormData()
+      formData.append('file', file)
+      Object.keys(eqSettings).forEach(key => {
+        formData.append(key, eqSettings[key].toString())
       })
-
-      const audioBlob = new Blob([response.data], { type: 'audio/mpeg' })
-      const audioUrl = URL.createObjectURL(audioBlob)
-      setProcessedAudio(audioUrl)
-      toast.success('Equalization applied successfully!')
+      
+      const response = await axios.post('/api/equalizer', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 50) / progressEvent.total)
+          options.onProgress?.(progress)
+        }
+      })
+      
+      options.onStageChange?.('Applying equalizer...')
+      options.onProgress?.(75)
+      
+      if (response.data.success) {
+        setDownloadUrl(response.data.download_url)
+        setProcessedAudio(response.data)
+        options.onProgress?.(100)
+        options.onStageChange?.('Complete!')
+        toast.success('Equalizer applied successfully!')
+      } else {
+        throw new Error(response.data.error || 'Processing failed')
+      }
     } catch (error) {
-      console.error('Error processing audio:', error)
-      toast.error('Failed to process audio. Please try again.')
-    } finally {
-      setIsProcessing(false)
+      console.error('Upload error:', error)
+      toast.error(error.response?.data?.detail || error.message || 'Failed to apply equalizer')
+      throw error
     }
   }
 
-  const downloadAudio = () => {
-    if (processedAudio) {
-      const a = document.createElement('a')
-      a.href = processedAudio
-      a.download = `${audioFile.name.replace(/\.[^/.]+$/, '')}_equalized.mp3`
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-    }
+  const handleEQChange = (band, value) => {
+    setEqSettings(prev => ({
+      ...prev,
+      [band]: parseInt(value)
+    }))
   }
 
   const resetEQ = () => {
-    setLowGain(0.0)
-    setMidGain(0.0)
-    setHighGain(0.0)
+    setEqSettings({
+      bass: 0,
+      mid: 0,
+      treble: 0,
+      lowMid: 0,
+      highMid: 0
+    })
   }
 
+  const downloadProcessedAudio = () => {
+    if (downloadUrl) {
+      window.open(downloadUrl, '_blank')
+    }
+  }
+
+  const eqBands = [
+    { key: 'bass', label: 'Bass', freq: '60Hz', color: 'text-red-400' },
+    { key: 'lowMid', label: 'Low Mid', freq: '250Hz', color: 'text-orange-400' },
+    { key: 'mid', label: 'Mid', freq: '1kHz', color: 'text-yellow-400' },
+    { key: 'highMid', label: 'High Mid', freq: '4kHz', color: 'text-green-400' },
+    { key: 'treble', label: 'Treble', freq: '10kHz', color: 'text-blue-400' }
+  ]
+
   return (
-    <>
-      <Head>
-        <title>Audio Equalizer - ODOREMOVER Audio Suite</title>
-        <meta name="description" content="Professional 3-band equalizer for frequency control and audio fine-tuning" />
-      </Head>
-
-      <div className="min-h-screen bg-white">
-        <Toaster position="top-right" />
-        
-        <header className="border-b border-gray-200 bg-white">
-          <div className="max-w-6xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-3">
-                <ArrowLeft className="w-5 h-5" />
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-lg flex items-center justify-center">
-                    <Equalizer3 className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="font-semibold">Audio Equalizer</span>
-                </div>
-              </Link>
-              <div className="text-sm text-gray-500">ODOREMOVER Audio Suite</div>
-            </div>
+    <ToolPageLayout
+      title="Audio Equalizer"
+      description="Fine-tune your audio frequencies with professional 5-band EQ"
+      icon={EqualizerIcon}
+      iconColor="text-teal-400"
+    >
+      <div className="max-w-4xl mx-auto">
+        {/* EQ Controls */}
+        <div className="glass-card p-8 mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-white flex items-center">
+              <Sliders className="w-5 h-5 mr-2 text-teal-400" />
+              5-Band Equalizer
+            </h2>
+            <button
+              onClick={resetEQ}
+              className="text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              Reset All
+            </button>
           </div>
-        </header>
-
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Audio Equalizer</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Professional 3-band equalizer with low, mid, and high frequency adjustment to fine-tune your audio
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <h2 className="text-2xl font-semibold text-gray-900">Upload Audio</h2>
-              
-              <div 
-                {...getRootProps()} 
-                className={`border-2 border-dashed rounded-2xl p-12 text-center transition-colors cursor-pointer ${
-                  isDragActive 
-                    ? 'border-cyan-500 bg-cyan-50' 
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                <input {...getInputProps()} />
-                <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                {audioFile ? (
-                  <div>
-                    <p className="text-lg font-medium text-gray-900">{audioFile.name}</p>
-                    <p className="text-gray-500">Ready for equalization</p>
-                  </div>
-                ) : (
-                  <div>
-                    <p className="text-lg font-medium text-gray-900">Drop your audio file here</p>
-                    <p className="text-gray-500">or click to browse</p>
-                  </div>
-                )}
-              </div>
-
-              {/* EQ Controls */}
-              <div className="bg-gray-50 rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-semibold text-gray-900">3-Band Equalizer</h3>
-                  <button
-                    onClick={resetEQ}
-                    className="text-sm text-cyan-600 hover:text-cyan-700 font-medium"
-                  >
-                    Reset EQ
-                  </button>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            {eqBands.map((band) => (
+              <div key={band.key} className="text-center">
+                <label className={`block text-sm font-medium ${band.color} mb-2`}>
+                  {band.label}
+                </label>
+                <div className="relative h-40 bg-gray-800 rounded-lg p-2">
+                  <input
+                    type="range"
+                    min="-12"
+                    max="12"
+                    step="1"
+                    value={eqSettings[band.key]}
+                    onChange={(e) => handleEQChange(band.key, e.target.value)}
+                    className="slider-vertical w-full h-full"
+                    orient="vertical"
+                  />
                 </div>
-
-                <div className="space-y-6">
-                  {/* Low Frequencies */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Low (60-250 Hz): {lowGain > 0 ? '+' : ''}{lowGain.toFixed(1)} dB
-                    </label>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-sm text-gray-500">-12</span>
-                      <input
-                        type="range"
-                        min="-12"
-                        max="12"
-                        step="0.5"
-                        value={lowGain}
-                        onChange={(e) => setLowGain(parseFloat(e.target.value))}
-                        className="flex-1 h-3 bg-gradient-to-r from-red-300 via-yellow-300 to-green-300 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <span className="text-sm text-gray-500">+12</span>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-1">Bass, kick drum, bass guitar</p>
+                <div className="mt-2">
+                  <div className={`text-lg font-bold ${band.color}`}>
+                    {eqSettings[band.key] > 0 ? '+' : ''}{eqSettings[band.key]}dB
                   </div>
-
-                  {/* Mid Frequencies */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Mid (250-4000 Hz): {midGain > 0 ? '+' : ''}{midGain.toFixed(1)} dB
-                    </label>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-sm text-gray-500">-12</span>
-                      <input
-                        type="range"
-                        min="-12"
-                        max="12"
-                        step="0.5"
-                        value={midGain}
-                        onChange={(e) => setMidGain(parseFloat(e.target.value))}
-                        className="flex-1 h-3 bg-gradient-to-r from-red-300 via-yellow-300 to-green-300 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <span className="text-sm text-gray-500">+12</span>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-1">Vocals, piano, guitar, most instruments</p>
-                  </div>
-
-                  {/* High Frequencies */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      High (4000-20000 Hz): {highGain > 0 ? '+' : ''}{highGain.toFixed(1)} dB
-                    </label>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-sm text-gray-500">-12</span>
-                      <input
-                        type="range"
-                        min="-12"
-                        max="12"
-                        step="0.5"
-                        value={highGain}
-                        onChange={(e) => setHighGain(parseFloat(e.target.value))}
-                        className="flex-1 h-3 bg-gradient-to-r from-red-300 via-yellow-300 to-green-300 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <span className="text-sm text-gray-500">+12</span>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-1">Cymbals, hi-hats, air, brightness</p>
-                  </div>
+                  <div className="text-xs text-gray-500">{band.freq}</div>
                 </div>
               </div>
-
-              <button
-                onClick={processAudio}
-                disabled={!audioFile || isProcessing}
-                className={`w-full py-3 px-6 rounded-xl font-medium transition-colors ${
-                  !audioFile || isProcessing
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-cyan-600 text-white hover:bg-cyan-700'
-                }`}
-              >
-                {isProcessing ? 'Applying EQ...' : 'Apply Equalization'}
-              </button>
-            </div>
-
-            <div className="space-y-6">
-              <h2 className="text-2xl font-semibold text-gray-900">Results</h2>
-              
-              {processedAudio ? (
-                <div className="space-y-4">
-                  <div className="bg-gray-50 rounded-2xl p-6">
-                    <h3 className="font-semibold text-gray-900 mb-4">Equalized Audio</h3>
-                    <audio controls className="w-full mb-4">
-                      <source src={processedAudio} type="audio/mpeg" />
-                      Your browser does not support the audio element.
-                    </audio>
-                    <button
-                      onClick={downloadAudio}
-                      className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700 transition-colors"
-                    >
-                      <Download className="w-5 h-5" />
-                      <span>Download Equalized Audio</span>
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-gray-50 rounded-2xl p-12 text-center">
-                  <BarChart3 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                  <p className="text-gray-500">Equalized audio will appear here</p>
-                </div>
-              )}
-
-              {/* EQ Presets */}
-              <div className="bg-cyan-50 rounded-2xl p-6">
-                <h3 className="font-semibold text-cyan-900 mb-4">Quick EQ Presets</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => { setLowGain(3); setMidGain(0); setHighGain(2) }}
-                    className="p-3 bg-white rounded-lg text-sm font-medium text-cyan-800 hover:bg-cyan-100 transition-colors"
-                  >
-                    Pop Music
-                  </button>
-                  <button
-                    onClick={() => { setLowGain(4); setMidGain(-2); setHighGain(3) }}
-                    className="p-3 bg-white rounded-lg text-sm font-medium text-cyan-800 hover:bg-cyan-100 transition-colors"
-                  >
-                    Rock/Metal
-                  </button>
-                  <button
-                    onClick={() => { setLowGain(1); setMidGain(3); setHighGain(1) }}
-                    className="p-3 bg-white rounded-lg text-sm font-medium text-cyan-800 hover:bg-cyan-100 transition-colors"
-                  >
-                    Vocal Focus
-                  </button>
-                  <button
-                    onClick={() => { setLowGain(-2); setMidGain(2); setHighGain(4) }}
-                    className="p-3 bg-white rounded-lg text-sm font-medium text-cyan-800 hover:bg-cyan-100 transition-colors"
-                  >
-                    Clarity
-                  </button>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
+
+        {/* Upload Section */}
+        <div className="glass-card p-8 mb-8">
+          <h2 className="text-xl font-semibold text-white mb-6 flex items-center">
+            <Upload className="w-5 h-5 mr-2 text-teal-400" />
+            Upload Audio File
+          </h2>
+          
+          <EnhancedUpload
+            onFileUpload={handleFileUpload}
+            maxFiles={1}
+            acceptedFormats={['audio/*']}
+            showPreview={true}
+          />
+        </div>
+
+        {/* Results Section */}
+        {processedAudio && (
+          <div className="glass-card p-8 mb-8">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <BarChart3 className="w-5 h-5 mr-2 text-green-400" />
+              Equalizer Applied
+            </h3>
+            
+            <div className="bg-gray-800/50 rounded-xl p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white font-medium">{processedAudio.filename}</p>
+                  <div className="text-gray-400 text-sm mt-1">
+                    EQ: Bass {eqSettings.bass > 0 ? '+' : ''}{eqSettings.bass}dB • 
+                    Mid {eqSettings.mid > 0 ? '+' : ''}{eqSettings.mid}dB • 
+                    Treble {eqSettings.treble > 0 ? '+' : ''}{eqSettings.treble}dB
+                  </div>
+                </div>
+                
+                <button
+                  onClick={downloadProcessedAudio}
+                  disabled={!downloadUrl}
+                  className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 
+                           px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 
+                           hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                >
+                  <Download className="w-5 h-5" />
+                  <span>Download</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </>
+      
+      <Toaster position="top-right" />
+    </ToolPageLayout>
   )
 }

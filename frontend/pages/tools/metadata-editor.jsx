@@ -1,241 +1,214 @@
 import React, { useState } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
-import { useDropzone } from 'react-dropzone'
-import { ArrowLeft, Upload, Download, Edit3, FileMusic } from 'lucide-react'
+import { Upload, Download, Edit3, Tag, Music } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
+import { ToolPageLayout } from '../../components/ToolPageLayout'
+import { MetadataEditorIcon } from '../../components/CustomIcons'
+import { EnhancedUpload } from '../../components/EnhancedUpload'
 
 export default function MetadataEditor() {
-  const [audioFile, setAudioFile] = useState(null)
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [processedAudio, setProcessedAudio] = useState(null)
   const [metadata, setMetadata] = useState({
     title: '',
     artist: '',
     album: '',
-    year: ''
+    year: '',
+    genre: '',
+    comment: ''
   })
+  const [processedAudio, setProcessedAudio] = useState(null)
+  const [downloadUrl, setDownloadUrl] = useState(null)
 
-  const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0]
-    if (file) {
-      if (file.type.startsWith('audio/')) {
-        setAudioFile(file)
-        setProcessedAudio(null)
-        toast.success('Audio file ready for metadata editing!')
-      } else {
-        toast.error('Please select an audio file')
-      }
-    }
-  }
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      'audio/*': ['.mp3', '.wav', '.flac', '.ogg', '.m4a', '.aac']
-    },
-    multiple: false
-  })
-
-  const processAudio = async () => {
-    if (!audioFile) {
-      toast.error('Please select an audio file first')
-      return
-    }
-
-    setIsProcessing(true)
-    const formData = new FormData()
-    formData.append('file', audioFile)
-    formData.append('title', metadata.title)
-    formData.append('artist', metadata.artist)
-    formData.append('album', metadata.album)
-    formData.append('year', metadata.year)
-
+  const handleFileUpload = async (file, options = {}) => {
     try {
-      const response = await axios.post('http://localhost:8000/metadata-editor', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        responseType: 'blob'
+      options.onStageChange?.('Uploading file...')
+      
+      const formData = new FormData()
+      formData.append('file', file)
+      Object.keys(metadata).forEach(key => {
+        if (metadata[key]) {
+          formData.append(key, metadata[key])
+        }
       })
-
-      const audioBlob = new Blob([response.data], { type: 'audio/mpeg' })
-      const audioUrl = URL.createObjectURL(audioBlob)
-      setProcessedAudio(audioUrl)
-      toast.success('Metadata updated successfully!')
+      
+      const response = await axios.post('/api/metadata-editor', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 50) / progressEvent.total)
+          options.onProgress?.(progress)
+        }
+      })
+      
+      options.onStageChange?.('Updating metadata...')
+      options.onProgress?.(75)
+      
+      if (response.data.success) {
+        setDownloadUrl(response.data.download_url)
+        setProcessedAudio(response.data)
+        options.onProgress?.(100)
+        options.onStageChange?.('Complete!')
+        toast.success('Metadata updated successfully!')
+      } else {
+        throw new Error(response.data.error || 'Processing failed')
+      }
     } catch (error) {
-      console.error('Error processing audio:', error)
-      toast.error('Failed to process audio. Please try again.')
-    } finally {
-      setIsProcessing(false)
+      console.error('Upload error:', error)
+      toast.error(error.response?.data?.detail || error.message || 'Failed to update metadata')
+      throw error
     }
   }
 
-  const downloadAudio = () => {
-    if (processedAudio) {
-      const a = document.createElement('a')
-      a.href = processedAudio
-      a.download = `${audioFile.name.replace(/\.[^/.]+$/, '')}_updated_metadata.mp3`
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
+  const handleMetadataChange = (field, value) => {
+    setMetadata(prev => ({
+      ...prev,
+      [field]: value
+    }))
+  }
+
+  const downloadProcessedAudio = () => {
+    if (downloadUrl) {
+      window.open(downloadUrl, '_blank')
     }
   }
 
   return (
-    <>
-      <Head>
-        <title>Metadata Editor - ODOREMOVER Audio Suite</title>
-        <meta name="description" content="Edit audio metadata, MP3 tags, and organize your music library" />
-      </Head>
-
-      <div className="min-h-screen bg-white">
-        <Toaster position="top-right" />
-        
-        <header className="border-b border-gray-200 bg-white">
-          <div className="max-w-6xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-3">
-                <ArrowLeft className="w-5 h-5" />
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-gray-600 to-slate-600 rounded-lg flex items-center justify-center">
-                    <Edit3 className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="font-semibold">Metadata Editor</span>
-                </div>
-              </Link>
-              <div className="text-sm text-gray-500">ODOREMOVER Audio Suite</div>
+    <ToolPageLayout
+      title="Metadata Editor"
+      description="Edit audio file metadata including title, artist, album, and more"
+      icon={MetadataEditorIcon}
+      iconColor="text-emerald-400"
+    >
+      <div className="max-w-4xl mx-auto">
+        {/* Metadata Form */}
+        <div className="glass-card p-8 mb-8">
+          <h2 className="text-xl font-semibold text-white mb-6 flex items-center">
+            <Edit3 className="w-5 h-5 mr-2 text-emerald-400" />
+            Audio Metadata
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
+              <input
+                type="text"
+                value={metadata.title}
+                onChange={(e) => handleMetadataChange('title', e.target.value)}
+                placeholder="Song title"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white 
+                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
             </div>
-          </div>
-        </header>
-
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Metadata Editor</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Edit audio metadata, MP3 tags, and organize your music library with professional tagging
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <h2 className="text-2xl font-semibold text-gray-900">Upload Audio</h2>
-              
-              <div 
-                {...getRootProps()} 
-                className={`border-2 border-dashed rounded-2xl p-12 text-center transition-colors cursor-pointer ${
-                  isDragActive 
-                    ? 'border-gray-500 bg-gray-50' 
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                <input {...getInputProps()} />
-                <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                {audioFile ? (
-                  <div>
-                    <p className="text-lg font-medium text-gray-900">{audioFile.name}</p>
-                    <p className="text-gray-500">Ready for metadata editing</p>
-                  </div>
-                ) : (
-                  <div>
-                    <p className="text-lg font-medium text-gray-900">Drop your audio file here</p>
-                    <p className="text-gray-500">or click to browse</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="font-semibold text-gray-900">Audio Metadata</h3>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                  <input
-                    type="text"
-                    value={metadata.title}
-                    onChange={(e) => setMetadata({...metadata, title: e.target.value})}
-                    placeholder="Song title"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Artist</label>
-                  <input
-                    type="text"
-                    value={metadata.artist}
-                    onChange={(e) => setMetadata({...metadata, artist: e.target.value})}
-                    placeholder="Artist name"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Album</label>
-                  <input
-                    type="text"
-                    value={metadata.album}
-                    onChange={(e) => setMetadata({...metadata, album: e.target.value})}
-                    placeholder="Album name"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
-                  <input
-                    type="text"
-                    value={metadata.year}
-                    onChange={(e) => setMetadata({...metadata, year: e.target.value})}
-                    placeholder="Release year"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                  />
-                </div>
-              </div>
-
-              <button
-                onClick={processAudio}
-                disabled={!audioFile || isProcessing}
-                className={`w-full py-3 px-6 rounded-xl font-medium transition-colors ${
-                  !audioFile || isProcessing
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-600 text-white hover:bg-gray-700'
-                }`}
-              >
-                {isProcessing ? 'Updating Metadata...' : 'Update Metadata'}
-              </button>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Artist</label>
+              <input
+                type="text"
+                value={metadata.artist}
+                onChange={(e) => handleMetadataChange('artist', e.target.value)}
+                placeholder="Artist name"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white 
+                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
             </div>
-
-            <div className="space-y-6">
-              <h2 className="text-2xl font-semibold text-gray-900">Results</h2>
-              
-              {processedAudio ? (
-                <div className="space-y-4">
-                  <div className="bg-gray-50 rounded-2xl p-6">
-                    <h3 className="font-semibold text-gray-900 mb-4">Audio with Updated Metadata</h3>
-                    <audio controls className="w-full mb-4">
-                      <source src={processedAudio} type="audio/mpeg" />
-                      Your browser does not support the audio element.
-                    </audio>
-                    <button
-                      onClick={downloadAudio}
-                      className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700 transition-colors"
-                    >
-                      <Download className="w-5 h-5" />
-                      <span>Download with Updated Tags</span>
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-gray-50 rounded-2xl p-12 text-center">
-                  <FileMusic className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                  <p className="text-gray-500">Updated audio will appear here</p>
-                </div>
-              )}
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Album</label>
+              <input
+                type="text"
+                value={metadata.album}
+                onChange={(e) => handleMetadataChange('album', e.target.value)}
+                placeholder="Album name"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white 
+                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Year</label>
+              <input
+                type="text"
+                value={metadata.year}
+                onChange={(e) => handleMetadataChange('year', e.target.value)}
+                placeholder="Release year"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white 
+                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Genre</label>
+              <input
+                type="text"
+                value={metadata.genre}
+                onChange={(e) => handleMetadataChange('genre', e.target.value)}
+                placeholder="Music genre"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white 
+                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Comment</label>
+              <input
+                type="text"
+                value={metadata.comment}
+                onChange={(e) => handleMetadataChange('comment', e.target.value)}
+                placeholder="Additional info"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white 
+                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
             </div>
           </div>
         </div>
+
+        {/* Upload Section */}
+        <div className="glass-card p-8 mb-8">
+          <h2 className="text-xl font-semibold text-white mb-6 flex items-center">
+            <Upload className="w-5 h-5 mr-2 text-emerald-400" />
+            Upload Audio File
+          </h2>
+          
+          <EnhancedUpload
+            onFileUpload={handleFileUpload}
+            maxFiles={1}
+            acceptedFormats={['audio/*']}
+            showPreview={true}
+          />
+        </div>
+
+        {/* Results Section */}
+        {processedAudio && (
+          <div className="glass-card p-8 mb-8">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <Tag className="w-5 h-5 mr-2 text-green-400" />
+              Metadata Updated
+            </h3>
+            
+            <div className="bg-gray-800/50 rounded-xl p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white font-medium">{processedAudio.filename}</p>
+                  <p className="text-gray-400 text-sm">
+                    Metadata successfully updated
+                  </p>
+                </div>
+                
+                <button
+                  onClick={downloadProcessedAudio}
+                  disabled={!downloadUrl}
+                  className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 
+                           px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 
+                           hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                >
+                  <Download className="w-5 h-5" />
+                  <span>Download</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </>
+      
+      <Toaster position="top-right" />
+    </ToolPageLayout>
   )
 }

@@ -1,38 +1,48 @@
 import React from 'react'
 
-// ODOREMOVER Main Logo - Complex and Unique Design
+// ODOREMOVER Main Logo - Complex Professional Branding
 export const OdoremoverLogo = ({ className = "w-8 h-8", color = "text-white" }) => (
-  <svg className={`${className} ${color}`} viewBox="0 0 64 64" fill="currentColor">
-    {/* Complex geometric pattern representing audio waves and removal */}
+  <svg className={`${className} ${color}`} viewBox="0 0 80 80" fill="currentColor">
+    {/* Advanced professional branding design */}
     <defs>
-      <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#3B82F6" />
-        <stop offset="33%" stopColor="#8B5CF6" />
-        <stop offset="66%" stopColor="#EC4899" />
-        <stop offset="100%" stopColor="#EF4444" />
+      <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0EA5E9" />
+        <stop offset="25%" stopColor="#3B82F6" />
+        <stop offset="50%" stopColor="#8B5CF6" />
+        <stop offset="75%" stopColor="#EC4899" />
+        <stop offset="100%" stopColor="#F43F5E" />
       </linearGradient>
+      <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.3" />
+        <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1" />
+      </radialGradient>
     </defs>
     
-    {/* Main circular base */}
-    <circle cx="32" cy="32" r="30" fill="url(#logoGradient)" opacity="0.1" />
+    {/* Outer ring with professional styling */}
+    <circle cx="40" cy="40" r="38" fill="none" stroke="url(#mainGradient)" strokeWidth="3" opacity="0.3" />
+    <circle cx="40" cy="40" r="32" fill="url(#centerGlow)" />
     
-    {/* Central diamond with audio symbol */}
-    <path d="M32 8L48 24L32 40L16 24Z" fill="url(#logoGradient)" />
+    {/* Central O for ODOREMOVER */}
+    <circle cx="40" cy="40" r="24" fill="none" stroke="url(#mainGradient)" strokeWidth="4" />
+    <circle cx="40" cy="40" r="16" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.7" />
     
-    {/* Audio wave patterns */}
-    <path d="M12 20h8l4-4v12l-4-4h-8z" fill="currentColor" opacity="0.8" />
-    <path d="M28 16c0-2 2-4 4-4s4 2 4 4v16c0 2-2 4-4 4s-4-2-4-4z" fill="currentColor" />
-    <path d="M44 20h8l4-4v12l-4-4h-8z" fill="currentColor" opacity="0.8" />
+    {/* Sound wave representation inside O */}
+    <path d="M25 30c5-2 10 2 15 0s10-2 15 0" stroke="url(#mainGradient)" strokeWidth="2" fill="none" />
+    <path d="M25 40c5 2 10-2 15 0s10 2 15 0" stroke="url(#mainGradient)" strokeWidth="2" fill="none" />
+    <path d="M25 50c5-2 10 2 15 0s10-2 15 0" stroke="url(#mainGradient)" strokeWidth="2" fill="none" />
     
-    {/* Removal effect lines */}
-    <path d="M8 32h48M32 8v48" stroke="currentColor" strokeWidth="2" opacity="0.6" />
-    <circle cx="32" cy="32" r="6" fill="none" stroke="currentColor" strokeWidth="2" />
+    {/* Corner brand elements */}
+    <rect x="8" y="8" width="6" height="6" rx="3" fill="url(#mainGradient)" opacity="0.6" />
+    <rect x="66" y="8" width="6" height="6" rx="3" fill="url(#mainGradient)" opacity="0.6" />
+    <rect x="8" y="66" width="6" height="6" rx="3" fill="url(#mainGradient)" opacity="0.6" />
+    <rect x="66" y="66" width="6" height="6" rx="3" fill="url(#mainGradient)" opacity="0.6" />
     
-    {/* Corner accent dots */}
-    <circle cx="8" cy="8" r="3" fill="currentColor" opacity="0.4" />
-    <circle cx="56" cy="8" r="3" fill="currentColor" opacity="0.4" />
-    <circle cx="8" cy="56" r="3" fill="currentColor" opacity="0.4" />
-    <circle cx="56" cy="56" r="3" fill="currentColor" opacity="0.4" />
+    {/* Professional accent lines */}
+    <path d="M12 40h8M60 40h8" stroke="currentColor" strokeWidth="2" opacity="0.5" />
+    <path d="M40 12v8M40 60v8" stroke="currentColor" strokeWidth="2" opacity="0.5" />
+    
+    {/* Center removal symbol */}
+    <path d="M34 34l12 12M46 34l-12 12" stroke="currentColor" strokeWidth="3" opacity="0.8" />
   </svg>
 )
 
@@ -176,5 +186,48 @@ export const LanguageIcon = ({ className = "w-6 h-6", color = "text-gray-400" })
     <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/>
     <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
     <path d="M8 12c0-3.3 1.8-6 4-6s4 2.7 4 6-1.8 6-4 6-4-2.7-4-6z" fill="none" stroke="currentColor" strokeWidth="1"/>
+  </svg>
+)
+
+// Metadata Editor Icon
+export const MetadataEditorIcon = ({ className = "w-6 h-6", color = "text-emerald-400" }) => (
+  <svg className={`${className} ${color}`} viewBox="0 0 24 24" fill="currentColor">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+    <path d="M7 8h10M7 12h8M7 16h6"/>
+    <circle cx="17" cy="16" r="2" fill="currentColor"/>
+    <path d="M15 14l4 4" stroke="currentColor" strokeWidth="1.5"/>
+    <rect x="5" y="6" width="2" height="2" rx="1"/>
+    <rect x="5" y="10" width="2" height="2" rx="1"/>
+    <rect x="5" y="14" width="2" height="2" rx="1"/>
+  </svg>
+)
+
+// Audio Reverse Icon
+export const AudioReverseIcon = ({ className = "w-6 h-6", color = "text-violet-400" }) => (
+  <svg className={`${className} ${color}`} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M3 12h4l3-6v12l-3-6H3z"/>
+    <path d="M14 6l6 6-6 6V6z"/>
+    <path d="M11 8c2 0 4 1.8 4 4s-2 4-4 4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <path d="M20 8l-2 2 2 2M4 8l2 2-2 2" stroke="currentColor" strokeWidth="2"/>
+    <circle cx="12" cy="12" r="1" className="animate-pulse"/>
+  </svg>
+)
+
+// Fade Effect Icon
+export const FadeEffectIcon = ({ className = "w-6 h-6", color = "text-amber-400" }) => (
+  <svg className={`${className} ${color}`} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M3 12h4l3-4v8l-3-4H3z"/>
+    <defs>
+      <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
+        <stop offset="50%" stopColor="currentColor" stopOpacity="0.5" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="0.1" />
+      </linearGradient>
+    </defs>
+    <rect x="14" y="8" width="2" height="8" fill="url(#fadeGradient)"/>
+    <rect x="16" y="9" width="2" height="6" fill="url(#fadeGradient)" opacity="0.8"/>
+    <rect x="18" y="10" width="2" height="4" fill="url(#fadeGradient)" opacity="0.6"/>
+    <rect x="20" y="11" width="2" height="2" fill="url(#fadeGradient)" opacity="0.3"/>
+    <path d="M11 6v12" stroke="currentColor" strokeWidth="1" opacity="0.5"/>
   </svg>
 )

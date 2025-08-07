@@ -7,7 +7,15 @@ import {
   PitchTempoIcon,
   ConverterIcon,
   AudioSplitterIcon,
-  KaraokeIcon
+  KaraokeIcon,
+  NoiseReductionIcon,
+  VolumeNormalizerIcon,
+  EqualizerIcon,
+  RecorderIcon,
+  CutterJoinerIcon,
+  MetadataEditorIcon,
+  AudioReverseIcon,
+  FadeEffectIcon
 } from './CustomIcons'
 import { ResponsiveContainer, ResponsiveGrid, AdaptiveButton } from './ResponsiveLayout'
 
@@ -120,6 +128,70 @@ export const EnhancedHero = () => {
       href: '/tools/karaoke',
       color: 'text-pink-400',
       bgColor: 'bg-pink-500/10'
+    },
+    {
+      icon: NoiseReductionIcon,
+      name: 'Noise Reducer',
+      description: 'Remove background noise from audio',
+      href: '/tools/noise-reduction',
+      color: 'text-indigo-400',
+      bgColor: 'bg-indigo-500/10'
+    },
+    {
+      icon: VolumeNormalizerIcon,
+      name: 'Volume Normalizer',
+      description: 'Normalize audio volume levels',
+      href: '/tools/volume-normalizer',
+      color: 'text-orange-400',
+      bgColor: 'bg-orange-500/10'
+    },
+    {
+      icon: EqualizerIcon,
+      name: 'Audio Equalizer',
+      description: 'Fine-tune frequency response',
+      href: '/tools/equalizer',
+      color: 'text-teal-400',
+      bgColor: 'bg-teal-500/10'
+    },
+    {
+      icon: RecorderIcon,
+      name: 'Audio Recorder',
+      description: 'Record high-quality audio',
+      href: '/tools/recorder',
+      color: 'text-red-400',
+      bgColor: 'bg-red-500/10'
+    },
+    {
+      icon: CutterJoinerIcon,
+      name: 'Cutter & Joiner',
+      description: 'Cut and join audio segments',
+      href: '/tools/cutter-joiner',
+      color: 'text-yellow-400',
+      bgColor: 'bg-yellow-500/10'
+    },
+    {
+      icon: MetadataEditorIcon,
+      name: 'Metadata Editor',
+      description: 'Edit audio file information',
+      href: '/tools/metadata-editor',
+      color: 'text-emerald-400',
+      bgColor: 'bg-emerald-500/10'
+    },
+    {
+      icon: AudioReverseIcon,
+      name: 'Audio Reverse',
+      description: 'Reverse audio playback',
+      href: '/tools/audio-reverse',
+      color: 'text-violet-400',
+      bgColor: 'bg-violet-500/10'
+    },
+    {
+      icon: FadeEffectIcon,
+      name: 'Fade Effect',
+      description: 'Add fade in/out effects',
+      href: '/tools/fade-effect',
+      color: 'text-amber-400',
+      bgColor: 'bg-amber-500/10'
     }
   ]
 
@@ -258,7 +330,7 @@ export const EnhancedHero = () => {
             <p className="text-xl text-gray-300">Everything you need for professional audio processing</p>
           </div>
 
-          <ResponsiveGrid cols={{ mobile: 1, tablet: 2, desktop: 3 }} gap={6}>
+          <ResponsiveGrid cols={{ mobile: 1, tablet: 2, desktop: 4 }} gap={6}>
             {tools.map((tool, index) => (
               <Link key={index} href={tool.href}>
                 <div className={`${tool.bgColor} glass-card p-6 hover:scale-105 transition-all duration-300 group relative`}>
