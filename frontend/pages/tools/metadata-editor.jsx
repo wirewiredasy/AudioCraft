@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToolPageLayout } from '../../components/ToolPageLayout'
 import { MetadataEditorIcon } from '../../components/CustomIcons'
 import { EnhancedUpload } from '../../components/EnhancedUpload'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function MetadataEditor() {
   const [metadata, setMetadata] = useState({
@@ -206,6 +207,9 @@ export default function MetadataEditor() {
             </div>
           </div>
         )}
+
+        {/* Recommended Tools */}
+        <RecommendedTools currentTool="metadata-editor" maxTools={4} />
       </div>
       
       <Toaster position="top-right" />

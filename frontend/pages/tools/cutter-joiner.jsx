@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone'
 import { ArrowLeft, Upload, Download, Scissors, Clock, Play, Pause } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function CutterJoiner() {
   const [audioFile, setAudioFile] = useState(null)
@@ -280,6 +281,11 @@ export default function CutterJoiner() {
                 <p>Join multiple audio files with smooth transitions. Automatic level matching for professional results.</p>
               </div>
             </div>
+          </div>
+          
+          {/* Recommended Tools */}
+          <div className="mt-8">
+            <RecommendedTools currentTool="cutter-joiner" maxTools={4} />
           </div>
         </div>
       </div>

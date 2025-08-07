@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToolPageLayout } from '../../components/ToolPageLayout'
 import { FadeEffectIcon } from '../../components/CustomIcons'
 import { EnhancedUpload } from '../../components/EnhancedUpload'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function FadeEffect() {
   const [fadeInDuration, setFadeInDuration] = useState(2)
@@ -154,6 +155,9 @@ export default function FadeEffect() {
             </div>
           </div>
         )}
+
+        {/* Recommended Tools */}
+        <RecommendedTools currentTool="fade-effect" maxTools={4} />
       </div>
       
       <Toaster position="top-right" />

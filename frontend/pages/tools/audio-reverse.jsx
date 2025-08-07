@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToolPageLayout } from '../../components/ToolPageLayout'
 import { AudioReverseIcon } from '../../components/CustomIcons'
 import { EnhancedUpload } from '../../components/EnhancedUpload'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function AudioReverse() {
   const [audioFile, setAudioFile] = useState(null)
@@ -109,7 +110,7 @@ export default function AudioReverse() {
         )}
 
         {/* Features Info */}
-        <div className="glass-card p-8">
+        <div className="glass-card p-8 mb-8">
           <h3 className="text-xl font-semibold text-white mb-6">How Audio Reverse Works</h3>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -138,6 +139,9 @@ export default function AudioReverse() {
             </div>
           </div>
         </div>
+
+        {/* Recommended Tools */}
+        <RecommendedTools currentTool="audio-reverse" maxTools={4} />
       </div>
       
       <Toaster position="top-right" />

@@ -16,6 +16,7 @@ import {
   Volume2,
   Star
 } from 'lucide-react'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function KaraokeMaker() {
   const [file, setFile] = useState(null)
@@ -398,6 +399,11 @@ export default function KaraokeMaker() {
               <p className="text-gray-400 text-sm">Get both karaoke and acapella versions</p>
             </div>
           </div>
+        </div>
+        
+        {/* Recommended Tools */}
+        <div className="mt-8">
+          <RecommendedTools currentTool="karaoke" maxTools={4} />
         </div>
       </div>
     </>

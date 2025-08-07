@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToolPageLayout } from '../../components/ToolPageLayout'
 import { EqualizerIcon } from '../../components/CustomIcons'
 import { EnhancedUpload } from '../../components/EnhancedUpload'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function Equalizer() {
   const [eqSettings, setEqSettings] = useState({
@@ -185,6 +186,9 @@ export default function Equalizer() {
             </div>
           </div>
         )}
+
+        {/* Recommended Tools */}
+        <RecommendedTools currentTool="equalizer" maxTools={4} />
       </div>
       
       <Toaster position="top-right" />

@@ -6,6 +6,7 @@ import Header from '../../components/Header'
 import Upload from '../../components/Upload'
 import Player from '../../components/Player'
 import { RefreshCw } from 'lucide-react'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function Converter() {
   const [selectedFile, setSelectedFile] = useState(null)
@@ -225,6 +226,11 @@ export default function Converter() {
               )}
             </div>
           )}
+          
+          {/* Recommended Tools */}
+          <div className="mt-8">
+            <RecommendedTools currentTool="converter" maxTools={4} />
+          </div>
         </main>
       </div>
     </>

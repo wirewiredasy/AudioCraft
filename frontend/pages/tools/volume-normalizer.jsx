@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToolPageLayout } from '../../components/ToolPageLayout'
 import { VolumeNormalizerIcon } from '../../components/CustomIcons'
 import { EnhancedUpload } from '../../components/EnhancedUpload'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function VolumeNormalizer() {
   const [targetLevel, setTargetLevel] = useState(-6.0)
@@ -152,6 +153,9 @@ export default function VolumeNormalizer() {
             </div>
           </div>
         )}
+
+        {/* Recommended Tools */}
+        <RecommendedTools currentTool="volume-normalizer" maxTools={4} />
       </div>
       
       <Toaster position="top-right" />

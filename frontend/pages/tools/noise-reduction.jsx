@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone'
 import { ArrowLeft, Upload, Download, ShieldCheck, Volume2, Sliders } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function NoiseReduction() {
   const [audioFile, setAudioFile] = useState(null)
@@ -235,6 +236,11 @@ export default function NoiseReduction() {
                 <p>Automatically adjusts reduction strength based on noise characteristics and audio content detection.</p>
               </div>
             </div>
+          </div>
+          
+          {/* Recommended Tools */}
+          <div className="mt-8">
+            <RecommendedTools currentTool="noise-reduction" maxTools={4} />
           </div>
         </div>
       </div>

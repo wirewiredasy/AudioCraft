@@ -14,6 +14,7 @@ import {
   AlertCircle,
   Waveform
 } from 'lucide-react'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function AudioSplitter() {
   const [file, setFile] = useState(null)
@@ -347,6 +348,11 @@ export default function AudioSplitter() {
               <p className="text-gray-400 text-sm">Download both channels as separate audio files</p>
             </div>
           </div>
+        </div>
+        
+        {/* Recommended Tools */}
+        <div className="mt-8">
+          <RecommendedTools currentTool="audio-splitter" maxTools={4} />
         </div>
       </div>
     </>

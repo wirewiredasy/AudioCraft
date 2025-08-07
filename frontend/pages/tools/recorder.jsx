@@ -14,6 +14,7 @@ import {
   AlertCircle,
   RotateCcw
 } from 'lucide-react'
+import { RecommendedTools } from '../../components/RecommendedTools'
 
 export default function AudioRecorder() {
   const [isRecording, setIsRecording] = useState(false)
@@ -391,6 +392,11 @@ export default function AudioRecorder() {
               <p className="text-gray-400 text-sm">Download your recordings in high quality format</p>
             </div>
           </div>
+        </div>
+        
+        {/* Recommended Tools */}
+        <div className="mt-8">
+          <RecommendedTools currentTool="recorder" maxTools={4} />
         </div>
       </div>
     </>
