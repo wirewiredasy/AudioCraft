@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { 
@@ -14,239 +14,260 @@ import {
   Wand2,
   RotateCcw,
   BarChart3,
-  Play
+  Play,
+  Menu,
+  X,
+  Upload,
+  User,
+  Globe,
+  Settings,
+  Headphones,
+  Zap
 } from 'lucide-react'
 
-export default function Dashboard() {
-  // All available backend tools mapped to proper frontend tools
-  const tools = [
-    {
-      title: "Vocal Remover and Isolation",
-      subtitle: "AI-Powered Vocal Separation",
-      description: "Separate voice from music out of a song free with powerful AI algorithms. Get karaoke and acapella versions instantly.",
-      icon: Mic,
-      gradient: "from-blue-500 to-purple-600",
-      href: "/tools/vocal-remover",
-      category: "AI Processing"
+export default function VocalRemoverClone() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  
+  // Sidebar navigation items matching vocalremover.org
+  const sidebarItems = [
+    { 
+      icon: Mic, 
+      label: 'Remover', 
+      href: '/tools/vocal-remover',
+      isActive: true 
     },
-    {
-      title: "Pitch & Tempo Editor",
-      subtitle: "Independent Audio Control",
-      description: "Adjust pitch and tempo independently without affecting audio quality. Professional speed and key changes.",
-      icon: TrendingUp,
-      gradient: "from-purple-500 to-pink-500",
-      href: "/tools/pitch-tempo",
-      category: "Audio Editing"
+    { 
+      icon: Music, 
+      label: 'Splitter', 
+      href: '/tools/audio-splitter' 
     },
-    {
-      title: "Audio Format Converter",
-      subtitle: "Universal File Support",
-      description: "Convert between MP3, WAV, FLAC, AAC, OGG and more. Multiple quality options for every need.",
-      icon: RefreshCw,
-      gradient: "from-teal-500 to-cyan-500",
-      href: "/tools/converter",
-      category: "Conversion"
+    { 
+      icon: TrendingUp, 
+      label: 'Pitcher', 
+      href: '/tools/pitch-tempo' 
     },
-    {
-      title: "Audio Cutter & Joiner",
-      subtitle: "Precise Audio Editing",
-      description: "Cut audio files at exact timestamps or join multiple files seamlessly. Professional editing tools.",
-      icon: Scissors,
-      gradient: "from-orange-500 to-red-500",
-      href: "/tools/cutter-joiner",
-      category: "Editing Tools"
+    { 
+      icon: Scissors, 
+      label: 'Cutter', 
+      href: '/tools/cutter-joiner' 
     },
-    {
-      title: "Noise Reduction",
-      subtitle: "Advanced Audio Cleanup",
-      description: "Remove background noise using advanced algorithms. Clean up recordings and enhance audio quality.",
-      icon: ShieldCheck,
-      gradient: "from-green-500 to-emerald-500",
-      href: "/tools/noise-reduction",
-      category: "Enhancement"
+    { 
+      icon: Volume2, 
+      label: 'Joiner', 
+      href: '/tools/cutter-joiner' 
     },
-    {
-      title: "Volume Normalizer",
-      subtitle: "Audio Level Control",
-      description: "Normalize and boost audio volume to professional standards. Consistent audio levels across files.",
-      icon: Volume2,
-      gradient: "from-indigo-500 to-blue-500",
-      href: "/tools/volume-normalizer",
-      category: "Enhancement"
+    { 
+      icon: Headphones, 
+      label: 'Recorder', 
+      href: '/tools/recorder' 
     },
-    {
-      title: "Fade Effects",
-      subtitle: "Professional Transitions",
-      description: "Add smooth fade in and fade out effects to your audio. Professional transition effects.",
-      icon: Wand2,
-      gradient: "from-pink-500 to-purple-500",
-      href: "/tools/fade-effect",
-      category: "Effects"
+    { 
+      icon: BarChart3, 
+      label: 'Karaoke', 
+      href: '/tools/karaoke' 
     },
-    {
-      title: "Metadata Editor",
-      subtitle: "MP3 Tag Management",
-      description: "Edit audio metadata, MP3 tags, title, artist, album information. Organize your music library.",
-      icon: Edit3,
-      gradient: "from-gray-600 to-slate-600",
-      href: "/tools/metadata-editor",
-      category: "Organization"
-    },
-    {
-      title: "Audio Reverse",
-      subtitle: "Backwards Playback",
-      description: "Reverse audio playback completely. Create unique backwards effects and special audio experiences.",
-      icon: RotateCcw,
-      gradient: "from-violet-500 to-purple-500",
-      href: "/tools/audio-reverse",
-      category: "Effects"
-    },
-    {
-      title: "Audio Equalizer",
-      subtitle: "Frequency Control",
-      description: "Professional 3-band equalizer with low, mid, and high frequency adjustment. Fine-tune your audio.",
-      icon: BarChart3,
-      gradient: "from-cyan-500 to-teal-500",
-      href: "/tools/equalizer",
-      category: "Enhancement"
+    { 
+      icon: Settings, 
+      label: 'Support', 
+      href: '/support' 
     }
   ]
 
   return (
     <>
       <Head>
-        <title>ODOREMOVER Audio Suite - Professional Audio Processing Tools</title>
-        <meta name="description" content="Separate voice from music, edit audio, convert formats and more with powerful AI algorithms. Free online audio processing tools." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>AI Vocal Remover and Isolation [No Limits] - Free Online Tool</title>
+        <meta name="description" content="Remove vocals from any song for free using advanced AI. Create karaoke tracks and acapella versions instantly. No registration required, unlimited usage." />
+        <meta name="keywords" content="vocal remover, karaoke maker, acapella creator, AI audio separation, remove vocals online, free vocal isolation" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="AI Vocal Remover and Isolation - Free Online Tool" />
+        <meta property="og:description" content="Remove vocals from any song for free using advanced AI. Create karaoke tracks and acapella versions instantly." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://vocalremover.org" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Vocal Remover - Free Online Tool" />
+        <meta name="twitter:description" content="Remove vocals from any song for free using advanced AI algorithms." />
+        <link rel="canonical" href="https://vocalremover.org" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-white">
-        {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
-          <div className="max-w-6xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <Music className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-gray-900">ODOREMOVER</h1>
-                  <p className="text-sm text-gray-600">Professional Audio Suite</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">
-                  How it works
-                </button>
-                <button className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Get Started
-                </button>
-              </div>
-            </div>
+      <div className="min-h-screen bg-gray-900 text-white flex">
+        {/* Sidebar */}
+        <div className={`fixed inset-y-0 left-0 z-50 w-16 bg-gray-800 border-r border-gray-700 transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-16'}`}>
+          {/* Sidebar Header */}
+          <div className="flex items-center justify-center h-16 border-b border-gray-700">
+            {isSidebarOpen ? (
+              <button 
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            ) : (
+              <button 
+                onClick={() => setIsSidebarOpen(true)}
+                className="p-2 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+            )}
           </div>
-        </header>
 
-        {/* Hero Section */}
-        <div className="max-w-6xl mx-auto px-4 py-16 text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Professional Audio Processing
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"> Suite</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Separate voice from music, edit audio files, convert formats and enhance sound quality with powerful AI algorithms. 
-            Complete professional audio tools, absolutely free.
-          </p>
-          
-          {/* Quick Stats */}
-          <div className="flex justify-center space-x-8 mb-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600">10+</div>
-              <div className="text-gray-600">Audio Tools</div>
+          {/* Sidebar Navigation */}
+          <nav className="mt-8 space-y-2 px-2">
+            {sidebarItems.map((item, index) => (
+              <Link 
+                key={index}
+                href={item.href}
+                className={`flex items-center px-3 py-3 rounded-lg transition-colors group ${
+                  item.isActive 
+                    ? 'bg-blue-600 text-white' 
+                    : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                <item.icon className="w-5 h-5 flex-shrink-0" />
+                {isSidebarOpen && (
+                  <span className="ml-3 text-sm font-medium">{item.label}</span>
+                )}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Bottom Items */}
+          <div className="absolute bottom-0 left-0 right-0 p-2 border-t border-gray-700">
+            <div className="flex items-center px-3 py-3 rounded-lg text-gray-400 hover:bg-gray-700 hover:text-white transition-colors cursor-pointer">
+              <User className="w-5 h-5 flex-shrink-0" />
+              {isSidebarOpen && (
+                <span className="ml-3 text-sm font-medium">Account</span>
+              )}
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600">AI-Powered</div>
-              <div className="text-gray-600">Processing</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-teal-600">Free</div>
-              <div className="text-gray-600">Forever</div>
+            <div className="flex items-center px-3 py-2 text-xs text-gray-500">
+              <Globe className="w-4 h-4 flex-shrink-0" />
+              {isSidebarOpen && (
+                <span className="ml-2">EN</span>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Tools Grid */}
-        <div className="max-w-6xl mx-auto px-4 pb-16">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Audio Processing Tools</h2>
-            <p className="text-gray-600 text-center max-w-2xl mx-auto">
-              Choose from our comprehensive suite of professional audio tools. Each tool is powered by advanced algorithms 
-              for the highest quality results.
-            </p>
-          </div>
+        {/* Main Content */}
+        <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-16'}`}>
+          {/* Main Header - HOW IT WORKS */}
+          <div className="text-center py-16 px-8">
+            <div className="max-w-4xl mx-auto">
+              <p className="text-gray-400 text-sm font-medium tracking-wider uppercase mb-4">
+                HOW IT WORKS
+              </p>
+              
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                Vocal Remover and Isolation
+              </h1>
+              
+              <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                Separate voice from music out of a song free with powerful AI algorithms
+              </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tools.map((tool, index) => {
-              const IconComponent = tool.icon
-              return (
+              {/* Audio Visualization */}
+              <div className="mb-12 max-w-md mx-auto">
+                <div className="space-y-4">
+                  {/* Music Track */}
+                  <div className="flex items-center space-x-4">
+                    <span className="text-gray-400 text-sm font-medium w-12 text-right">Music</span>
+                    <div className="flex-1 h-8 bg-gradient-to-r from-green-500 to-teal-400 rounded-lg relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-300 opacity-80"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-full h-1 bg-white bg-opacity-30 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Vocal Track */}
+                  <div className="flex items-center space-x-4">
+                    <span className="text-gray-400 text-sm font-medium w-12 text-right">Vocal</span>
+                    <div className="flex-1 h-8 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-400 opacity-80"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-full h-1 bg-white bg-opacity-30 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Upload Button */}
+              <div className="mb-16">
                 <Link 
-                  key={tool.title}
-                  href={tool.href}
-                  className="group bg-white border-2 border-gray-100 rounded-2xl p-8 hover:border-blue-200 hover:shadow-xl transition-all duration-300"
+                  href="/tools/vocal-remover"
+                  className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold text-white transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  {/* Tool Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${tool.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                          {tool.title}
-                        </h3>
-                        <span className="px-2 py-1 bg-blue-100 text-blue-600 text-xs font-medium rounded-lg">
-                          {tool.category}
-                        </span>
-                      </div>
-                      <h4 className="text-sm font-semibold text-blue-600 mb-2">{tool.subtitle}</h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">{tool.description}</p>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <span className="text-sm font-medium text-gray-500">Try Now →</span>
-                      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <Play className="w-4 h-4 text-gray-600 group-hover:text-blue-600" />
-                      </div>
-                    </div>
-                  </div>
+                  <Upload className="w-5 h-5 mr-2" />
+                  Browse my files
                 </Link>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Footer */}
-        <footer className="bg-gray-50 border-t border-gray-200 mt-16">
-          <div className="max-w-6xl mx-auto px-4 py-12">
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Music className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-lg font-bold text-gray-900">ODOREMOVER Audio Suite</span>
               </div>
-              <p className="text-gray-600 mb-6">Professional audio processing tools powered by advanced AI algorithms</p>
-              <div className="flex justify-center space-x-6 text-sm text-gray-500">
-                <a href="#" className="hover:text-gray-700">Privacy Policy</a>
-                <a href="#" className="hover:text-gray-700">Terms of Service</a>
-                <a href="#" className="hover:text-gray-700">API Documentation</a>
-                <a href="#" className="hover:text-gray-700">Support</a>
+
+              {/* Features Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">Fast Processing</h3>
+                  <p className="text-gray-400 text-sm">AI-powered vocal separation in seconds</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <ShieldCheck className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">100% Secure</h3>
+                  <p className="text-gray-400 text-sm">Your files are processed securely and deleted automatically</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <Music className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">High Quality</h3>
+                  <p className="text-gray-400 text-sm">Professional results with advanced algorithms</p>
+                </div>
+              </div>
+
+              {/* Additional Tools Section */}
+              <div className="mt-20 pt-16 border-t border-gray-800">
+                <h2 className="text-2xl font-bold mb-8">Other Audio Tools</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <Link href="/tools/pitch-tempo" className="group">
+                    <div className="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                      <TrendingUp className="w-8 h-8 text-blue-400 mb-3 mx-auto" />
+                      <h3 className="text-sm font-semibold text-center">Pitch Changer</h3>
+                    </div>
+                  </Link>
+                  
+                  <Link href="/tools/converter" className="group">
+                    <div className="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                      <RefreshCw className="w-8 h-8 text-green-400 mb-3 mx-auto" />
+                      <h3 className="text-sm font-semibold text-center">Audio Converter</h3>
+                    </div>
+                  </Link>
+                  
+                  <Link href="/tools/cutter-joiner" className="group">
+                    <div className="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                      <Scissors className="w-8 h-8 text-yellow-400 mb-3 mx-auto" />
+                      <h3 className="text-sm font-semibold text-center">Audio Cutter</h3>
+                    </div>
+                  </Link>
+                  
+                  <Link href="/tools/volume-normalizer" className="group">
+                    <div className="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                      <Volume2 className="w-8 h-8 text-purple-400 mb-3 mx-auto" />
+                      <h3 className="text-sm font-semibold text-center">Volume Booster</h3>
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </footer>
+        </div>
       </div>
     </>
   )

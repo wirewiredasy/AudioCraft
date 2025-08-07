@@ -23,16 +23,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/tools/pitch-tempo": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/tools/pitch-tempo.js"
-    ],
-    "/tools/vocal-remover": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/tools/vocal-remover.js"
     ]
   },
   "ampFirstPages": []
