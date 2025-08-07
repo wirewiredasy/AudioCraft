@@ -23,6 +23,21 @@ self.__BUILD_MANIFEST = {
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
+    ],
+    "/support": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/support.js"
+    ],
+    "/tools/audio-splitter": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/tools/audio-splitter.js"
+    ],
+    "/tools/cutter-joiner": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/tools/cutter-joiner.js"
     ]
   },
   "ampFirstPages": []
