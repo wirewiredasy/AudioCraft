@@ -91,59 +91,64 @@ export default function Tools() {
   return (
     <>
       <Head>
-        <title>Audio Processing Tools - ODOREMOVER Audio Suite</title>
-        <meta name="description" content="Complete collection of professional audio processing tools. Remove vocals, adjust pitch, convert formats, and enhance your audio." />
+        <title>Audio Tools - ODOREMOVER Audio Suite</title>
+        <meta name="description" content="Complete collection of professional audio processing tools. Choose from vocal removal, pitch adjustment, format conversion, and more." />
       </Head>
 
       <div className="min-h-screen">
         <Header />
-
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Header */}
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Page Header */}
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Audio Processing Tools
+              Audio Processing
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent block mt-2">
+                Tools Collection
+              </span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Professional-grade audio tools for all your processing needs. 
-              Choose from our comprehensive collection of features designed for creators, 
-              musicians, and audio professionals.
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Professional-grade audio processing tools for creators, musicians, and producers. 
+              Transform your audio with cutting-edge technology.
             </p>
           </div>
 
           {/* Tools Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {tools.map((tool, index) => (
-              <ToolCard
-                key={index}
-                title={tool.title}
-                description={tool.description}
-                href={tool.href}
-                icon={tool.icon}
-                gradient={tool.gradient}
-              />
+              <div key={tool.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <ToolCard
+                  title={tool.title}
+                  description={tool.description}
+                  href={tool.href}
+                  icon={tool.icon}
+                  gradient={tool.gradient}
+                />
+              </div>
             ))}
           </div>
 
-          {/* Help Section */}
+          {/* Footer Section */}
           <div className="mt-20 text-center">
-            <div className="glass-card max-w-2xl mx-auto">
-              <h2 className="text-2xl font-bold text-white mb-4">
+            <div className="glass-card">
+              <h3 className="text-2xl font-semibold text-white mb-4">
                 Need Help Getting Started?
-              </h2>
+              </h3>
               <p className="text-gray-300 mb-6">
-                Each tool is designed to be intuitive and powerful. Simply upload your audio file, 
-                adjust the settings to your preference, and download the processed result.
+                Each tool includes detailed instructions and supports multiple audio formats.
+                Simply upload your file and let our advanced algorithms do the work.
               </p>
-              <div className="space-y-2 text-sm text-gray-400">
-                <p>✓ Supports all major audio formats</p>
-                <p>✓ Professional-quality processing</p>
-                <p>✓ Fast and secure file handling</p>
-                <p>✓ No registration required</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="btn-primary">
+                  View Documentation
+                </button>
+                <button className="btn-secondary">
+                  Contact Support
+                </button>
               </div>
             </div>
           </div>
-        </main>
+        </div>
       </div>
     </>
   )

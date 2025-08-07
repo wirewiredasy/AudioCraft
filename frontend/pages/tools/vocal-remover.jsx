@@ -1,57 +1,77 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import axios from 'axios'
-import toast from 'react-hot-toast'
 import Header from '../../components/Header'
 import Upload from '../../components/Upload'
 import Player from '../../components/Player'
-import { Mic, Info } from 'lucide-react'
+import { Mic, Download, Loader2, CheckCircle } from 'lucide-react'
 
 export default function VocalRemover() {
-  const [selectedFile, setSelectedFile] = useState(null)
+  const [file, setFile] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false)
-  const [result, setResult] = useState(null)
-  const [uploadProgress, setUploadProgress] = useState(0)
+  const [processedFile, setProcessedFile] = useState(null)
+  const [progress, setProgress] = useState(0)
 
-  const handleFileUpload = (file) => {
-    setSelectedFile(file)
-    setResult(null)
-    setUploadProgress(0)
+  const handleFileSelect = (selectedFile) => {
+    setFile(selectedFile)
+    setProcessedFile(null)
+    setProgress(0)
   }
 
-  const processAudio = async () => {
-    if (!selectedFile) return
+  const handleProcess = async () => {
+    if (!file) return
 
     setIsProcessing(true)
-    setResult(null)
+    setProgress(0)
 
     try {
       const formData = new FormData()
-      formData.append('file', selectedFile)
+      formData.append('file', file)
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/vocal-remover`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          onUploadProgress: (progressEvent) => {
-            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            setUploadProgress(progress)
-          },
-        }
-      )
+      // Simulate progress updates
+      const progressInterval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval)
+            return 90
+          }
+          return prev + 10
+        })
+      }, 500)
 
-      setResult(response.data)
-      setUploadProgress(100)
-      toast.success('Vocals removed successfully!')
+      const response = await fetch('/api/vocal-remover/process', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Processing failed')
+      }
+
+      const blob = await response.blob()
+      const url = URL.createObjectURL(blob)
+      
+      setProcessedFile({
+        url,
+        name: `${file.name.split('.')[0]}_no_vocals.${file.name.split('.').pop()}`,
+        size: blob.size
+      })
+
+      setProgress(100)
+      clearInterval(progressInterval)
     } catch (error) {
-      console.error('Error processing audio:', error)
-      toast.error(error.response?.data?.detail || 'Failed to remove vocals')
-      setUploadProgress(0)
+      console.error('Error processing file:', error)
+      alert('Error processing file. Please try again.')
     } finally {
       setIsProcessing(false)
+    }
+  }
+
+  const handleDownload = () => {
+    if (processedFile) {
+      const a = document.createElement('a')
+      a.href = processedFile.url
+      a.download = processedFile.name
+      a.click()
     }
   }
 
@@ -59,115 +79,162 @@ export default function VocalRemover() {
     <>
       <Head>
         <title>Vocal Remover - ODOREMOVER Audio Suite</title>
-        <meta name="description" content="Remove vocals from songs using AI-powered separation. Create instrumental tracks and karaoke versions." />
+        <meta name="description" content="Remove vocals from any song to create instrumental tracks and karaoke versions using AI-powered vocal separation technology." />
       </Head>
 
       <div className="min-h-screen">
         <Header />
-
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Header */}
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Tool Header */}
           <div className="text-center mb-12">
-            <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
               <Mic className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Vocal Remover
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Remove vocals from songs using advanced AI separation technology. 
-              Create instrumental tracks or karaoke versions with professional quality.
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Remove vocals from any song to create instrumental tracks perfect for karaoke, 
+              backing tracks, or remixing projects.
             </p>
           </div>
 
-          {/* Info Section */}
-          <div className="alert-info mb-8">
-            <div className="flex items-start space-x-3">
-              <Info className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-blue-400 mb-2">How It Works</h3>
-                <div className="text-gray-300 space-y-1">
-                  <p>• Uses center channel extraction and spectral subtraction</p>
-                  <p>• Works best with stereo recordings where vocals are centered</p>
-                  <p>• Results may vary based on original mixing and recording quality</p>
-                  <p>• Supports all major audio formats (MP3, WAV, FLAC, etc.)</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Upload Section */}
-          <div className="glass-card mb-8">
-            <Upload 
-              onFileSelect={handleFileUpload}
-              isProcessing={isProcessing}
-              accept="audio/*"
+          <div className="mb-8">
+            <Upload
+              onFileSelect={handleFileSelect}
+              acceptedFormats={['.mp3', '.wav', '.flac', '.m4a', '.aac']}
+              maxSize={50}
               title="Upload Audio File"
-              description="Select a song to remove vocals from"
+              description="Supported formats: MP3, WAV, FLAC, M4A, AAC (Max 50MB)"
             />
-
-            {selectedFile && (
-              <div className="mt-8">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="font-semibold text-white">{selectedFile.name}</h3>
-                    <p className="text-sm text-gray-400">
-                      {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
-                    </p>
-                  </div>
-                  <button
-                    onClick={processAudio}
-                    disabled={isProcessing}
-                    className="btn-primary disabled:opacity-50"
-                  >
-                    {isProcessing ? 'Removing Vocals...' : 'Remove Vocals'}
-                  </button>
-                </div>
-
-                {/* Progress */}
-                {uploadProgress > 0 && (
-                  <div className="mb-4">
-                    <div className="progress-bar">
-                      <div 
-                        className="progress-fill"
-                        style={{ width: `${uploadProgress}%` }}
-                      />
-                    </div>
-                    <p className="text-sm text-gray-400 mt-1">{uploadProgress}% complete</p>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
-          {/* Result */}
-          {result && (
-            <div className="glass-card">
-              <h3 className="text-xl font-semibold text-white mb-6">
-                ✅ Vocals Removed Successfully!
-              </h3>
-              
-              <Player
-                audioUrl={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${result.output_file}`}
-                fileName={`vocal_removed_${selectedFile?.name || 'audio.wav'}`}
-                downloadUrl={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${result.download_url}`}
-              />
-
-              {/* Processing Details */}
-              {result.processing_details && (
-                <div className="mt-6 p-4 bg-gray-800/50 rounded-lg">
-                  <h4 className="font-medium text-gray-300 mb-2">Processing Details</h4>
-                  <div className="text-sm text-gray-400 space-y-1">
-                    <p>Duration: {result.processing_details.duration?.toFixed(2)} seconds</p>
-                    <p>Sample Rate: {result.processing_details.sample_rate} Hz</p>
-                    <p>Methods: {result.methods_used?.join(', ')}</p>
-                    <p>Vocal Suppression: {result.processing_details.vocal_suppression}</p>
-                  </div>
+          {/* File Info */}
+          {file && (
+            <div className="glass-card mb-8">
+              <h3 className="text-lg font-semibold text-white mb-4">Selected File</h3>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white font-medium">{file.name}</p>
+                  <p className="text-gray-400 text-sm">
+                    {(file.size / (1024 * 1024)).toFixed(2)} MB
+                  </p>
                 </div>
-              )}
+                <button
+                  onClick={handleProcess}
+                  disabled={isProcessing}
+                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Mic className="w-4 h-4" />
+                      <span>Remove Vocals</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           )}
-        </main>
+
+          {/* Progress */}
+          {isProcessing && (
+            <div className="glass-card mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Processing Audio</h3>
+                <span className="text-white font-medium">{progress}%</span>
+              </div>
+              <div className="progress-bar">
+                <div 
+                  className="progress-fill" 
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <p className="text-gray-400 text-sm mt-3">
+                Analyzing audio patterns and separating vocal frequencies...
+              </p>
+            </div>
+          )}
+
+          {/* Results */}
+          {processedFile && (
+            <div className="glass-card mb-8">
+              <div className="flex items-center space-x-3 mb-6">
+                <CheckCircle className="w-6 h-6 text-green-400" />
+                <h3 className="text-lg font-semibold text-white">Processing Complete</h3>
+              </div>
+
+              {/* Audio Players */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="text-white font-medium mb-3">Original Audio</h4>
+                  <Player
+                    src={URL.createObjectURL(file)}
+                    title="Original"
+                  />
+                </div>
+                <div>
+                  <h4 className="text-white font-medium mb-3">Vocals Removed</h4>
+                  <Player
+                    src={processedFile.url}
+                    title="No Vocals"
+                  />
+                </div>
+              </div>
+
+              {/* Download Button */}
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={handleDownload}
+                  className="btn-success flex items-center space-x-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download Instrumental</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* How It Works */}
+          <div className="glass-card">
+            <h3 className="text-xl font-semibold text-white mb-6">How Vocal Removal Works</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-red-400 font-bold">1</span>
+                </div>
+                <h4 className="text-white font-medium mb-2">Audio Analysis</h4>
+                <p className="text-gray-400 text-sm">
+                  Our AI analyzes the stereo field to identify vocal frequencies and spatial positioning.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-red-400 font-bold">2</span>
+                </div>
+                <h4 className="text-white font-medium mb-2">Vocal Separation</h4>
+                <p className="text-gray-400 text-sm">
+                  Advanced spectral subtraction removes center-panned vocals while preserving instruments.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-red-400 font-bold">3</span>
+                </div>
+                <h4 className="text-white font-medium mb-2">Quality Enhancement</h4>
+                <p className="text-gray-400 text-sm">
+                  The remaining instrumental track is optimized for clarity and balanced frequency response.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )
