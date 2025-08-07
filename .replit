@@ -6,29 +6,6 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
 
 [workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "API Gateway"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Frontend"
-
-[[workflows.workflow]]
-name = "API Gateway"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python main.py"
-waitForPort = 5000
 
 [[workflows.workflow]]
 name = "Frontend Development"
@@ -90,15 +67,6 @@ args = "python main.py"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
-
-[[workflows.workflow]]
-name = "Frontend"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd frontend && npm run dev"
-waitForPort = 3000
 
 [[workflows.workflow]]
 name = "ODOREMOVER App"
