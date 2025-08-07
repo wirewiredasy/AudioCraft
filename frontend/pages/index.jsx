@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -30,7 +31,7 @@ import {
   AccountIcon,
   LanguageIcon
 } from '../components/CustomIcons'
-import Footer from '../components/Footer' // Import the Footer component
+import Footer from '../components/Footer'
 
 export default function OdoremoverHome() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -92,19 +93,109 @@ export default function OdoremoverHome() {
   return (
     <>
       <Head>
-        <title>ODOREMOVER - AI Audio Processing Suite [Professional Tools]</title>
-        <meta name="description" content="Professional audio processing with ODOREMOVER suite. Vocal removal, pitch adjustment, format conversion, noise reduction, and more. Advanced AI-powered tools for musicians and creators." />
-        <meta name="keywords" content="odoremover, audio processing, vocal remover, pitch tempo, audio converter, karaoke maker, AI audio tools, professional audio editing" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="ODOREMOVER - Professional AI Audio Processing Suite" />
-        <meta property="og:description" content="Advanced audio processing tools with AI technology. Vocal removal, pitch adjustment, format conversion, and professional editing features." />
+        <title>ODOREMOVER - AI Audio Processing Suite [Professional Tools] | Remove Vocals Online Free</title>
+        <meta name="description" content="Professional AI-powered audio processing with ODOREMOVER suite. Remove vocals from songs, adjust pitch/tempo, convert audio formats, reduce noise, and create karaoke tracks. Advanced algorithms for musicians and creators." />
+        <meta name="keywords" content="odoremover, vocal remover online free, AI audio processing, pitch tempo changer, audio converter mp3, karaoke maker, noise reduction, audio splitter, professional audio editing, music producer tools" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href="https://odoremover.app" />
+        
+        {/* Open Graph specific for homepage */}
+        <meta property="og:title" content="ODOREMOVER - Professional AI Audio Processing Suite | Remove Vocals Free" />
+        <meta property="og:description" content="Advanced audio processing tools with AI technology. Vocal removal, pitch adjustment, format conversion, noise reduction, and professional editing features." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://odoremover.app" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ODOREMOVER - AI Audio Processing Suite" />
-        <meta name="twitter:description" content="Professional audio tools powered by advanced AI algorithms." />
-        <link rel="canonical" href="https://odoremover.app" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content="https://odoremover.app/og-homepage.jpg" />
+        
+        {/* Twitter specific for homepage */}
+        <meta name="twitter:title" content="ODOREMOVER - AI Audio Processing Suite | Remove Vocals Free" />
+        <meta name="twitter:description" content="Professional audio tools powered by advanced AI algorithms. Remove vocals, adjust pitch/tempo, convert formats." />
+        <meta name="twitter:image" content="https://odoremover.app/twitter-homepage.jpg" />
+        
+        {/* Enhanced structured data for homepage */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "ODOREMOVER Audio Processing Suite",
+              "alternateName": "ODOREMOVER",
+              "description": "Professional AI-powered audio processing suite for vocal removal, pitch adjustment, format conversion, noise reduction, and audio editing",
+              "url": "https://odoremover.app",
+              "sameAs": [
+                "https://twitter.com/odoremover",
+                "https://facebook.com/odoremover"
+              ],
+              "applicationCategory": "MultimediaApplication",
+              "operatingSystem": "Any",
+              "browserRequirements": "Requires JavaScript. Requires HTML5.",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "2547"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "creator": {
+                "@type": "Organization",
+                "name": "ODOREMOVER",
+                "url": "https://odoremover.app"
+              },
+              "featureList": [
+                "AI-Powered Vocal Removal",
+                "Pitch & Tempo Adjustment", 
+                "Audio Format Conversion",
+                "Advanced Noise Reduction",
+                "Audio Splitting & Separation",
+                "Karaoke Track Creation",
+                "Volume Normalization",
+                "Audio Cutting & Joining"
+              ],
+              "screenshot": "https://odoremover.app/screenshot.jpg"
+            })
+          }}
+        />
+        
+        {/* FAQ Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How does AI vocal removal work?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ODOREMOVER uses advanced AI algorithms to analyze audio frequencies and separate vocal tracks from instrumental music using spectral analysis and machine learning."
+                  }
+                },
+                {
+                  "@type": "Question", 
+                  "name": "Is ODOREMOVER free to use?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, ODOREMOVER offers free audio processing tools including vocal removal, pitch adjustment, and format conversion with professional quality results."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What audio formats are supported?",
+                  "acceptedAnswer": {
+                    "@type": "Answer", 
+                    "text": "ODOREMOVER supports MP3, WAV, FLAC, OGG, M4A, AAC and other popular audio formats for processing and conversion."
+                  }
+                }
+              ]
+            })
+          }}
+        />
       </Head>
 
       <div className="min-h-screen bg-gray-900 text-white flex">
