@@ -17,50 +17,30 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom right, #0f172a, #581c87, #0f172a);
-  color: white;
-  -webkit-font-smoothing: antialiased;
+  @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900;
+  @apply text-white antialiased;
   min-height: 100vh;
 }
 
 /* Glassmorphism Components */
 .glass {
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
   box-shadow: var(--shadow-glass);
 }
 
 .glass-card {
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-glass);
-  border-radius: 1rem;
-  padding: 1.5rem;
+  @apply glass rounded-2xl p-6;
 }
 
 .glass-button {
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-glass);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
+  @apply glass rounded-xl px-6 py-3 font-medium transition-all duration-300;
+  @apply hover:bg-white/20 hover:scale-105;
 }
 
 /* Audio Visualizer Styles */
 .audio-wave {
   background: var(--gradient-audio);
-  border-radius: 9999px;
-  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @apply rounded-full animate-pulse-slow;
 }
 
 /* Upload Zone Styles */

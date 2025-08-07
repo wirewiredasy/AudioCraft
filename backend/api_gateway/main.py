@@ -7,14 +7,25 @@ import sys
 import uuid
 from pathlib import Path
 
-# Add backend root to Python path
-backend_root = os.path.join(os.path.dirname(__file__), '..')
-sys.path.insert(0, backend_root)
+# Add services to Python path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'services'))
+
+# Import all service processors
+from vocal_remover.processor import VocalRemoverProcessor
+from pitch_tempo.processor import PitchTempoProcessor
+from converter.processor import ConverterProcessor
+from cutter_joiner.processor import CutterJoinerProcessor
+from noise_reduction.processor import NoiseReductionProcessor
+from volume_normalizer.processor import VolumeNormalizerProcessor
+from fade_effect.processor import FadeEffectProcessor
+from metadata_editor.processor import MetadataEditorProcessor
+from audio_reverse.processor import AudioReverseProcessor
+from equalizer.processor import EqualizerProcessor
 
 # Create FastAPI app
 app = FastAPI(
     title="ODOREMOVER Audio Suite API",
-    description="Professional audio processing microservices platform with advanced features",
+    description="Professional audio processing microservices platform",
     version="2.0.0"
 )
 
@@ -36,114 +47,133 @@ os.makedirs(PROCESSED_DIR, exist_ok=True)
 # Mount static files
 app.mount("/download", StaticFiles(directory=PROCESSED_DIR), name="downloads")
 
-# Initialize processors with fallbacks
-vocal_processor = None
-pitch_processor = None
-converter_processor = None
-
-# Try to import processors
-try:
-    from services.vocal_remover.processor import VocalRemoverProcessor
-    vocal_processor = VocalRemoverProcessor()
-    print("✓ Vocal remover processor loaded")
-except Exception as e:
-    print(f"✗ Vocal remover processor failed: {e}")
-
-try:
-    from services.pitch_tempo.processor import PitchTempoProcessor
-    pitch_processor = PitchTempoProcessor()
-    print("✓ Pitch tempo processor loaded")
-except Exception as e:
-    print(f"✗ Pitch tempo processor failed: {e}")
-
-try:
-    from services.converter.processor import ConverterProcessor
-    converter_processor = ConverterProcessor()
-    print("✓ Converter processor loaded")
-except Exception as e:
-    print(f"✗ Converter processor failed: {e}")
+# Initialize processors
+vocal_processor = VocalRemoverProcessor()
+pitch_processor = PitchTempoProcessor()
+converter_processor = ConverterProcessor()
+cutter_processor = CutterJoinerProcessor()
+noise_processor = NoiseReductionProcessor()
+volume_processor = VolumeNormalizerProcessor()
+fade_processor = FadeEffectProcessor()
+metadata_processor = MetadataEditorProcessor()
+reverse_processor = AudioReverseProcessor()
+equalizer_processor = EqualizerProcessor()
 
 @app.get("/")
 async def root():
     return {
         "message": "ODOREMOVER Audio Suite API",
         "version": "2.0.0",
-        "status": "active",
-        "available_tools": {
-            "vocal_remover": vocal_processor is not None,
-            "pitch_tempo": pitch_processor is not None,
-            "converter": converter_processor is not None,
-        }
+        "services": [
+            "vocal-remover", "pitch-tempo", "converter", "cutter-joiner",
+            "noise-reduction", "volume-normalizer", "fade-effect",
+            "metadata-editor", "audio-reverse", "equalizer"
+        ]
     }
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "message": "API is running"}
+    return {"status": "healthy", "services": "all_operational"}
 
+# Vocal Remover Service
 @app.post("/vocal-remover")
-async def remove_vocals(file: UploadFile = File(...)):
-    """Remove vocals from audio file"""
-    if not vocal_processor:
-        raise HTTPException(status_code=503, detail="Vocal remover service unavailable")
-    
-    try:
-        result = await vocal_processor.process(file)
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Processing failed: {str(e)}")
+async def vocal_remover(file: UploadFile = File(...)):
+    """Remove vocals from audio using AI separation"""
+    return await vocal_processor.process(file)
 
+# Pitch & Tempo Service
 @app.post("/pitch-tempo")
-async def adjust_pitch_tempo(
+async def pitch_tempo(
     file: UploadFile = File(...),
-    pitch_shift: float = Form(0),
-    tempo_change: float = Form(0)
+    pitch_shift: float = Form(0.0),
+    tempo_change: float = Form(1.0)
 ):
-    """Adjust pitch and tempo of audio file"""
-    if not pitch_processor:
-        raise HTTPException(status_code=503, detail="Pitch tempo service unavailable")
-    
-    try:
-        # Note: This is a simplified version, actual processor may need different parameters
-        result = await pitch_processor.process(file, pitch_shift, tempo_change)
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Processing failed: {str(e)}")
+    """Adjust pitch and tempo independently"""
+    return await pitch_processor.process(file, pitch_shift, tempo_change)
 
-@app.post("/convert")
-async def convert_audio(
+# Format Converter Service
+@app.post("/converter")
+async def converter(
     file: UploadFile = File(...),
-    output_format: str = Form("mp3")
+    output_format: str = Form("mp3"),
+    quality: str = Form("high")
 ):
-    """Convert audio file to different format"""
-    if not converter_processor:
-        raise HTTPException(status_code=503, detail="Converter service unavailable")
-    
-    try:
-        result = await converter_processor.process(file, output_format)
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Processing failed: {str(e)}")
+    """Convert audio between different formats"""
+    return await converter_processor.process(file, output_format, quality)
 
-@app.post("/upload-test")
-async def test_upload(file: UploadFile = File(...)):
-    """Test file upload functionality"""
-    try:
-        # Save uploaded file
-        upload_path = f"{UPLOAD_DIR}/{uuid.uuid4()}_{file.filename}"
-        with open(upload_path, "wb") as buffer:
-            content = await file.read()
-            buffer.write(content)
-        
-        return {
-            "message": "File uploaded successfully",
-            "filename": file.filename,
-            "size": len(content),
-            "content_type": file.content_type,
-            "saved_as": upload_path
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+# Cutter & Joiner Service
+@app.post("/cutter-joiner")
+async def cutter_joiner(
+    file: UploadFile = File(...),
+    operation: str = Form("cut"),
+    start_time: float = Form(0.0),
+    end_time: float = Form(None)
+):
+    """Cut or join audio files"""
+    return await cutter_processor.process(file, operation, start_time, end_time)
+
+# Noise Reduction Service
+@app.post("/noise-reduction")
+async def noise_reduction(
+    file: UploadFile = File(...),
+    reduction_strength: float = Form(0.8),
+    stationary: bool = Form(True)
+):
+    """Reduce background noise using advanced algorithms"""
+    return await noise_processor.process(file, reduction_strength, stationary)
+
+# Volume Normalizer Service
+@app.post("/volume-normalizer")
+async def volume_normalizer(
+    file: UploadFile = File(...),
+    target_level: float = Form(-6.0),
+    normalize: bool = Form(True)
+):
+    """Normalize and boost audio volume"""
+    return await volume_processor.process(file, target_level, normalize)
+
+# Fade Effect Service
+@app.post("/fade-effect")
+async def fade_effect(
+    file: UploadFile = File(...),
+    fade_in_duration: float = Form(2.0),
+    fade_out_duration: float = Form(2.0)
+):
+    """Add fade in/out effects to audio"""
+    return await fade_processor.process(file, fade_in_duration, fade_out_duration)
+
+# Metadata Editor Service
+@app.post("/metadata-editor")
+async def metadata_editor(
+    file: UploadFile = File(...),
+    title: str = Form(None),
+    artist: str = Form(None),
+    album: str = Form(None),
+    year: str = Form(None)
+):
+    """Edit audio metadata and MP3 tags"""
+    return await metadata_processor.process(file, title, artist, album, year)
+
+# Audio Reverse Service
+@app.post("/audio-reverse")
+async def audio_reverse(file: UploadFile = File(...)):
+    """Reverse audio playback completely"""
+    return await reverse_processor.process(file)
+
+# Equalizer Service
+@app.post("/equalizer")
+async def equalizer(
+    file: UploadFile = File(...),
+    low_gain: float = Form(0.0),
+    mid_gain: float = Form(0.0),
+    high_gain: float = Form(0.0)
+):
+    """Apply 3-band equalizer with frequency adjustment"""
+    return await equalizer_processor.process(file, low_gain, mid_gain, high_gain)
 
 if __name__ == "__main__":
     import uvicorn
+    print("🚀 Starting ODOREMOVER Audio Suite API Gateway...")
+    print("📡 Backend will be available at: http://0.0.0.0:8000")
+    print("🎵 All audio processing microservices ready!")
     uvicorn.run(app, host="0.0.0.0", port=8000)

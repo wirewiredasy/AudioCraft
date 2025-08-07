@@ -1,9 +1,9 @@
 modules = ["nodejs-20", "python-3.11", "web"]
-run = "node frontend/pages/tools/index.jsx"
+run = "node index.js"
 
 [nix]
 channel = "stable-25_05"
-packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "openssl", "pkg-config", "postgresql", "xsimd"]
+packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
 
 [workflows]
 runButton = "Project"
@@ -95,10 +95,6 @@ args = "Backend API"
 task = "workflow.run"
 args = "Frontend"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
 [[workflows.workflow]]
 name = "Backend API"
 author = "agent"
@@ -132,15 +128,6 @@ args = "cd backend/api_gateway && python main.py"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "gunicorn --bind 0.0.0.0:5000 --reuse-port --reload main:app"
-waitForPort = 5000
 
 [[ports]]
 localPort = 443
@@ -180,8 +167,7 @@ localPort = 52711
 externalPort = 5173
 
 [deployment]
-run = ["gunicorn", "--bind", "0.0.0.0:5000", "main:app"]
-deploymentTarget = "autoscale"
+run = ["sh", "-c", "node index.js"]
 
 [agent]
 expertMode = true
