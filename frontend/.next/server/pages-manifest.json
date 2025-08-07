@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/support": "pages/support.js",
-  "/tools/recorder": "pages/tools/recorder.js",
-  "/tools/audio-splitter": "pages/tools/audio-splitter.js"
+  "/": "pages/index.js"
 }
