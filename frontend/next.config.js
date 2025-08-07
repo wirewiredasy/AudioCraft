@@ -2,20 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
-          },
-        ],
-      },
-    ]
-  },
-
+  
   // API configuration
   async rewrites() {
     return [
@@ -25,17 +12,17 @@ const nextConfig = {
       }
     ]
   },
-
+  
   // Environment variables
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
   },
-
+  
   // Image optimization
   images: {
     domains: ['localhost'],
   },
-
+  
   // Webpack configuration for audio files
   webpack: (config) => {
     config.module.rules.push({
