@@ -1,4 +1,4 @@
-modules = ["nodejs-20", "python-3.11", "web"]
+modules = ["nodejs-20", "python-3.11", "web", "python3"]
 run = "node services/vocal_remover/services/vocal_remover/main.py"
 
 [nix]
