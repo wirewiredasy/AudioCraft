@@ -27,15 +27,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/tools/audio-splitter": [
+    "/auth/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/tools/audio-splitter.js"
+      "static/chunks/pages/auth/login.js"
     ],
-    "/tools/pitch-tempo": [
+    "/support": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/tools/pitch-tempo.js"
+      "static/chunks/pages/support.js"
+    ],
+    "/tools/volume-normalizer": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/tools/volume-normalizer.js"
     ]
   },
   "ampFirstPages": []

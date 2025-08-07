@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/tools/pitch-tempo": "pages/tools/pitch-tempo.js",
-  "/tools/karaoke": "pages/tools/karaoke.js",
-  "/tools/audio-splitter": "pages/tools/audio-splitter.js"
+  "/support": "pages/support.js",
+  "/auth/login": "pages/auth/login.js",
+  "/tools/volume-normalizer": "pages/tools/volume-normalizer.js"
 }
