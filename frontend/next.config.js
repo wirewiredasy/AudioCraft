@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+
   
   // Fix cross-origin warning
-  allowedDevOrigins: ["*.replit.dev", "*.replit.co"],
+  allowedDevOrigins: ["*.replit.dev", "*.replit.co", "*.replit.app"],
   
   // Optimization settings
   poweredByHeader: false,
@@ -28,14 +28,14 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/:path*'
+        destination: 'http://0.0.0.0:8000/:path*'
       }
     ]
   },
   
   // Environment variables
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://0.0.0.0:8000',
   },
   
   // Image optimization
