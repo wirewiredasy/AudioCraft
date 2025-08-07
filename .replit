@@ -6,7 +6,7 @@ channel = "stable-25_05"
 packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
 
 [workflows]
-runButton = "Project"
+runButton = "ODOREMOVER Full Stack"
 
 [[workflows.workflow]]
 name = "Frontend Development"
@@ -118,6 +118,19 @@ waitForPort = 3000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow]]
+name = "ODOREMOVER Full Stack"
+author = 46099888
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend/api_gateway && python main.py"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
 
 [[ports]]
 localPort = 443

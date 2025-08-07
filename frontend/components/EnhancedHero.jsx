@@ -128,7 +128,7 @@ export const EnhancedHero = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
-      
+
       {/* Main Hero Section */}
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24">
         <ResponsiveContainer>
@@ -187,19 +187,7 @@ export const EnhancedHero = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-              {[
-                { number: '2.5M+', label: 'Files Processed' },
-                { number: '150K+', label: 'Happy Users' },
-                { number: '99.9%', label: 'Uptime' },
-                { number: '4.9★', label: 'User Rating' }
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.number}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            {/* Statistics section removed */}
           </div>
         </ResponsiveContainer>
       </section>
@@ -229,7 +217,7 @@ export const EnhancedHero = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
                 <p className="text-gray-400">{step.description}</p>
-                
+
                 {/* Step indicator */}
                 <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-sm font-bold">
                   {index + 1}
@@ -280,7 +268,7 @@ export const EnhancedHero = () => {
                       Popular
                     </div>
                   )}
-                  
+
                   <div className="flex items-center mb-4">
                     <tool.icon className={`w-12 h-12 ${tool.color} mr-4`} />
                     <div>
@@ -288,7 +276,7 @@ export const EnhancedHero = () => {
                       <p className="text-sm text-gray-400">{tool.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="text-right">
                     <span className="text-sm text-gray-400 group-hover:text-blue-400 transition-colors">
                       Try Now →
