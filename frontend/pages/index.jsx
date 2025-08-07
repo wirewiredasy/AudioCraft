@@ -30,6 +30,7 @@ import {
   AccountIcon,
   LanguageIcon
 } from '../components/CustomIcons'
+import Footer from '../components/Footer' // Import the Footer component
 
 export default function OdoremoverHome() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -42,7 +43,7 @@ export default function OdoremoverHome() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-  
+
   // Sidebar navigation items with custom icons
   const sidebarItems = [
     { 
@@ -211,7 +212,7 @@ export default function OdoremoverHome() {
               <p className="text-gray-400 text-sm font-medium tracking-wider uppercase mb-4">
                 HOW IT WORKS
               </p>
-              
+
               <div className="flex items-center justify-center mb-6">
                 <OdoremoverLogo className="w-16 h-16 mr-4 text-blue-400" />
                 <div>
@@ -221,11 +222,11 @@ export default function OdoremoverHome() {
                   <p className="text-lg text-blue-400 font-medium">Audio Processing Suite</p>
                 </div>
               </div>
-              
+
               <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-200">
                 Vocal Remover and Isolation
               </h2>
-              
+
               <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
                 Separate voice from music out of a song free with powerful AI algorithms
               </p>
@@ -243,7 +244,7 @@ export default function OdoremoverHome() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Vocal Track */}
                   <div className="flex items-center space-x-4">
                     <span className="text-gray-400 text-sm font-medium w-12 text-right">Vocal</span>
@@ -277,7 +278,7 @@ export default function OdoremoverHome() {
                   <h3 className="text-lg font-semibold mb-2">Fast Processing</h3>
                   <p className="text-gray-400 text-sm">AI-powered vocal separation in seconds</p>
                 </div>
-                
+
                 <div className="text-center">
                   <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <ShieldCheck className="w-6 h-6 text-white" />
@@ -285,7 +286,7 @@ export default function OdoremoverHome() {
                   <h3 className="text-lg font-semibold mb-2">100% Secure</h3>
                   <p className="text-gray-400 text-sm">Your files are processed securely and deleted automatically</p>
                 </div>
-                
+
                 <div className="text-center">
                   <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Music className="w-6 h-6 text-white" />
@@ -305,21 +306,21 @@ export default function OdoremoverHome() {
                       <h3 className="text-xs md:text-sm font-semibold text-center">Pitch Tempo</h3>
                     </div>
                   </Link>
-                  
+
                   <Link href="/tools/converter" className="group">
                     <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
                       <ConverterIcon className="w-8 h-8 text-cyan-400 mb-3 mx-auto" />
                       <h3 className="text-xs md:text-sm font-semibold text-center">Converter</h3>
                     </div>
                   </Link>
-                  
+
                   <Link href="/tools/audio-splitter" className="group">
                     <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
                       <AudioSplitterIcon className="w-8 h-8 text-green-400 mb-3 mx-auto" />
                       <h3 className="text-xs md:text-sm font-semibold text-center">Splitter</h3>
                     </div>
                   </Link>
-                  
+
                   <Link href="/tools/karaoke" className="group">
                     <div className="bg-gray-800 rounded-lg p-4 md:p-6 hover:bg-gray-700 transition-colors">
                       <KaraokeIcon className="w-8 h-8 text-pink-400 mb-3 mx-auto" />
@@ -330,6 +331,8 @@ export default function OdoremoverHome() {
               </div>
             </div>
           </div>
+          {/* Footer */}
+          <Footer />
         </div>
       </div>
     </>
