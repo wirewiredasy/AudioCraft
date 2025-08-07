@@ -4,6 +4,6 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/404": "pages/404.js",
-  "/tools/pitch-tempo": "pages/tools/pitch-tempo.js",
-  "/tools/cutter-joiner": "pages/tools/cutter-joiner.js"
+  "/tools/recorder": "pages/tools/recorder.js",
+  "/tools/audio-splitter": "pages/tools/audio-splitter.js"
 }

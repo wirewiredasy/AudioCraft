@@ -29,15 +29,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/tools/cutter-joiner": [
+    "/tools/audio-splitter": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/tools/cutter-joiner.js"
+      "static/chunks/pages/tools/audio-splitter.js"
     ],
-    "/tools/pitch-tempo": [
+    "/tools/recorder": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/tools/pitch-tempo.js"
+      "static/chunks/pages/tools/recorder.js"
     ]
   },
   "ampFirstPages": []
