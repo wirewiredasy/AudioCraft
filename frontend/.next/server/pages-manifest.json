@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/tools/audio-splitter": "pages/tools/audio-splitter.js",
-  "/tools/cutter-joiner": "pages/tools/cutter-joiner.js",
-  "/support": "pages/support.js"
+  "/support": "pages/support.js",
+  "/tools/recorder": "pages/tools/recorder.js",
+  "/tools/audio-splitter": "pages/tools/audio-splitter.js"
 }
