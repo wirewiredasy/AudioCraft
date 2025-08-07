@@ -2,8 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/tools/recorder": "pages/tools/recorder.js",
   "/": "pages/index.js",
-  "/tools/audio-splitter": "pages/tools/audio-splitter.js",
+  "/tools/recorder": "pages/tools/recorder.js",
+  "/tools/karaoke": "pages/tools/karaoke.js",
+  "/tools/pitch-tempo": "pages/tools/pitch-tempo.js",
   "/support": "pages/support.js"
 }

@@ -29,10 +29,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/support.js"
     ],
-    "/tools/audio-splitter": [
+    "/tools/karaoke": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/tools/audio-splitter.js"
+      "static/chunks/pages/tools/karaoke.js"
+    ],
+    "/tools/pitch-tempo": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/tools/pitch-tempo.js"
     ],
     "/tools/recorder": [
       "static/chunks/webpack.js",
