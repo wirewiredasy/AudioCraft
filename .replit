@@ -1,9 +1,9 @@
-modules = ["vue-node-20", "nodejs-20", "python-3.11", "web"]
+modules = ["nodejs-20", "python-3.11", "web"]
 run = "node services/vocal_remover/services/vocal_remover/main.py"
 
 [nix]
 channel = "stable-25_05"
-packages = ["ffmpeg", "ffmpeg-full", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
+packages = ["ffmpeg", "ffmpeg-full", "file", "glibcLocales", "libsndfile", "libxcrypt", "pkg-config", "xsimd"]
 
 [workflows]
 runButton = "Project"
