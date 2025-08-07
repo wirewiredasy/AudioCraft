@@ -116,9 +116,6 @@ task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 3000
 
-[workflows.workflow.metadata]
-outputType = "webview"
-
 [[workflows.workflow]]
 name = "ODOREMOVER Full Stack"
 author = 46099888
