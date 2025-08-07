@@ -6,9 +6,18 @@ import os
 import sys
 import uuid
 from pathlib import Path
+from contextlib import asynccontextmanager
+
+# Import new API modules
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from shared.database import db_manager
+from api.auth_routes import router as auth_router
+from api.processing_routes import router as processing_router
+from api.presets_routes import router as presets_router
 
 # Add services to Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'services'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 # Import all service processors
 from vocal_remover.processor import VocalRemoverProcessor
@@ -22,11 +31,20 @@ from metadata_editor.processor import MetadataEditorProcessor
 from audio_reverse.processor import AudioReverseProcessor
 from equalizer.processor import EqualizerProcessor
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    await db_manager.connect()
+    yield
+    # Shutdown
+    await db_manager.disconnect()
+
 # Create FastAPI app
 app = FastAPI(
     title="ODOREMOVER Audio Suite API",
-    description="Professional audio processing microservices platform",
-    version="2.0.0"
+    description="Professional audio processing microservices platform with advanced features",
+    version="2.0.0",
+    lifespan=lifespan
 )
 
 # CORS middleware
@@ -46,6 +64,11 @@ os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 # Mount static files
 app.mount("/download", StaticFiles(directory=PROCESSED_DIR), name="downloads")
+
+# Include new API routers
+app.include_router(auth_router)
+app.include_router(processing_router)
+app.include_router(presets_router)
 
 # Initialize processors
 vocal_processor = VocalRemoverProcessor()
@@ -68,6 +91,10 @@ async def root():
             "vocal-remover", "pitch-tempo", "converter", "cutter-joiner",
             "noise-reduction", "volume-normalizer", "fade-effect",
             "metadata-editor", "audio-reverse", "equalizer"
+        ],
+        "advanced_features": [
+            "authentication", "batch-processing", "real-time-progress",
+            "audio-presets", "background-queue", "websocket-updates"
         ]
     }
 
