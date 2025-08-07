@@ -21,6 +21,7 @@ from fade_effect.processor import FadeEffectProcessor
 from metadata_editor.processor import MetadataEditorProcessor
 from audio_reverse.processor import AudioReverseProcessor
 from equalizer.processor import EqualizerProcessor
+from audio_splitter.processor import AudioSplitterProcessor
 
 # Create FastAPI app
 app = FastAPI(
@@ -58,6 +59,7 @@ fade_processor = FadeEffectProcessor()
 metadata_processor = MetadataEditorProcessor()
 reverse_processor = AudioReverseProcessor()
 equalizer_processor = EqualizerProcessor()
+splitter_processor = AudioSplitterProcessor()
 
 @app.get("/")
 async def root():
@@ -67,7 +69,7 @@ async def root():
         "services": [
             "vocal-remover", "pitch-tempo", "converter", "cutter-joiner",
             "noise-reduction", "volume-normalizer", "fade-effect",
-            "metadata-editor", "audio-reverse", "equalizer"
+            "metadata-editor", "audio-reverse", "equalizer", "audio-splitter"
         ]
     }
 
@@ -170,6 +172,16 @@ async def equalizer(
 ):
     """Apply 3-band equalizer with frequency adjustment"""
     return await equalizer_processor.process(file, low_gain, mid_gain, high_gain)
+
+# Audio Splitter Service
+@app.post("/audio-splitter")
+async def audio_splitter(
+    file: UploadFile = File(...),
+    split_type: str = Form("lr_channels"),
+    output_format: str = Form("wav")
+):
+    """Advanced audio channel splitting with multiple methods"""
+    return await splitter_processor.process(file, split_type, output_format)
 
 if __name__ == "__main__":
     import uvicorn

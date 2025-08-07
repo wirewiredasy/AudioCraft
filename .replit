@@ -142,9 +142,6 @@ task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 5000
 
-[workflows.workflow.metadata]
-outputType = "webview"
-
 [[ports]]
 localPort = 443
 externalPort = 3002
