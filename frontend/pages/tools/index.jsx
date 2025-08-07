@@ -276,8 +276,7 @@ export default function AllTools() {
                 <div
                   className="group relative overflow-hidden rounded-3xl bg-gray-800/50 border border-gray-700 p-8 transition-all duration-500 hover:scale-105 hover:shadow-2xl backdrop-blur-xl hover:bg-gray-800/70"
                   style={{ 
-                    animationDelay: `${index * 0.1}s`,
-                    animation: 'fadeInUp 0.6s ease-out forwards'
+                    animation: `fadeInUp 0.6s ease-out forwards ${index * 0.1}s`
                   }}
                 >
                   {/* Popular Badge */}
